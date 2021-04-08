@@ -1,5 +1,4 @@
 // Core
-import { TRideStatus } from 'src/types/types'
 import {
     BaseEntity,
     Column,
@@ -9,9 +8,13 @@ import {
     PrimaryGeneratedColumn,
 } from 'typeorm'
 
+// Types
+import { RideStatus } from 'src/types/types'
+
+
 // Verification Entity 
 @Entity()
-class Verification extends BaseEntity {
+class Ride extends BaseEntity {
     // Create  Verification table in PostgreSQL
     @PrimaryGeneratedColumn()
     id!: number
@@ -20,7 +23,7 @@ class Verification extends BaseEntity {
         type: 'text',
         enum: [ 'ACCEPTED', 'FINISHED', 'CANCELED', 'REQUESING', 'ONROUTE' ]
     })
-    status!: TRideStatus
+    status!: RideStatus
     
     @Column({ type: 'text' })
     pickUpAddress!: string
@@ -57,4 +60,4 @@ class Verification extends BaseEntity {
 }
 
 
-export default Verification 
+export default Ride 

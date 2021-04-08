@@ -1,8 +1,8 @@
-export type TVerificationTarget = 
+export type VerificationTarget = 
     | 'PHONE' 
     | 'EMAIL'
 
-export type TRideStatus = 
+export type RideStatus = 
     | 'ACCEPTED'
     | 'FINISHED'
     | 'CANCELED'

@@ -10,7 +10,7 @@ import {
 } from 'typeorm'
 
 // Types
-import { TVerificationTarget } from 'src/types/types'
+import { VerificationTarget } from 'src/types/types'
 
 const PHONE = 'PHONE' 
 const EMAIL = 'EMAIL'
@@ -23,7 +23,7 @@ class Verification extends BaseEntity {
     id!: number
     
     @Column({ type: 'text', enum: [ PHONE, EMAIL ]})
-    target!: TVerificationTarget
+    target!: VerificationTarget
 
     @Column({ type: 'text'})
     payload!: string

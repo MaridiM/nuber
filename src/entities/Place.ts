@@ -10,7 +10,7 @@ import {
 
 // Verification Entity 
 @Entity()
-class Verification extends BaseEntity {
+class Place extends BaseEntity {
     // Create  Verification table in PostgreSQL
     @PrimaryGeneratedColumn()
     id!: number
@@ -37,4 +37,4 @@ class Verification extends BaseEntity {
 }
 
 
-export default Verification 
+export default Place 
