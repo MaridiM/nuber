@@ -23,10 +23,11 @@ class Message extends BaseEntity {
     @Column({ type: 'text' })
     text!: string
 
-    // Many messages inside one chat
+    // One chat have many messages
     @ManyToOne( type => Chat, chat => chat.messages)
     chat!: Chat
-
+    
+    // One user have many messages
     @ManyToOne( type => User, user => user.messages)
     user!: User
 

@@ -19,10 +19,11 @@ class Chat extends BaseEntity {
     @PrimaryGeneratedColumn()
     id!: number
     
-    // Inside one, many messages
+    // One chat can have many messages
     @OneToMany( type => Message, message => message.chat ) 
     messages!: Message[]
-
+    
+    // One chat can have many users
     @OneToMany(type => User, user => user.chat)
     participants!: User[]
         

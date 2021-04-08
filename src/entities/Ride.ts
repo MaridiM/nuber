@@ -6,10 +6,14 @@ import {
     Entity,
     UpdateDateColumn,
     PrimaryGeneratedColumn,
+    ManyToOne,
 } from 'typeorm'
 
 // Types
 import { RideStatus } from 'src/types/types'
+
+// Entities
+import User from './User'
 
 
 // Verification Entity 
@@ -52,8 +56,14 @@ class Ride extends BaseEntity {
     @Column({ type: 'text' })
     duration!: string
     
-        
- 
+    // One users(Passengers) can have many ridesAsPassenger
+    @ManyToOne( type => User, user => user.ridesAsPassenger)
+    passenger!: User
+    
+    // One users(Passengers) can have many ridesAsDriver
+    @ManyToOne( type => User, user => user.ridesAsDriver)       
+    driver!: User
+
     @CreateDateColumn() createdAt!: string
     @UpdateDateColumn() updatedAt?: string
 

@@ -17,6 +17,8 @@ import {
 // Entities
 import Chat from './Chat'
 import Message from './Message'
+import Ride from './Ride'
+import Verification from './Verification'
 
 
 // Salt for Hashing Password
@@ -75,19 +77,32 @@ class User extends BaseEntity {
     
     @Column({ type: 'double precision', default: 0 }) 
     lastOrientation?: number
-    
-    @ManyToOne( type => Chat, chat => chat.participants)
-    chat?: Chat
 
+    // One chat can have many participants
+    @ManyToOne( type => Chat, chat => chat.participants)
+    chat?: Chat // Chat in user
+
+    // One User can have many  messages
     @OneToMany( type => Message, message => message.user)
-    message?: Message[]
+    messages?: Message[] // Message in user
+
+    // One user can have many verifications
+    @OneToMany( type => Verification, verification => verification.user)
+    verifications?: Verification[] //Verifications in user
+    
+    // One passenger can have many rides  
+    @OneToMany( type => Ride, ride => ride.passenger)
+    ridesAsPassenger?: Ride[]
+    
+    // One driver can have many rides  
+    @OneToMany( type => Ride, ride => ride.driver)
+    ridesAsDriver?: Ride[]
 
     @CreateDateColumn() 
     createdAt!: string
     
     @UpdateDateColumn() 
     updatedAt?: string
-    messages: any
     
     get fullname(): string {
         return `${this.firstName} ${this.lastName}`
