@@ -1,3 +1,7 @@
+// Core
+import { ConnectionOptions } from 'typeorm'
+
+
 // TS Types
 type TCookie = {
     httpOnly: boolean,
@@ -36,4 +40,22 @@ export const sessionOptions: ISession = {
 export const corsOptions: ICors = {
     origin: `http://localhost:${PORT}`,
     credentials: true // for set cookie on client from server
+}
+
+// Default ormCcnfig, by connection with databse
+export const connectionOptions: ConnectionOptions  = {
+    // type connection
+    type: 'postgres', 
+    // database name
+    database: 'nuber', 
+    // synchronize
+    synchronize: true,  
+    // Started to  transition
+    logging: true, 
+    // watching by entities app
+    entities: [ 'entities/**/*.*' ],
+    host: process.env.DB_ENDPOINT, 
+    port: 5432, 
+    username:  process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD
 }
