@@ -24,10 +24,10 @@ class Verification extends BaseEntity {
     
     @Column({ type: 'text', enum: [ PHONE, EMAIL ]})
     target!: TVerificationTarget
-    
+
     @Column({ type: 'text'})
     payload!: string
-    
+
     @Column({ type: 'text'})
     key!: string
     
@@ -37,7 +37,7 @@ class Verification extends BaseEntity {
     @CreateDateColumn() createdAt!: string
     @UpdateDateColumn() updatedAt?: string
 
-    // 
+    // Generate Key by target value ( PHONE | EMAIL )
     @BeforeInsert()
     createKey(): void {
         if(this.target === PHONE) {
