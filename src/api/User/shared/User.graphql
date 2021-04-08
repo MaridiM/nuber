@@ -3,10 +3,9 @@ type User {
     email: String  
     firstName: String!
     lastName: String!
-    facebookID: String
     age: Int
     password: String
-    verified: Boolean!
+    verifiedEmail: Boolean!
     phoneNumber: String
     verifiedPhoneNumber: Boolean!
     profilePhoto: String
@@ -14,6 +13,7 @@ type User {
     updatedAt: String
     fullName: String
     idDriving: Boolean!
+    idRiding: Boolean!
     isTaken: Boolean!
     lastLng: Float
     lastLat: Float

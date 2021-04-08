@@ -22,59 +22,59 @@ class User extends BaseEntity {
 
     // Create Columns for User Table in PostgreSQL
     @PrimaryGeneratedColumn() 
-    id: number | undefined
+    id!: number
 
     @Column({ type: 'text', unique: true })
     @IsEmail()
-    email: string | undefined 
+    email?: string 
+    
+    @Column({ type: 'boolean', default: false }) 
+    verifiedEmail!: boolean 
 
     @Column({ type: 'text' })
-    firstName: string | undefined 
+    firstName!: string 
 
     @Column({ type: 'text' })
-    lastName: string | undefined 
+    lastName!: string 
     
     @Column({ type: 'int' }) 
-    age: number | undefined 
+    age?: number 
 
     @Column({ type: 'text' })
-    password: string | undefined
+    password?: string
     
     @Column({ type: 'text' })
-    phoneNumber: string | undefined
+    phoneNumber?: string
     
     @Column({ type: 'boolean', default: false })
-    verifiedPhoneNumber: boolean  | undefined
+    verifiedPhoneNumber!: boolean
 
     @Column({ type: 'text' })
-    profilePhoto: string | undefined
+    profilePhoto?: string
+    
+    @Column({ type: 'boolean', default: false }) 
+    isDriving!: boolean
 
-    @Column({ type: 'text' }) 
-    facebookID: string | undefined
+    @Column({ type: 'boolean', default: false }) 
+    isRiding!: boolean
     
     @Column({ type: 'boolean', default: false }) 
-    isDriving: boolean | undefined
-    
-    @Column({ type: 'boolean', default: false }) 
-    isRiding: boolean | undefined
-    
-    @Column({ type: 'boolean', default: false }) 
-    isTaken: boolean | undefined
+    isTaken!: boolean
     
     @Column({ type: 'double precision', default: 0 }) 
-    lastLng: number | undefined
+    lastLng?: number
     
     @Column({ type: 'double precision', default: 0 }) 
-    lastLat: number | undefined
+    lastLat?: number
     
     @Column({ type: 'double precision', default: 0 }) 
-    lastOrientation: number | undefined
+    lastOrientation?: number
     
     @CreateDateColumn() 
-    createdAt: string | undefined
+    createdAt!: string
     
     @UpdateDateColumn() 
-    updatedAt: string | undefined
+    updatedAt?: string
     
     get fullname(): string {
         return `${this.firstName} ${this.lastName}`

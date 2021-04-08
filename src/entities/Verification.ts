@@ -8,6 +8,9 @@ import {
     PrimaryGeneratedColumn,
 } from 'typeorm'
 
+// Types
+import { TVerificationTarget } from 'src/types/types'
+
 // Verification Entity 
 @Entity()
 class Verification extends BaseEntity {
@@ -15,8 +18,8 @@ class Verification extends BaseEntity {
     @PrimaryGeneratedColumn()
     id!: number
     
-    @Column({ type: 'text'})
-    target!: string
+    @Column({ type: 'text', enum: ['PHONE', 'EMAIL']})
+    target!: TVerificationTarget
     
     @Column({ type: 'text'})
     payload!: string

@@ -13,17 +13,39 @@ export type Scalars = {
 
 export type Query = {
   __typename?: 'Query';
-  bye: SeyByeResponse;
-  hello: Scalars['String'];
+  user?: Maybe<User>;
 };
 
-
-export type QueryByeArgs = {
-  name: Scalars['String'];
+export type User = {
+  __typename?: 'User';
+  id: Scalars['Int'];
+  email?: Maybe<Scalars['String']>;
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
+  age?: Maybe<Scalars['Int']>;
+  password?: Maybe<Scalars['String']>;
+  verifiedEmail: Scalars['Boolean'];
+  phoneNumber?: Maybe<Scalars['String']>;
+  verifiedPhoneNumber: Scalars['Boolean'];
+  profilePhoto?: Maybe<Scalars['String']>;
+  createdAt: Scalars['String'];
+  updatedAt?: Maybe<Scalars['String']>;
+  fullName?: Maybe<Scalars['String']>;
+  idDriving: Scalars['Boolean'];
+  idRiding: Scalars['Boolean'];
+  isTaken: Scalars['Boolean'];
+  lastLng?: Maybe<Scalars['Float']>;
+  lastLat?: Maybe<Scalars['Float']>;
+  lastOrientation?: Maybe<Scalars['Float']>;
 };
 
-export type SeyByeResponse = {
-  __typename?: 'SeyByeResponse';
-  text: Scalars['String'];
-  error: Scalars['Boolean'];
+export type Verification = {
+  __typename?: 'Verification';
+  id: Scalars['Int'];
+  target: Scalars['String'];
+  payload: Scalars['String'];
+  key: Scalars['String'];
+  used: Scalars['Boolean'];
+  createdAt: Scalars['String'];
+  updatedAt: Scalars['String'];
 };
