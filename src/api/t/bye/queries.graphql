@@ -1,8 +1,0 @@
-type SeyByeResponse {
-    text: String!
-    error: Boolean!
-}
-
-type Query {
-    bye(name: String!): SeyByeResponse!
-}

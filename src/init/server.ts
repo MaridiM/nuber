@@ -9,8 +9,6 @@ import { apolloServer } from './apolloServer'
 const server = http.createServer(app)
 // Install subscriptions handlers by server
 // Give /graphql path
-
-
 apolloServer.installSubscriptionHandlers(server)
 
 // Endpoint

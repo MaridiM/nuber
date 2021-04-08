@@ -9,7 +9,7 @@ import { PORT, connectionOptions } from './init/config'
 import { server } from './init/server'
 import { graphqlPath, subscriptionsPath } from './init/apolloServer'
 
-// Create PostgreSQL connection with orm and  after start servers
+// Create PostgreSQL connection with typeorm and  after start servers
 createConnection(connectionOptions).then(() => {
     server.listen(PORT, (): void => {
         console.log(`✔️ Server ready at http://localhost:${PORT}${graphqlPath}`)

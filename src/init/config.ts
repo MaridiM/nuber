@@ -48,7 +48,7 @@ export const connectionOptions: ConnectionOptions  = {
     type: 'postgres', 
     // database name
     database: 'nuber', 
-    // synchronize
+    // synchronize with database (automatically)
     synchronize: true,  
     // Started to  transition
     logging: true, 
