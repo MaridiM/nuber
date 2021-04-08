@@ -6,7 +6,6 @@ import {
     Entity,
     UpdateDateColumn,
     PrimaryGeneratedColumn,
-    BeforeInsert,
 } from 'typeorm'
 
 // Verification Entity 
@@ -18,7 +17,7 @@ class Verification extends BaseEntity {
     
     @Column({ type: 'text'})
     name!: string
-    
+
     @Column({ type: 'double precision'})
     lat!: number
 
