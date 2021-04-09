@@ -11,32 +11,87 @@ export type Scalars = {
   Float: number;
 };
 
+export type Chat = {
+  __typename?: 'Chat';
+  id: Scalars['Int'];
+  messages: Array<Maybe<Message>>;
+  participants: Array<Maybe<User>>;
+  createdAt: Scalars['String'];
+  updatedAt?: Maybe<Scalars['String']>;
+};
+
+export type Message = {
+  __typename?: 'Message';
+  id: Scalars['Int'];
+  text: Scalars['String'];
+  chat: Message;
+  user: User;
+  createdAt: Scalars['String'];
+  updateAt?: Maybe<Scalars['String']>;
+};
+
+export type Place = {
+  __typename?: 'Place';
+  id: Scalars['Int'];
+  name: Scalars['String'];
+  lat: Scalars['Float'];
+  lng: Scalars['Float'];
+  address: Scalars['String'];
+  isFav: Scalars['Boolean'];
+  createdAt: Scalars['String'];
+  updatedAt?: Maybe<Scalars['String']>;
+};
+
 export type Query = {
   __typename?: 'Query';
   user?: Maybe<User>;
+};
+
+export type Ride = {
+  __typename?: 'Ride';
+  id: Scalars['Int'];
+  status: Scalars['String'];
+  pickUpAddress: Scalars['String'];
+  picUpLat: Scalars['Float'];
+  picUpLng: Scalars['Float'];
+  dropOffAddress: Scalars['String'];
+  dropOffLat: Scalars['Float'];
+  dropOffLng: Scalars['Float'];
+  price: Scalars['Float'];
+  distance: Scalars['String'];
+  duration: Scalars['String'];
+  driver: User;
+  passenger: User;
+  createdAt: Scalars['String'];
+  updatedAt?: Maybe<Scalars['String']>;
 };
 
 export type User = {
   __typename?: 'User';
   id: Scalars['Int'];
   email?: Maybe<Scalars['String']>;
+  verifiedEmail: Scalars['Boolean'];
   firstName: Scalars['String'];
   lastName: Scalars['String'];
+  fullName?: Maybe<Scalars['String']>;
   age?: Maybe<Scalars['Int']>;
   password?: Maybe<Scalars['String']>;
-  verifiedEmail: Scalars['Boolean'];
   phoneNumber?: Maybe<Scalars['String']>;
   verifiedPhoneNumber: Scalars['Boolean'];
   profilePhoto?: Maybe<Scalars['String']>;
-  createdAt: Scalars['String'];
-  updatedAt?: Maybe<Scalars['String']>;
-  fullName?: Maybe<Scalars['String']>;
   idDriving: Scalars['Boolean'];
   idRiding: Scalars['Boolean'];
   isTaken: Scalars['Boolean'];
   lastLng?: Maybe<Scalars['Float']>;
   lastLat?: Maybe<Scalars['Float']>;
   lastOrientation?: Maybe<Scalars['Float']>;
+  chat?: Maybe<Chat>;
+  messages?: Maybe<Array<Maybe<Message>>>;
+  verifications?: Maybe<Array<Maybe<Verification>>>;
+  ridesAsPassenger: Array<Maybe<Ride>>;
+  ridesAsDriver: Array<Maybe<Ride>>;
+  createdAt: Scalars['String'];
+  updatedAt?: Maybe<Scalars['String']>;
 };
 
 export type Verification = {
@@ -46,6 +101,7 @@ export type Verification = {
   payload: Scalars['String'];
   key: Scalars['String'];
   used: Scalars['Boolean'];
+  user: User;
   createdAt: Scalars['String'];
   updatedAt: Scalars['String'];
 };

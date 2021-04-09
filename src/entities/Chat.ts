@@ -34,4 +34,4 @@ class Chat extends BaseEntity {
 }
 
 
-export default Chat 
+export default Chat
