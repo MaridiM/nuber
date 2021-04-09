@@ -1,4 +1,4 @@
- export type Resolver = (parent: unknown, args: unknown, context: unknown, info: unknown) => void
+ export type Resolver = (parent: any, args: any, context: any, info: any) => void
 
  export interface Resolvers {
     [key: string]: { // Query {}

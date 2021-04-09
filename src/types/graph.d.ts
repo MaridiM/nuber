@@ -20,6 +20,13 @@ export type Chat = {
   updatedAt?: Maybe<Scalars['String']>;
 };
 
+export type FacebookConnectResponse = {
+  __typename?: 'FacebookConnectResponse';
+  ok: Scalars['Boolean'];
+  error?: Maybe<Scalars['String']>;
+  token?: Maybe<Scalars['String']>;
+};
+
 export type Message = {
   __typename?: 'Message';
   id: Scalars['Int'];
@@ -28,6 +35,19 @@ export type Message = {
   user: User;
   createdAt: Scalars['String'];
   updateAt?: Maybe<Scalars['String']>;
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  FacebookConnect: FacebookConnectResponse;
+};
+
+
+export type MutationFacebookConnectArgs = {
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
+  email: Scalars['String'];
+  facebookID: Scalars['String'];
 };
 
 export type Place = {
@@ -78,6 +98,7 @@ export type User = {
   password?: Maybe<Scalars['String']>;
   phoneNumber?: Maybe<Scalars['String']>;
   verifiedPhoneNumber: Scalars['Boolean'];
+  facebookID: Scalars['String'];
   profilePhoto?: Maybe<Scalars['String']>;
   idDriving: Scalars['Boolean'];
   idRiding: Scalars['Boolean'];
