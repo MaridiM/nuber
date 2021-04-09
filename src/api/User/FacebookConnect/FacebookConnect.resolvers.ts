@@ -17,23 +17,23 @@ const resolvers : Resolvers = {
         ): Promise<FacebookConnectResponse> => {
             
             const { facebookID } = args
+
+            const response = (
+                ok: boolean,
+                error: string | null,
+                token: string | null
+            ): FacebookConnectResponse => ({
+                ok, error, token
+            }) 
             
             // Existing User by facebookID
             try {
                 const existingUser = await User.findOne({ facebookID })
                 if(existingUser) {
-                    return {
-                        ok: true,
-                        error: null,
-                        token: "Coming soon"
-                    }
+                    return response(true, null, 'Coming soon already')
                 }
             } catch (error) {
-                return { 
-                    ok: false,
-                    error: error.message,
-                    token: null
-                }
+                return response(false, error.message, null)
             }
             
             // Create new User by facebookID
@@ -43,18 +43,10 @@ const resolvers : Resolvers = {
                         profilePhoto: `http://graph.facebook.com/${facebookID}/picture?type=square` 
                     }).save()
                     
-                return {
-                    ok: true,
-                    error: null,
-                    token: "Coming soon"
-                }
+               return response(true, null, 'Coming soon created')
 
             } catch (error) {
-                return { 
-                    ok: false,
-                    error: error.message,
-                    token: null
-                }
+                return response(false, error.message, null)
             }
         }
     }

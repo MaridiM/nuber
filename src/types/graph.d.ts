@@ -20,6 +20,13 @@ export type Chat = {
   updatedAt?: Maybe<Scalars['String']>;
 };
 
+export type EmailSignInResponse = {
+  __typename?: 'EmailSignInResponse';
+  ok: Scalars['Boolean'];
+  error?: Maybe<Scalars['String']>;
+  token?: Maybe<Scalars['String']>;
+};
+
 export type FacebookConnectResponse = {
   __typename?: 'FacebookConnectResponse';
   ok: Scalars['Boolean'];
@@ -39,7 +46,14 @@ export type Message = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  EmailSignIn: EmailSignInResponse;
   FacebookConnect: FacebookConnectResponse;
+};
+
+
+export type MutationEmailSignInArgs = {
+  email: Scalars['String'];
+  password: Scalars['String'];
 };
 
 
