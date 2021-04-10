@@ -48,6 +48,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   EmailSignIn: EmailSignInResponse;
   FacebookConnect: FacebookConnectResponse;
+  StartPhoneVerification: StartPhoneVerificationResponse;
 };
 
 
@@ -62,6 +63,11 @@ export type MutationFacebookConnectArgs = {
   lastName: Scalars['String'];
   email: Scalars['String'];
   facebookID: Scalars['String'];
+};
+
+
+export type MutationStartPhoneVerificationArgs = {
+  phoneNumber: Scalars['String'];
 };
 
 export type Place = {
@@ -98,6 +104,12 @@ export type Ride = {
   passenger: User;
   createdAt: Scalars['String'];
   updatedAt?: Maybe<Scalars['String']>;
+};
+
+export type StartPhoneVerificationResponse = {
+  __typename?: 'StartPhoneVerificationResponse';
+  ok: Scalars['Boolean'];
+  error?: Maybe<Scalars['String']>;
 };
 
 export type User = {

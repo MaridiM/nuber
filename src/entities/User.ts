@@ -89,10 +89,6 @@ class User extends BaseEntity {
     @OneToMany( type => Message, message => message.user)
     messages?: Message[] // Message in user
 
-    // One user can have many verifications
-    @OneToMany( type => Verification, verification => verification.user)
-    verifications?: Verification[] //Verifications in user
-    
     // One passenger can have many rides  
     @OneToMany( type => Ride, ride => ride.passenger)
     ridesAsPassenger?: Ride[]

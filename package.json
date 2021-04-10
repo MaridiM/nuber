@@ -4,7 +4,7 @@
   "description": "Server for (N)Uber Clone, GraphQL, Typescript, NodeJS, PostgreSQL",
   "main": "index.js",
   "scripts": {
-    "predev":  "npm run types",
+    "predev": "npm run types",
     "dev": "cd src && nodemon --exec ts-node index.ts -e ts,graphql",
     "pretypes": "gql-merge --out-file ./src/schema.graphql ./src/api/**/*.graphql",
     "types": "graphql-codegen"
@@ -39,6 +39,7 @@
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "pg": "^8.5.1",
+    "twilio": "^3.60.0",
     "typeorm": "^0.2.32"
   },
   "devDependencies": {
@@ -52,6 +53,7 @@
     "@types/helmet": "^4.0.0",
     "@types/morgan": "^1.9.2",
     "@types/node": "^14.14.37",
+    "@types/twilio": "^3.19.3",
     "babel-runtime": "^6.26.0",
     "concurrently": "^6.0.0",
     "gql-merge": "0.0.6",

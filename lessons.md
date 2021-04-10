@@ -69,7 +69,7 @@
 
 ### Verification
 
-- [ ] 34 Introduction to Twilio 
+- [x] 34 Introduction to Twilio 
 - [ ] 35 StartPhoneVerification Resolver part One 
 - [ ] 36 StartPhoneVerification Resolver part Two 
 - [ ] 37 StartPhoneVerification Resolver part Three: Sending SMS 
