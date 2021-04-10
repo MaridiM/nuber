@@ -38,10 +38,6 @@ const resolvers: Resolvers = {
                 } else {
                     return response(false, 'Wrong password!', null)
                 }
-
-
-                return response(true, null, "Coming Soon!")
-            
             } catch (error) {
                 return response(false, error.message, null)
             }

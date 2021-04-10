@@ -7,7 +7,7 @@ Server for (N)Uber Clone, GraphQL, Typescript, NodeJS, PostgreSQL
 ### Public Resolvers: 
 - [x] Sign In | Sign Up - with Facebook
 - [x] Start Phone Number Verification
-- [ ] Complete Phone Number Verification
+- [x] Complete Phone Number Verification
 - [ ] Sign Up - with Email
 
 ---

@@ -20,6 +20,13 @@ export type Chat = {
   updatedAt?: Maybe<Scalars['String']>;
 };
 
+export type CompletePhoneVerificationResponse = {
+  __typename?: 'CompletePhoneVerificationResponse';
+  ok: Scalars['Boolean'];
+  error?: Maybe<Scalars['String']>;
+  token?: Maybe<Scalars['String']>;
+};
+
 export type EmailSignInResponse = {
   __typename?: 'EmailSignInResponse';
   ok: Scalars['Boolean'];
@@ -46,9 +53,16 @@ export type Message = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  CompletePhoneVerification?: Maybe<CompletePhoneVerificationResponse>;
   EmailSignIn: EmailSignInResponse;
   FacebookConnect: FacebookConnectResponse;
   StartPhoneVerification: StartPhoneVerificationResponse;
+};
+
+
+export type MutationCompletePhoneVerificationArgs = {
+  phoneNumber: Scalars['String'];
+  key: Scalars['String'];
 };
 
 
@@ -134,7 +148,6 @@ export type User = {
   lastOrientation?: Maybe<Scalars['Float']>;
   chat?: Maybe<Chat>;
   messages?: Maybe<Array<Maybe<Message>>>;
-  verifications?: Maybe<Array<Maybe<Verification>>>;
   ridesAsPassenger: Array<Maybe<Ride>>;
   ridesAsDriver: Array<Maybe<Ride>>;
   createdAt: Scalars['String'];
@@ -147,8 +160,7 @@ export type Verification = {
   target: Scalars['String'];
   payload: Scalars['String'];
   key: Scalars['String'];
-  used: Scalars['Boolean'];
-  user: User;
+  verified?: Maybe<Scalars['Boolean']>;
   createdAt: Scalars['String'];
   updatedAt: Scalars['String'];
 };

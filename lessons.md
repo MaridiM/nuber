@@ -70,11 +70,11 @@
 ### Verification
 
 - [x] 34 Introduction to Twilio 
-- [ ] 35 StartPhoneVerification Resolver part One 
-- [ ] 36 StartPhoneVerification Resolver part Two 
-- [ ] 37 StartPhoneVerification Resolver part Three: Sending SMS 
-- [ ] 38 CompletePhoneVerification part One 
-- [ ] 39 CompletePhoneVerification part Two 
+- [x] 35 StartPhoneVerification Resolver part One 
+- [x] 36 StartPhoneVerification Resolver part Two 
+- [x] 37 StartPhoneVerification Resolver part Three: Sending SMS 
+- [x] 38 CompletePhoneVerification part One 
+- [x] 39 CompletePhoneVerification part Two 
 
 ---
 

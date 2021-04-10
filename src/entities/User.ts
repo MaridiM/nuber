@@ -18,8 +18,6 @@ import {
 import Chat from './Chat'
 import Message from './Message'
 import Ride from './Ride'
-import Verification from './Verification'
-
 
 // Salt for Hashing Password
 const BCRYPT_ROUNDS = 10
