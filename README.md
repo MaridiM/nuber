@@ -6,16 +6,22 @@ Server for (N)Uber Clone, GraphQL, Typescript, NodeJS, PostgreSQL
 
 ### Public Resolvers: 
 - [x] Sign In | Sign Up - with Facebook
+- [x] Sign In - with Email 
 - [x] Start Phone Number Verification
 - [x] Complete Phone Number Verification
 - [ ] Sign Up - with Email
 
 ---
 
-### Private Resolvers: 
+### Authentication: 
 
 - [ ] GenerateJWT
 - [ ] Verify JWT
+
+---
+
+### Private Resolvers: 
+
 - [ ] Verify Email
 - [ ] Get My Profile
 - [ ] Update My Profile

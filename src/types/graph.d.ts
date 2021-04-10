@@ -34,6 +34,13 @@ export type EmailSignInResponse = {
   token?: Maybe<Scalars['String']>;
 };
 
+export type EmailSignUpResponse = {
+  __typename?: 'EmailSignUpResponse';
+  ok: Scalars['Boolean'];
+  error?: Maybe<Scalars['String']>;
+  token?: Maybe<Scalars['String']>;
+};
+
 export type FacebookConnectResponse = {
   __typename?: 'FacebookConnectResponse';
   ok: Scalars['Boolean'];
@@ -55,6 +62,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   CompletePhoneVerification?: Maybe<CompletePhoneVerificationResponse>;
   EmailSignIn: EmailSignInResponse;
+  EmailSignUp: EmailSignUpResponse;
   FacebookConnect: FacebookConnectResponse;
   StartPhoneVerification: StartPhoneVerificationResponse;
 };
@@ -69,6 +77,16 @@ export type MutationCompletePhoneVerificationArgs = {
 export type MutationEmailSignInArgs = {
   email: Scalars['String'];
   password: Scalars['String'];
+};
+
+
+export type MutationEmailSignUpArgs = {
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
+  email: Scalars['String'];
+  password: Scalars['String'];
+  profilePhoto: Scalars['String'];
+  age: Scalars['Int'];
 };
 
 

@@ -80,8 +80,8 @@
 
 ### Auth
 
-- [ ] 40 EmailSignUp Resolver
-- [ ] 41 Creating Custom JWT 
+- [x] 40 EmailSignUp Resolver
+- [x] 41 Creating Custom JWT 
 - [ ] 42 Authenticating Users with Custom JWT 
 - [ ] 43 Testing Authentication Resolvers 
 - [ ] 44 Custom Auth Middleware on Express part One 

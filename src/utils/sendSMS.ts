@@ -1,8 +1,6 @@
 // Core
 import Twilio from 'twilio'
 
-
-
 // Create twilio client
 const twilioClient = Twilio(process.env.TWILIO_SID, process.env.TWILIO_TOKEN)
 
