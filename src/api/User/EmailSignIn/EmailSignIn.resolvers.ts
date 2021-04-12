@@ -8,6 +8,9 @@ import {
 // Entities
 import User from '../../../entities/User'
 
+// Utils
+import createJWT from './../../../utils/createJWT'
+
 
 const resolvers: Resolvers = {
     Mutation: {
@@ -29,12 +32,13 @@ const resolvers: Resolvers = {
             try {
                 const user = await User.findOne({ email })
                 if(!user) {
-                    return response(true, null, "No User found with that email!")
+                    return response(true, "No User found with that email!", null)
                 }
                 
                 const checkPassword = await user.comparePassword(password)
                 if(checkPassword) {
-                    return response(true, null, 'Coming Soon!')
+                    const token = createJWT(user.id)
+                    return response(true, null, token)
                 } else {
                     return response(false, 'Wrong password!', null)
                 }

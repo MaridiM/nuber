@@ -82,17 +82,17 @@
 
 - [x] 40 EmailSignUp Resolver
 - [x] 41 Creating Custom JWT 
-- [ ] 42 Authenticating Users with Custom JWT 
-- [ ] 43 Testing Authentication Resolvers 
-- [ ] 44 Custom Auth Middleware on Express part One 
-- [ ] 45 Custom Auth Middleware on Express part Two 
-- [ ] 46 Using Resolver Context for Authentication 
-- [ ] 47 GetMyProfile Resolver 
-- [ ] 48 Protecting Resolvers with Middlewares 
-- [ ] 49 Sending Confirmation Email part One
-- [ ] 50 Sending Confirmation Email part Two 
-- [ ] 51 Sending Confirmation Email part Three
-- [ ] 52 Testing Email Sending 
+- [x] 42 Authenticating Users with Custom JWT 
+- [x] 43 Testing Authentication Resolvers 
+- [x] 44 Custom Auth Middleware on Express part One 
+- [x] 45 Custom Auth Middleware on Express part Two 
+- [x] 46 Using Resolver Context for Authentication 
+- [x] 47 GetMyProfile Resolver 
+- [x] 48 Protecting Resolvers with Middlewares 
+- [x] 49 Sending Confirmation Email part One
+- [x] 50 Sending Confirmation Email part Two 
+- [x] 51 Sending Confirmation Email part Three
+- [x] 52 Testing Email Sending 
 - [ ] 53 RequestEmailVerification Resolver 
 - [ ] 54 CompleteEmailVerification Resolver
 - [ ] 55 Testing Email Verification Resolvers 

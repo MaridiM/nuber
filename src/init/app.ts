@@ -10,7 +10,7 @@ import bodyParser from 'body-parser'
 // Config
 import { sessionOptions, corsOptions } from './config'
 // Read Token
-// import { readToken } from './readToken'
+import { readToken } from './readToken'
 
 // Init express app
 const app: Application = express()
@@ -23,8 +23,9 @@ app.use(cors(corsOptions))
 app.use(helmet({ contentSecurityPolicy: (process.env.NODE_ENV === 'production') ? undefined : false }))
 app.use(logger('dev'))
 
-// 
-// app.use(readToken)
+
+// Middleware for reading token 
+app.use(readToken)
 
 // Send static on production 
 if(process.env.NODE_ENV === 'production') {

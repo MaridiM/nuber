@@ -48,6 +48,13 @@ export type FacebookConnectResponse = {
   token?: Maybe<Scalars['String']>;
 };
 
+export type GetMyProfileResponse = {
+  __typename?: 'GetMyProfileResponse';
+  ok: Scalars['Boolean'];
+  error?: Maybe<Scalars['String']>;
+  user?: Maybe<User>;
+};
+
 export type Message = {
   __typename?: 'Message';
   id: Scalars['Int'];
@@ -86,6 +93,7 @@ export type MutationEmailSignUpArgs = {
   email: Scalars['String'];
   password: Scalars['String'];
   profilePhoto: Scalars['String'];
+  phoneNumber: Scalars['String'];
   age: Scalars['Int'];
 };
 
@@ -116,7 +124,7 @@ export type Place = {
 
 export type Query = {
   __typename?: 'Query';
-  user?: Maybe<User>;
+  GetMyProfile: GetMyProfileResponse;
 };
 
 export type Ride = {

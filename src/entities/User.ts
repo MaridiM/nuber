@@ -47,7 +47,7 @@ class User extends BaseEntity {
     age?: number 
 
     @Column({ type: 'text', nullable: true })
-    password?: string
+    password?: string 
     
     @Column({ type: 'text', nullable: true })
     phoneNumber?: string
@@ -107,7 +107,7 @@ class User extends BaseEntity {
 
     // Verify password
     public comparePassword(password: string): Promise<boolean> {
-        return bcrypt.compare( this.password, password)
+        return bcrypt.compare(password, this.password || '')
     }
 
     // Hash password before insert and update

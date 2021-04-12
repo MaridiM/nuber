@@ -8,6 +8,8 @@ import {
 // Entities
 import User from '../../../entities/User'
 
+// Utils
+import createJWT from './../../../utils/createJWT'
 
 const resolvers : Resolvers = {
     Mutation: {
@@ -30,7 +32,8 @@ const resolvers : Resolvers = {
             try {
                 const existingUser = await User.findOne({ facebookID })
                 if(existingUser) {
-                    return response(true, null, 'Coming soon already')
+                    const token = createJWT(existingUser.id)
+                    return response(true, null, token)
                 }
             } catch (error) {
                 return response(false, error.message, null)
@@ -38,12 +41,14 @@ const resolvers : Resolvers = {
             
             // Create new User by facebookID
             try {
-                await User.create({ 
+                const newUser = await User.create({ 
                         ...args, 
                         profilePhoto: `http://graph.facebook.com/${facebookID}/picture?type=square` 
                     }).save()
-                    
-               return response(true, null, 'Coming soon created')
+                
+                
+                const token = createJWT(newUser.id)
+                return response(true, null, token)
 
             } catch (error) {
                 return response(false, error.message, null)

@@ -9,6 +9,9 @@ import {
 import Verification from './../../../entities/Verification'
 import User from './../../../entities/User';
 
+// Utils
+import createJWT from './../../../utils/createJWT';
+
 const resolvers: Resolvers = {
     Mutation: {
         CompletePhoneVerification: async (
@@ -39,6 +42,7 @@ const resolvers: Resolvers = {
                     return response(false, 'Verification key not valid', null)
                 } else { 
                     verification.verified = true
+                    verification.save()
                 }
 
             } catch (error) {
@@ -56,7 +60,9 @@ const resolvers: Resolvers = {
                 if (user) {
                     user.verifiedPhoneNumber = true
                     user.save()
-                    return response(true, null, 'Coming Soon!')
+                    
+                    const token = createJWT(user.id)
+                    return response(true, null, token)
                 } else {
                     return response(true, null, null)
                 }

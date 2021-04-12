@@ -34,14 +34,17 @@ const resolvers: Resolvers = {
                 }).save()
 
                 // Send message to phone with key
-                await sendVerificationSMS(newVerification.payload, newVerification.key)
-                console.log(newVerification)
+                await sendVerificationSMS(
+                    newVerification.payload, 
+                    newVerification.key
+                )
+
                 return { 
                     ok: true,
                     error: null
                 }
 
-            } catch (error) {
+            } catch (error) {  
                 return {
                     ok: false,
                     error: error.message

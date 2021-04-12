@@ -1,30 +1,18 @@
 // Core
 import { ConnectionOptions } from 'typeorm'
 
+// Types
+import { 
+    SessionOptions,
+    CorsOptions
+} from './../types/config.d';
 
-// TS Types
-type TCookie = {
-    httpOnly: boolean,
-    maxAge: number
-}
-interface ISession {
-    key: string,
-    secret: string | string[],
-    resave: boolean,
-    rolling: boolean,
-    saveUninitialized: boolean,
-    cookie: TCookie
-}
-interface ICors {
-    origin: string,
-    credentials: boolean
-}
 
 // Config server 
 export const PORT: number | string = process.env.PORT || 8888
 
 // Session config
-export const sessionOptions: ISession = {
+export const sessionOptions: SessionOptions = {
     key: 'token',
     secret: process.env.SESSION_SECRET || "dfhgdiuerh4389kjsdvn4839hf34kj434h5lk",
     resave: false,
@@ -37,7 +25,7 @@ export const sessionOptions: ISession = {
 }
 
 // CORS config
-export const corsOptions: ICors = {
+export const corsOptions: CorsOptions = {
     origin: `http://localhost:${PORT}`,
     credentials: true // for set cookie on client from server
 }

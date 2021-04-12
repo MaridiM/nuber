@@ -3,10 +3,15 @@ import { Resolvers } from './../../../types/resolvers.d';
 import { 
     EmailSignInResponse,
     MutationEmailSignUpArgs
-} from './../../../types/graph.d';
+} from './../../../types/graph.d'
 
 // Entities
-import User from './../../../entities/User';
+import Verification from './../../../entities/Verification'
+import User from './../../../entities/User'
+
+// Utils
+import createJWT from './../../../utils/createJWT'
+import { sendVerificationEmail } from './../../../utils/sendEmail'
 
 const resolvers: Resolvers = {
     Mutation: {
@@ -14,7 +19,7 @@ const resolvers: Resolvers = {
             _,
             args: MutationEmailSignUpArgs
         ): Promise<EmailSignInResponse> => {
-            const { email } = args
+            const { email, phoneNumber } = args
             try {
 
                 // Existing user
@@ -22,16 +27,53 @@ const resolvers: Resolvers = {
                 if( existingUser ) {
                     return { 
                         ok: false,
-                        error: 'You should log in instead'
+                        error: 'You should log in instead',
+                        token: null
                     }
                 }
-                // Create new user
-                await User.create({ ...args }).save()
 
-                return { 
-                    ok: true,
-                    error: null,
-                    token: 'Coming soon!' 
+                // Check to verification phone before create new user
+                const phoneVerification = await Verification.findOne({ 
+                    payload: phoneNumber, 
+                    verified: true
+                })
+
+                // If Phone is verified, then create new user 
+                if(phoneVerification) {
+                    const newUser = await User.create({ ...args }).save()
+                    
+                    // After created new user, 
+                    // crete new  verification key and 
+                    // then send verification email
+                    if(newUser.email) {
+                        // Create Verification
+                        const emailVerification = await Verification.create({
+                            payload: newUser.email,
+                            target: 'EMAIL'
+                        }).save()
+                        
+                        // Send email with verification key
+                        await sendVerificationEmail(
+                            newUser.email, 
+                            newUser.fullname, 
+                            emailVerification.key
+                        )
+                    }
+                    
+                    const token = createJWT(newUser.id)
+    
+                    return { 
+                        ok: true,
+                        error: null,
+                        token 
+                    }
+                } else {
+                    return { 
+                        ok: true,
+                        error: "You haven't verified your phone number",
+                        token: null 
+                    }
+                    
                 }
 
 

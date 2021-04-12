@@ -9,21 +9,22 @@ Server for (N)Uber Clone, GraphQL, Typescript, NodeJS, PostgreSQL
 - [x] Sign In - with Email 
 - [x] Start Phone Number Verification
 - [x] Complete Phone Number Verification
-- [ ] Sign Up - with Email
+- [x] Sign Up - with Email
 
 ---
 
 ### Authentication: 
 
-- [ ] GenerateJWT
-- [ ] Verify JWT
+- [x] GenerateJWT
+- [x] Verify JWT
 
 ---
 
 ### Private Resolvers: 
 
+- [x] Get My Profile
+- [ ] Request Email Verification
 - [ ] Verify Email
-- [ ] Get My Profile
 - [ ] Update My Profile
 - [ ] Toggle Driving Mode
 - [ ] Report Location | Orientation
