@@ -23,8 +23,8 @@ Server for (N)Uber Clone, GraphQL, Typescript, NodeJS, PostgreSQL
 ### Private Resolvers: 
 
 - [x] Get My Profile
-- [ ] Request Email Verification
-- [ ] Verify Email
+- [x] Request Email Verification
+- [x] Verify Email
 - [ ] Update My Profile
 - [ ] Toggle Driving Mode
 - [ ] Report Location | Orientation

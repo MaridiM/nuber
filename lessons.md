@@ -93,9 +93,9 @@
 - [x] 50 Sending Confirmation Email part Two 
 - [x] 51 Sending Confirmation Email part Three
 - [x] 52 Testing Email Sending 
-- [ ] 53 RequestEmailVerification Resolver 
-- [ ] 54 CompleteEmailVerification Resolver
-- [ ] 55 Testing Email Verification Resolvers 
+- [x] 53 RequestEmailVerification Resolver 
+- [x] 54 CompleteEmailVerification Resolver
+- [x] 55 Testing Email Verification Resolvers 
 
 ---
 

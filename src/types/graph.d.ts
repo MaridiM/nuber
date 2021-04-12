@@ -20,6 +20,12 @@ export type Chat = {
   updatedAt?: Maybe<Scalars['String']>;
 };
 
+export type CompleteEmailVerificationResponse = {
+  __typename?: 'CompleteEmailVerificationResponse';
+  ok: Scalars['Boolean'];
+  error?: Maybe<Scalars['String']>;
+};
+
 export type CompletePhoneVerificationResponse = {
   __typename?: 'CompletePhoneVerificationResponse';
   ok: Scalars['Boolean'];
@@ -67,11 +73,19 @@ export type Message = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  CompleteEmailVerification: CompleteEmailVerificationResponse;
+  CompleteEmailVerification1: Scalars['String'];
   CompletePhoneVerification?: Maybe<CompletePhoneVerificationResponse>;
   EmailSignIn: EmailSignInResponse;
   EmailSignUp: EmailSignUpResponse;
   FacebookConnect: FacebookConnectResponse;
+  RequestEmailVerification: RequestEmailVerificationResponse;
   StartPhoneVerification: StartPhoneVerificationResponse;
+};
+
+
+export type MutationCompleteEmailVerificationArgs = {
+  key: Scalars['String'];
 };
 
 
@@ -125,6 +139,12 @@ export type Place = {
 export type Query = {
   __typename?: 'Query';
   GetMyProfile: GetMyProfileResponse;
+};
+
+export type RequestEmailVerificationResponse = {
+  __typename?: 'RequestEmailVerificationResponse';
+  ok: Scalars['Boolean'];
+  error?: Maybe<Scalars['String']>;
 };
 
 export type Ride = {
