@@ -1,26 +1,27 @@
 type User {
     id: Int!
-    email: String  
+    email: String
     verifiedEmail: Boolean!
     firstName: String!
     lastName: String!
-    fullName: String
     age: Int
     password: String
     phoneNumber: String
     verifiedPhoneNumber: Boolean!
-    facebookID: String!
     profilePhoto: String
-    idDriving: Boolean!
-    idRiding: Boolean!
+    fullName: String
+    isDriving: Boolean!
+    isRiding: Boolean!
     isTaken: Boolean!
     lastLng: Float
     lastLat: Float
     lastOrientation: Float
-    chat: Chat
+    facebookID: String
     messages: [Message]
-    ridesAsPassenger: [Ride]!
-    ridesAsDriver: [Ride]!
+    ridesAsPassenger: [Ride]
+    ridesAsDriver: [Ride]
+    places: [Place]
     createdAt: String!
     updatedAt: String
+    
 }

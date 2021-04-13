@@ -111,17 +111,17 @@
 
 ### Place
 
-- [ ] 60 AddPlace Resolver 
-- [ ] 61 EditPlace Resolver 
-- [ ] 62 DeletePlace Resolver 
-- [ ] 63 GetMyPlaces Resolver and Testing 
+- [x] 60 AddPlace Resolver 
+- [x] 61 EditPlace Resolver 
+- [x] 62 DeletePlace Resolver 
+- [x] 63 GetMyPlaces Resolver and Testing 
 
 ---
 
 ### Nearby Drivers & Ride
 
-- [ ] 64 GetNearbyDrivers Resolver part One 
-- [ ] 65 GetNearbyDrivers Resolver part Two 
+- [x] 64 GetNearbyDrivers Resolver part One 
+- [x] 65 GetNearbyDrivers Resolver part Two 
 - [ ] 66 DriversSubscription part One 
 - [ ] 67 DriversSubscription part Two 
 - [ ] 68 Authenticating WebSocket Subscriptions part One

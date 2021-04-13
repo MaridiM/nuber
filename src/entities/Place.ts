@@ -6,9 +6,12 @@ import {
     Entity,
     UpdateDateColumn,
     PrimaryGeneratedColumn,
+    ManyToOne,
 } from 'typeorm'
 
-// Verification Entity 
+// Entities
+import User from './User'
+
 @Entity()
 class Place extends BaseEntity {
     // Create  Verification table in PostgreSQL
@@ -30,6 +33,12 @@ class Place extends BaseEntity {
     @Column({ type: 'boolean'})
     isFav!: boolean
     
+    @Column({ nullable: true})
+    userID!: number 
+
+    @ManyToOne(type => User, user => user.places)
+    user!: User
+
  
     @CreateDateColumn() createdAt!: string
     @UpdateDateColumn() updatedAt?: string

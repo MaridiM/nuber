@@ -28,10 +28,11 @@ Server for (N)Uber Clone, GraphQL, Typescript, NodeJS, PostgreSQL
 - [x] Update My Profile
 - [x] Toggle Driving Mode
 - [x] Report Location | Orientation
-- [ ] Add Place
-- [ ] Edit Place
-- [ ] Delete Place
-- [ ] See Nearby Drivers
+- [x] Add Place
+- [x] Edit Place
+- [x] Delete Place
+- [x] Get My Places
+- [x] See Nearby Drivers
 - [ ] Subscribe to Nearby Drivers
 - [ ] Request a Ride
 - [ ] Get Nearby Rides

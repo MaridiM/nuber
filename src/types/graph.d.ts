@@ -11,6 +11,12 @@ export type Scalars = {
   Float: number;
 };
 
+export type AddPlaceResponse = {
+  __typename?: 'AddPlaceResponse';
+  ok: Scalars['Boolean'];
+  error?: Maybe<Scalars['String']>;
+};
+
 export type Chat = {
   __typename?: 'Chat';
   id: Scalars['Int'];
@@ -31,6 +37,18 @@ export type CompletePhoneVerificationResponse = {
   ok: Scalars['Boolean'];
   error?: Maybe<Scalars['String']>;
   token?: Maybe<Scalars['String']>;
+};
+
+export type DeletePlaceResponse = {
+  __typename?: 'DeletePlaceResponse';
+  ok: Scalars['Boolean'];
+  error?: Maybe<Scalars['String']>;
+};
+
+export type EditPlaceResponse = {
+  __typename?: 'EditPlaceResponse';
+  ok: Scalars['Boolean'];
+  error?: Maybe<Scalars['String']>;
 };
 
 export type EmailSignInResponse = {
@@ -54,6 +72,13 @@ export type FacebookConnectResponse = {
   token?: Maybe<Scalars['String']>;
 };
 
+export type GetMyPlacesResponse = {
+  __typename?: 'GetMyPlacesResponse';
+  ok: Scalars['Boolean'];
+  error?: Maybe<Scalars['String']>;
+  places?: Maybe<Array<Maybe<Place>>>;
+};
+
 export type GetMyProfileResponse = {
   __typename?: 'GetMyProfileResponse';
   ok: Scalars['Boolean'];
@@ -61,11 +86,18 @@ export type GetMyProfileResponse = {
   user?: Maybe<User>;
 };
 
+export type GetNearbyDriversResponse = {
+  __typename?: 'GetNearbyDriversResponse';
+  ok: Scalars['Boolean'];
+  error?: Maybe<Scalars['String']>;
+  drivers?: Maybe<Array<Maybe<User>>>;
+};
+
 export type Message = {
   __typename?: 'Message';
   id: Scalars['Int'];
   text: Scalars['String'];
-  chat: Message;
+  chat: Chat;
   user: User;
   createdAt: Scalars['String'];
   updateAt?: Maybe<Scalars['String']>;
@@ -73,16 +105,30 @@ export type Message = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  AddPlace: AddPlaceResponse;
   CompleteEmailVerification: CompleteEmailVerificationResponse;
   CompletePhoneVerification?: Maybe<CompletePhoneVerificationResponse>;
+  DeletePlace: DeletePlaceResponse;
+  EditPlace: EditPlaceResponse;
   EmailSignIn: EmailSignInResponse;
   EmailSignUp: EmailSignUpResponse;
   FacebookConnect: FacebookConnectResponse;
+  GetMyPlaces: GetMyPlacesResponse;
+  GetNearbyDrivers: GetNearbyDriversResponse;
   ReportMovement: ReportMovementResponse;
   RequestEmailVerification: RequestEmailVerificationResponse;
   StartPhoneVerification: StartPhoneVerificationResponse;
   ToggleDrivingMode: ToggleDrivingModeResponse;
   UpdateMyProfile?: Maybe<UpdateMyProfileResponse>;
+};
+
+
+export type MutationAddPlaceArgs = {
+  name: Scalars['String'];
+  lat: Scalars['Float'];
+  lng: Scalars['Float'];
+  address: Scalars['String'];
+  isFav: Scalars['Boolean'];
 };
 
 
@@ -94,6 +140,18 @@ export type MutationCompleteEmailVerificationArgs = {
 export type MutationCompletePhoneVerificationArgs = {
   phoneNumber: Scalars['String'];
   key: Scalars['String'];
+};
+
+
+export type MutationDeletePlaceArgs = {
+  placeID: Scalars['Int'];
+};
+
+
+export type MutationEditPlaceArgs = {
+  placeID: Scalars['Int'];
+  name?: Maybe<Scalars['String']>;
+  isFav?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -151,6 +209,8 @@ export type Place = {
   lng: Scalars['Float'];
   address: Scalars['String'];
   isFav: Scalars['Boolean'];
+  userID: Scalars['Int'];
+  user: User;
   createdAt: Scalars['String'];
   updatedAt?: Maybe<Scalars['String']>;
 };
@@ -216,23 +276,23 @@ export type User = {
   verifiedEmail: Scalars['Boolean'];
   firstName: Scalars['String'];
   lastName: Scalars['String'];
-  fullName?: Maybe<Scalars['String']>;
   age?: Maybe<Scalars['Int']>;
   password?: Maybe<Scalars['String']>;
   phoneNumber?: Maybe<Scalars['String']>;
   verifiedPhoneNumber: Scalars['Boolean'];
-  facebookID: Scalars['String'];
   profilePhoto?: Maybe<Scalars['String']>;
-  idDriving: Scalars['Boolean'];
-  idRiding: Scalars['Boolean'];
+  fullName?: Maybe<Scalars['String']>;
+  isDriving: Scalars['Boolean'];
+  isRiding: Scalars['Boolean'];
   isTaken: Scalars['Boolean'];
   lastLng?: Maybe<Scalars['Float']>;
   lastLat?: Maybe<Scalars['Float']>;
   lastOrientation?: Maybe<Scalars['Float']>;
-  chat?: Maybe<Chat>;
+  facebookID?: Maybe<Scalars['String']>;
   messages?: Maybe<Array<Maybe<Message>>>;
-  ridesAsPassenger: Array<Maybe<Ride>>;
-  ridesAsDriver: Array<Maybe<Ride>>;
+  ridesAsPassenger?: Maybe<Array<Maybe<Ride>>>;
+  ridesAsDriver?: Maybe<Array<Maybe<Ride>>>;
+  places?: Maybe<Array<Maybe<Place>>>;
   createdAt: Scalars['String'];
   updatedAt?: Maybe<Scalars['String']>;
 };

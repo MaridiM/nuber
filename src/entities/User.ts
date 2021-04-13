@@ -18,6 +18,7 @@ import {
 import Chat from './Chat'
 import Message from './Message'
 import Ride from './Ride'
+import Place from './Place';
 
 // Salt for Hashing Password
 const BCRYPT_ROUNDS = 10
@@ -32,7 +33,7 @@ class User extends BaseEntity {
 
     @Column({ type: 'text', nullable: true })
     @IsEmail()
-    email?: string | null
+    email?: string
     
     @Column({ type: 'boolean', default: false }) 
     verifiedEmail!: boolean 
@@ -94,6 +95,9 @@ class User extends BaseEntity {
     // One driver can have many rides  
     @OneToMany( type => Ride, ride => ride.driver)
     ridesAsDriver?: Ride[]
+
+    @OneToMany(type => Place, place => place.user)
+    places?: Place[]
 
     @CreateDateColumn() 
     createdAt!: string

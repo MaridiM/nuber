@@ -9,10 +9,49 @@ type Chat {
 type Message {
   id: Int!
   text: String!
-  chat: Message!
+  chat: Chat!
   user: User!
   createdAt: String!
   updateAt: String
+}
+
+type AddPlaceResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, isFav: Boolean!): AddPlaceResponse!
+  DeletePlace(placeID: Int!): DeletePlaceResponse!
+  EditPlace(placeID: Int!, name: String, isFav: Boolean): EditPlaceResponse!
+  GetMyPlaces: GetMyPlacesResponse!
+  CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!
+  CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse
+  EmailSignIn(email: String!, password: String!): EmailSignInResponse!
+  EmailSignUp(firstName: String!, lastName: String!, email: String!, password: String!, profilePhoto: String!, phoneNumber: String!, age: Int!): EmailSignUpResponse!
+  FacebookConnect(firstName: String!, lastName: String!, email: String!, facebookID: String!): FacebookConnectResponse!
+  GetNearbyDrivers: GetNearbyDriversResponse!
+  ReportMovement(orientation: Float, lat: Float, lng: Float): ReportMovementResponse!
+  RequestEmailVerification: RequestEmailVerificationResponse!
+  StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!
+  ToggleDrivingMode: ToggleDrivingModeResponse!
+  UpdateMyProfile(firstName: String, lastName: String, email: String, password: String, age: String, profilePhoto: String): UpdateMyProfileResponse
+}
+
+type DeletePlaceResponse {
+  ok: Boolean!
+  error: String
+}
+
+type EditPlaceResponse {
+  ok: Boolean!
+  error: String
+}
+
+type GetMyPlacesResponse {
+  ok: Boolean!
+  error: String
+  places: [Place]
 }
 
 type Place {
@@ -22,6 +61,8 @@ type Place {
   lng: Float!
   address: String!
   isFav: Boolean!
+  userID: Int!
+  user: User!
   createdAt: String!
   updatedAt: String
 }
@@ -47,19 +88,6 @@ type Ride {
 type CompleteEmailVerificationResponse {
   ok: Boolean!
   error: String
-}
-
-type Mutation {
-  CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!
-  CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse
-  EmailSignIn(email: String!, password: String!): EmailSignInResponse!
-  EmailSignUp(firstName: String!, lastName: String!, email: String!, password: String!, profilePhoto: String!, phoneNumber: String!, age: Int!): EmailSignUpResponse!
-  FacebookConnect(firstName: String!, lastName: String!, email: String!, facebookID: String!): FacebookConnectResponse!
-  ReportMovement(orientation: Float, lat: Float, lng: Float): ReportMovementResponse!
-  RequestEmailVerification: RequestEmailVerificationResponse!
-  StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!
-  ToggleDrivingMode: ToggleDrivingModeResponse!
-  UpdateMyProfile(firstName: String, lastName: String, email: String, password: String, age: String, profilePhoto: String): UpdateMyProfileResponse
 }
 
 type CompletePhoneVerificationResponse {
@@ -96,6 +124,12 @@ type Query {
   GetMyProfile: GetMyProfileResponse!
 }
 
+type GetNearbyDriversResponse {
+  ok: Boolean!
+  error: String
+  drivers: [User]
+}
+
 type ReportMovementResponse {
   ok: Boolean!
   error: String
@@ -112,23 +146,23 @@ type User {
   verifiedEmail: Boolean!
   firstName: String!
   lastName: String!
-  fullName: String
   age: Int
   password: String
   phoneNumber: String
   verifiedPhoneNumber: Boolean!
-  facebookID: String!
   profilePhoto: String
-  idDriving: Boolean!
-  idRiding: Boolean!
+  fullName: String
+  isDriving: Boolean!
+  isRiding: Boolean!
   isTaken: Boolean!
   lastLng: Float
   lastLat: Float
   lastOrientation: Float
-  chat: Chat
+  facebookID: String
   messages: [Message]
-  ridesAsPassenger: [Ride]!
-  ridesAsDriver: [Ride]!
+  ridesAsPassenger: [Ride]
+  ridesAsDriver: [Ride]
+  places: [Place]
   createdAt: String!
   updatedAt: String
 }
