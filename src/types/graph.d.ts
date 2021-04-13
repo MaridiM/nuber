@@ -78,8 +78,10 @@ export type Mutation = {
   EmailSignIn: EmailSignInResponse;
   EmailSignUp: EmailSignUpResponse;
   FacebookConnect: FacebookConnectResponse;
+  ReportMovement: ReportMovementResponse;
   RequestEmailVerification: RequestEmailVerificationResponse;
   StartPhoneVerification: StartPhoneVerificationResponse;
+  ToggleDrivingMode: ToggleDrivingModeResponse;
   UpdateMyProfile?: Maybe<UpdateMyProfileResponse>;
 };
 
@@ -120,6 +122,13 @@ export type MutationFacebookConnectArgs = {
 };
 
 
+export type MutationReportMovementArgs = {
+  orientation?: Maybe<Scalars['Float']>;
+  lat?: Maybe<Scalars['Float']>;
+  lng?: Maybe<Scalars['Float']>;
+};
+
+
 export type MutationStartPhoneVerificationArgs = {
   phoneNumber: Scalars['String'];
 };
@@ -151,6 +160,12 @@ export type Query = {
   GetMyProfile: GetMyProfileResponse;
 };
 
+export type ReportMovementResponse = {
+  __typename?: 'ReportMovementResponse';
+  ok: Scalars['Boolean'];
+  error?: Maybe<Scalars['String']>;
+};
+
 export type RequestEmailVerificationResponse = {
   __typename?: 'RequestEmailVerificationResponse';
   ok: Scalars['Boolean'];
@@ -178,6 +193,12 @@ export type Ride = {
 
 export type StartPhoneVerificationResponse = {
   __typename?: 'StartPhoneVerificationResponse';
+  ok: Scalars['Boolean'];
+  error?: Maybe<Scalars['String']>;
+};
+
+export type ToggleDrivingModeResponse = {
+  __typename?: 'ToggleDrivingModeResponse';
   ok: Scalars['Boolean'];
   error?: Maybe<Scalars['String']>;
 };

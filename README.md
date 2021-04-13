@@ -25,9 +25,9 @@ Server for (N)Uber Clone, GraphQL, Typescript, NodeJS, PostgreSQL
 - [x] Get My Profile
 - [x] Request Email Verification
 - [x] Verify Email
-- [ ] Update My Profile
-- [ ] Toggle Driving Mode
-- [ ] Report Location | Orientation
+- [x] Update My Profile
+- [x] Toggle Driving Mode
+- [x] Report Location | Orientation
 - [ ] Add Place
 - [ ] Edit Place
 - [ ] Delete Place

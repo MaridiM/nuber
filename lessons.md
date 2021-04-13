@@ -103,9 +103,9 @@
 
 - [x] 56 UpdateMyProfile Resolver part One 
 - [x] 57 UpdateMyProfile Resolver part Two
-- [ ] 57.1 UpdateMyProfile Resolver Bug Fixing 
-- [ ] 58 ToggleDrivingMode Resolver 
-- [ ] 59 ReportMovement Resolver 
+- [x] 57.1 UpdateMyProfile Resolver Bug Fixing 
+- [x] 58 ToggleDrivingMode Resolver 
+- [x] 59 ReportMovement Resolver 
 
 ---
 
@@ -148,4 +148,4 @@
 - [ ] 84 Testing GetChat Resolver
 - [ ] 85 SendChatMessage Resolver 
 - [ ] 86 MessageSubscription 
-- [ ] 87 Backend Conclusions 
+- [ ] 87 Backend Conclusions    
