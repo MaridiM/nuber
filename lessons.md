@@ -101,8 +101,8 @@
 
 ### Profile
 
-- [ ] 56 UpdateMyProfile Resolver part One 
-- [ ] 57 UpdateMyProfile Resolver part Two
+- [x] 56 UpdateMyProfile Resolver part One 
+- [x] 57 UpdateMyProfile Resolver part Two
 - [ ] 57.1 UpdateMyProfile Resolver Bug Fixing 
 - [ ] 58 ToggleDrivingMode Resolver 
 - [ ] 59 ReportMovement Resolver 

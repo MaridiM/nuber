@@ -37,7 +37,7 @@ const resolvers: Resolvers = {
                     }).save()
 
                     // Send email verification
-                    await sendVerificationEmail(user.email, user.fullname, newVerification.key)
+                    await sendVerificationEmail(user.email, user.fullName, newVerification.key)
                     
                     return { 
                         ok: true,

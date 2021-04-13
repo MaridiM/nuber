@@ -20,8 +20,8 @@ const resolvers: Resolvers = {
             args: MutationEmailSignUpArgs
         ): Promise<EmailSignInResponse> => {
             const { email, phoneNumber } = args
-            try {
 
+            try {
                 // Existing user
                 const existingUser = await User.findOne({ email })
                 if( existingUser ) {
@@ -55,7 +55,7 @@ const resolvers: Resolvers = {
                         // Send email with verification key
                         await sendVerificationEmail(
                             newUser.email, 
-                            newUser.fullname, 
+                            newUser.fullName, 
                             emailVerification.key
                         )
                     }

@@ -74,13 +74,13 @@ export type Message = {
 export type Mutation = {
   __typename?: 'Mutation';
   CompleteEmailVerification: CompleteEmailVerificationResponse;
-  CompleteEmailVerification1: Scalars['String'];
   CompletePhoneVerification?: Maybe<CompletePhoneVerificationResponse>;
   EmailSignIn: EmailSignInResponse;
   EmailSignUp: EmailSignUpResponse;
   FacebookConnect: FacebookConnectResponse;
   RequestEmailVerification: RequestEmailVerificationResponse;
   StartPhoneVerification: StartPhoneVerificationResponse;
+  UpdateMyProfile?: Maybe<UpdateMyProfileResponse>;
 };
 
 
@@ -122,6 +122,16 @@ export type MutationFacebookConnectArgs = {
 
 export type MutationStartPhoneVerificationArgs = {
   phoneNumber: Scalars['String'];
+};
+
+
+export type MutationUpdateMyProfileArgs = {
+  firstName?: Maybe<Scalars['String']>;
+  lastName?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  password?: Maybe<Scalars['String']>;
+  age?: Maybe<Scalars['String']>;
+  profilePhoto?: Maybe<Scalars['String']>;
 };
 
 export type Place = {
@@ -168,6 +178,12 @@ export type Ride = {
 
 export type StartPhoneVerificationResponse = {
   __typename?: 'StartPhoneVerificationResponse';
+  ok: Scalars['Boolean'];
+  error?: Maybe<Scalars['String']>;
+};
+
+export type UpdateMyProfileResponse = {
+  __typename?: 'UpdateMyProfileResponse';
   ok: Scalars['Boolean'];
   error?: Maybe<Scalars['String']>;
 };

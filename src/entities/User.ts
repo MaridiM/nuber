@@ -101,13 +101,13 @@ class User extends BaseEntity {
     @UpdateDateColumn() 
     updatedAt?: string
     
-    get fullname(): string {
+    get fullName(): string {
         return `${this.firstName} ${this.lastName}`
     }
 
     // Verify password
-    public comparePassword(password: string): Promise<boolean> {
-        return bcrypt.compare(password, this.password || '')
+    public async comparePassword(password: string): Promise<boolean> {
+        return await bcrypt.compare(password, this.password || '')
     }
 
     // Hash password before insert and update

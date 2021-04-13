@@ -51,13 +51,13 @@ type CompleteEmailVerificationResponse {
 
 type Mutation {
   CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!
-  CompleteEmailVerification1: String!
   CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse
   EmailSignIn(email: String!, password: String!): EmailSignInResponse!
   EmailSignUp(firstName: String!, lastName: String!, email: String!, password: String!, profilePhoto: String!, phoneNumber: String!, age: Int!): EmailSignUpResponse!
   FacebookConnect(firstName: String!, lastName: String!, email: String!, facebookID: String!): FacebookConnectResponse!
   RequestEmailVerification: RequestEmailVerificationResponse!
   StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!
+  UpdateMyProfile(firstName: String, lastName: String, email: String, password: String, age: String, profilePhoto: String): UpdateMyProfileResponse
 }
 
 type CompletePhoneVerificationResponse {
@@ -127,6 +127,11 @@ type User {
 }
 
 type StartPhoneVerificationResponse {
+  ok: Boolean!
+  error: String
+}
+
+type UpdateMyProfileResponse {
   ok: Boolean!
   error: String
 }
