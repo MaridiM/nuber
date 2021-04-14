@@ -5,7 +5,7 @@ import session from 'express-session'
 import helmet from 'helmet'
 import logger from 'morgan'
 import path from 'path'
-import bodyParser from 'body-parser'
+// import bodyParser from 'body-parser'
 
 // Config
 import { sessionOptions, corsOptions } from './config'
@@ -16,8 +16,8 @@ import { readToken } from './readToken'
 const app: Application = express()
 
 // Middleware
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
+// app.use(bodyParser.json())
+// app.use(bodyParser.urlencoded({ extended: true }))
 app.use(session(sessionOptions))
 app.use(cors(corsOptions))
 app.use(helmet({ contentSecurityPolicy: (process.env.NODE_ENV === 'production') ? undefined : false }))

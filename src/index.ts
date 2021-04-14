@@ -7,7 +7,7 @@ dotenv.config({ path: '../.env' })
 import './init/app'
 import { PORT, connectionOptions } from './init/config'
 import { server } from './init/server'
-import { graphqlPath, subscriptionsPath } from './init/apolloServer'
+import { graphqlPath, subscriptionsPath } from './init/applyMiddleware'
 
 // Create PostgreSQL connection with typeorm and  after start servers
 createConnection(connectionOptions).then(() => {
