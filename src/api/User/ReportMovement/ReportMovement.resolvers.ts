@@ -18,7 +18,7 @@ const resolvers: Resolvers = {
         ReportMovement: privateAuthResolver( async (
             _, 
             args: MutationReportMovementArgs,
-            { req }
+            { req, pubSub }
         ): Promise<ReportMovementResponse> => {
 
             // Get user, from req
@@ -28,6 +28,13 @@ const resolvers: Resolvers = {
             try {
                 // Update location  and orientation  user in profile
                 await User.update({ id: user.id }, { ...notNull })
+                
+                // Update drivers coordinates
+                // Publish chanel name, 
+                // Using Payload basic data({ DriversSubscription: user }), data what we send
+                pubSub.publish('driverUpdate', { DriversSubscription: user }) 
+
+
                 return {
                     ok: true,
                     error: null

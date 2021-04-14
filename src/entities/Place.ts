@@ -21,16 +21,16 @@ class Place extends BaseEntity {
     @Column({ type: 'text'})
     name!: string
 
-    @Column({ type: 'double precision'})
+    @Column({ type: 'double precision',  default: 0 })
     lat!: number
 
-    @Column({ type: 'double precision'})
+    @Column({ type: 'double precision', default: 0 })
     lng!: number
 
     @Column({ type: 'text'})
     address!: string
 
-    @Column({ type: 'boolean'})
+    @Column({ type: 'boolean', default: false})
     isFav!: boolean
     
     @Column({ nullable: true})

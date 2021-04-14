@@ -3,12 +3,14 @@ import { ApolloServer } from 'apollo-server-express'
 
 // Schema
 import schema from '../schema'
+import pubSub from './pubSub'
 
 // Init Apollo server
 const apolloServer  = new ApolloServer({
     schema,
     context: ({req, res}) => { 
-        return { req, res } // return node req, res 
+        // Set data in  context
+        return { req, res, pubSub}  
     },
     playground: {
         settings: {

@@ -122,8 +122,8 @@
 
 - [x] 64 GetNearbyDrivers Resolver part One 
 - [x] 65 GetNearbyDrivers Resolver part Two 
-- [ ] 66 DriversSubscription part One 
-- [ ] 67 DriversSubscription part Two 
+- [x] 66 DriversSubscription part One 
+- [x] 67 DriversSubscription part Two 
 - [ ] 68 Authenticating WebSocket Subscriptions part One
 - [ ] 69 Authenticating WebSocket Subscriptions part Two 
 - [ ] 70 Filtering Subscription Messages 

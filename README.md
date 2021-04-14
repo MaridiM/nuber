@@ -33,7 +33,8 @@ Server for (N)Uber Clone, GraphQL, Typescript, NodeJS, PostgreSQL
 - [x] Delete Place
 - [x] Get My Places
 - [x] See Nearby Drivers
-- [ ] Subscribe to Nearby Drivers
+- [x] Subscribe to Nearby Drivers
+- [ ] Authentication Subscription to Nearby Drivers
 - [ ] Request a Ride
 - [ ] Get Nearby Rides
 - [ ] Subscribe to Nearby Ride Request

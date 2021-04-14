@@ -181,9 +181,9 @@ export type MutationFacebookConnectArgs = {
 
 
 export type MutationReportMovementArgs = {
-  orientation?: Maybe<Scalars['Float']>;
-  lat?: Maybe<Scalars['Float']>;
-  lng?: Maybe<Scalars['Float']>;
+  lastOrientation?: Maybe<Scalars['Float']>;
+  lastLat?: Maybe<Scalars['Float']>;
+  lastLng?: Maybe<Scalars['Float']>;
 };
 
 
@@ -255,6 +255,11 @@ export type StartPhoneVerificationResponse = {
   __typename?: 'StartPhoneVerificationResponse';
   ok: Scalars['Boolean'];
   error?: Maybe<Scalars['String']>;
+};
+
+export type Subscription = {
+  __typename?: 'Subscription';
+  DriversSubscription?: Maybe<User>;
 };
 
 export type ToggleDrivingModeResponse = {
