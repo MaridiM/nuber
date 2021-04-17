@@ -93,6 +93,13 @@ export type GetNearbyDriversResponse = {
   drivers?: Maybe<Array<Maybe<User>>>;
 };
 
+export type GetNearbyRidesResponse = {
+  __typename?: 'GetNearbyRidesResponse';
+  ok: Scalars['Boolean'];
+  error?: Maybe<Scalars['String']>;
+  rides?: Maybe<Array<Maybe<Ride>>>;
+};
+
 export type Message = {
   __typename?: 'Message';
   id: Scalars['Int'];
@@ -190,8 +197,8 @@ export type MutationReportMovementArgs = {
 
 export type MutationRequestRideArgs = {
   pickUpAddress: Scalars['String'];
-  picUpLat: Scalars['Float'];
-  picUpLng: Scalars['Float'];
+  pickUpLat: Scalars['Float'];
+  pickUpLng: Scalars['Float'];
   dropOffAddress: Scalars['String'];
   dropOffLat: Scalars['Float'];
   dropOffLng: Scalars['Float'];
@@ -232,6 +239,7 @@ export type Place = {
 export type Query = {
   __typename?: 'Query';
   GetMyProfile: GetMyProfileResponse;
+  GetNearbyRides: GetNearbyRidesResponse;
 };
 
 export type ReportMovementResponse = {
@@ -258,8 +266,8 @@ export type Ride = {
   id: Scalars['Int'];
   status: Scalars['String'];
   pickUpAddress: Scalars['String'];
-  picUpLat: Scalars['Float'];
-  picUpLng: Scalars['Float'];
+  pickUpLat: Scalars['Float'];
+  pickUpLng: Scalars['Float'];
   dropOffAddress: Scalars['String'];
   dropOffLat: Scalars['Float'];
   dropOffLng: Scalars['Float'];

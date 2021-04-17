@@ -7,8 +7,8 @@ type RequestRideResponse {
 type Mutation {
     RequestRide(
         pickUpAddress: String!,
-        picUpLat: Float!,
-        picUpLng: Float!,
+        pickUpLat: Float!,
+        pickUpLng: Float!,
         dropOffAddress: String!,
         dropOffLat: Float!,
         dropOffLng: Float!,

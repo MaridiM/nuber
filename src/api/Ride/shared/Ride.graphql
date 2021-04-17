@@ -2,8 +2,8 @@ type Ride {
     id: Int!
     status: String!
     pickUpAddress: String!
-    picUpLat: Float!
-    picUpLng: Float!
+    pickUpLat: Float!
+    pickUpLng: Float!
     dropOffAddress: String!
     dropOffLat: Float!
     dropOffLng: Float!

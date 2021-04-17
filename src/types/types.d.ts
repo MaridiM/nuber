@@ -6,5 +6,5 @@ export type RideStatus =
     | 'ACCEPTED'
     | 'FINISHED'
     | 'CANCELED'
-    | 'REQUESING'
+    | 'REQUESTING'
     | 'ONROUTE'

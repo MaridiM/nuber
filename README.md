@@ -4,7 +4,8 @@ Server for (N)Uber Clone, GraphQL, Typescript, NodeJS, PostgreSQL
 
 ## Resolvers
 
-### Public Resolvers: 
+### Public Resolvers
+
 - [x] Sign In | Sign Up - with Facebook
 - [x] Sign In - with Email 
 - [x] Start Phone Number Verification
@@ -13,14 +14,14 @@ Server for (N)Uber Clone, GraphQL, Typescript, NodeJS, PostgreSQL
 
 ---
 
-### Authentication: 
+### Authentication
 
 - [x] GenerateJWT
 - [x] Verify JWT
 
 ---
 
-### Private Resolvers: 
+### Private Resolvers
 
 - [x] Get My Profile
 - [x] Request Email Verification
@@ -36,12 +37,13 @@ Server for (N)Uber Clone, GraphQL, Typescript, NodeJS, PostgreSQL
 - [x] Subscribe to Nearby Drivers
 - [x] Authentication Subscription to Nearby Drivers
 - [x] Request a Ride
-- [ ] Get Nearby Rides
+- [x] Get Nearby Rides
 - [ ] Subscribe to Nearby Ride Request
 - [ ] Subscribe to Ride Status
 - [ ] Get Chat Room Messages
 - [ ] Send a chat Message
 
-## Code Chellenge
+## Code Challenge
+
 - [ ] Get Ride History
-- [ ] See Ride Detail 
+- [ ] See Ride Detail
