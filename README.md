@@ -34,8 +34,8 @@ Server for (N)Uber Clone, GraphQL, Typescript, NodeJS, PostgreSQL
 - [x] Get My Places
 - [x] See Nearby Drivers
 - [x] Subscribe to Nearby Drivers
-- [ ] Authentication Subscription to Nearby Drivers
-- [ ] Request a Ride
+- [x] Authentication Subscription to Nearby Drivers
+- [x] Request a Ride
 - [ ] Get Nearby Rides
 - [ ] Subscribe to Nearby Ride Request
 - [ ] Subscribe to Ride Status

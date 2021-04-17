@@ -1,4 +1,5 @@
 // Core
+import { PoolConfig } from 'pg'
 import { ConnectionOptions } from 'typeorm'
 
 // Types
@@ -30,6 +31,19 @@ export const corsOptions: CorsOptions = {
     credentials: true // for set cookie on client from server
 }
 
+// Default pg, by connection with PostgreSQL
+export const PGPoolConfig: PoolConfig = {
+    database: 'nuber', 
+    user:  process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    host: process.env.DB_ENDPOINT, 
+    port: 5432, 
+    // idleTimeoutMillis: 30000,
+    // connectionTimeoutMillis: 2000, 
+    max: 99
+  }
+
+
 // Default ormCcnfig, by connection with databse
 export const connectionOptions: ConnectionOptions  = {
     // type connection
@@ -47,3 +61,4 @@ export const connectionOptions: ConnectionOptions  = {
     username:  process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD
 }
+

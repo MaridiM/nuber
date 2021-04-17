@@ -26,24 +26,27 @@ const resolvers: Resolvers = {
 
             try {
                 // Find place by args id
-                const place  = await Place.findOne({ id: args.placeID })
+                const place  = await Place.findOne({ id: args.id })
                 
 
                 if(place) {
                     // If place exist, 
                     // Then check equals placeID === user.id
-                    if( place.userID === user.id ) {
-                        const notNull = cleanNullArgs(args)
+                    if( place.userId === user.id ) {
+                        const notNull =  cleanNullArgs(args)
 
-                        // Update place by place.userID, and update non null values
-                        await Place.update({ id: args.placeID }, { ...notNull } )
+                        
+                        // Update place by place.userId, and update non null values
+                        if( typeof(notNull) === 'object') {
+                            await Place.update({ id: args.id }, { ...notNull } )
+                        }
 
                         return {
                             ok: true,
                             error: null
                         }
                     } else {
-                        //  Return error if user.id !== place.userID
+                        //  Return error if user.id !== place.userId
                         return { 
                             ok: false,
                             error: 'Not Authorized'

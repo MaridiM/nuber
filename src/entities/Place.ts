@@ -34,10 +34,10 @@ class Place extends BaseEntity {
     isFav!: boolean
     
     @Column({ nullable: true})
-    userID!: number 
+    userId!: number 
 
-    @ManyToOne(type => User, user => user.places)
-    user!: User
+    @ManyToOne(type => User, user => user.places )
+    user!: User;
 
  
     @CreateDateColumn() createdAt!: string

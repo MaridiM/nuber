@@ -10,7 +10,10 @@ import privateAuthResolver from './../../../utils/privateAuthResolver'
 import cleanNullArgs from './../../../utils/cleanNullArgs'
 
 // Entities
-import User from './../../../entities/User';
+import User from './../../../entities/User'
+
+// SQL 
+import { SQL } from './../../../init/db/'
 
 const resolvers: Resolvers = {
     Mutation: {
@@ -21,17 +24,19 @@ const resolvers: Resolvers = {
         ): Promise<UpdateMyProfileResponse> => {
             // Get user from req
             const user: User = req.user
-            
+
             // Check args by null, 
             // if not null set on notNull {}
-            const notNull = cleanNullArgs(args) 
+            const clearArgs = cleanNullArgs(args, true) 
             try {
-
+                
                 if(args.password !== null) {
                     user.password = args.password
                     user.save()
-                }
-                await User.update({ id: user.id }, { ...notNull }) 
+                } 
+
+                await SQL(`UPDATE "user" SET ${clearArgs} WHERE id = ${user.id};`)
+
                 return {
                     ok: true,
                     error: null

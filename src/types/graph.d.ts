@@ -117,6 +117,7 @@ export type Mutation = {
   GetNearbyDrivers: GetNearbyDriversResponse;
   ReportMovement: ReportMovementResponse;
   RequestEmailVerification: RequestEmailVerificationResponse;
+  RequestRide: RequestRideResponse;
   StartPhoneVerification: StartPhoneVerificationResponse;
   ToggleDrivingMode: ToggleDrivingModeResponse;
   UpdateMyProfile?: Maybe<UpdateMyProfileResponse>;
@@ -149,7 +150,7 @@ export type MutationDeletePlaceArgs = {
 
 
 export type MutationEditPlaceArgs = {
-  placeID: Scalars['Int'];
+  id: Scalars['Int'];
   name?: Maybe<Scalars['String']>;
   isFav?: Maybe<Scalars['Boolean']>;
 };
@@ -187,6 +188,19 @@ export type MutationReportMovementArgs = {
 };
 
 
+export type MutationRequestRideArgs = {
+  pickUpAddress: Scalars['String'];
+  picUpLat: Scalars['Float'];
+  picUpLng: Scalars['Float'];
+  dropOffAddress: Scalars['String'];
+  dropOffLat: Scalars['Float'];
+  dropOffLng: Scalars['Float'];
+  price: Scalars['Float'];
+  distance: Scalars['String'];
+  duration: Scalars['String'];
+};
+
+
 export type MutationStartPhoneVerificationArgs = {
   phoneNumber: Scalars['String'];
 };
@@ -209,7 +223,7 @@ export type Place = {
   lng: Scalars['Float'];
   address: Scalars['String'];
   isFav: Scalars['Boolean'];
-  userID: Scalars['Int'];
+  userId: Scalars['Int'];
   user: User;
   createdAt: Scalars['String'];
   updatedAt?: Maybe<Scalars['String']>;
@@ -230,6 +244,13 @@ export type RequestEmailVerificationResponse = {
   __typename?: 'RequestEmailVerificationResponse';
   ok: Scalars['Boolean'];
   error?: Maybe<Scalars['String']>;
+};
+
+export type RequestRideResponse = {
+  __typename?: 'RequestRideResponse';
+  ok: Scalars['Boolean'];
+  error?: Maybe<Scalars['String']>;
+  ride?: Maybe<Ride>;
 };
 
 export type Ride = {

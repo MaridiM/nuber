@@ -5,7 +5,7 @@ type EditPlaceResponse {
 
 type Mutation { 
     EditPlace( 
-        placeID: Int!, 
+        id: Int!, 
         name: String, 
         isFav: Boolean 
     ): EditPlaceResponse! 

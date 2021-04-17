@@ -26,10 +26,10 @@ const resolvers: Resolvers = {
                 const place = await Place.findOne({ id: args.placeID })
 
                 if( place ) {
-                    // Compare place place.userID === user.id
+                    // Compare place place.userId === user.id
                     // if true, remove place
                     // else return error
-                    if(place.userID === user.id) {
+                    if(place.userId === user.id) {
                         place.remove()
 
                         return { 

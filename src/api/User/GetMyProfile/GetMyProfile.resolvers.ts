@@ -5,13 +5,14 @@ import { GetMyProfileResponse } from './../../../types/graph.d';
 // Utils
 import privateAuthResolver from './../../../utils/privateAuthResolver';
 
+
 const resolvers: Resolvers = {
     Query: {
         GetMyProfile: privateAuthResolver(async (
             _, __, { req }
         ): Promise<GetMyProfileResponse> => {
-            
             const { user } = req
+            
             return {
                 ok: true,
                 error: null,

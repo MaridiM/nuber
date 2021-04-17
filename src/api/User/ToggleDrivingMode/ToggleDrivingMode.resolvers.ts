@@ -18,8 +18,10 @@ const resolvers: Resolvers = {
             const user: User = req.user
 
             try {
+                console.log(user)
                 // Set user isDriving 
                 user.isDriving = !user.isDriving
+                console.log(user)
                 user.save()
 
                 return { 

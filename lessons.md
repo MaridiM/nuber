@@ -126,9 +126,9 @@
 - [x] 67 DriversSubscription part Two 
 - [x] 68 Authenticating WebSocket Subscriptions part One
 - [x] 69 Authenticating WebSocket Subscriptions part Two 
-- [ ] 70 Filtering Subscription Messages 
-- [ ] 71 Filtering Subscription Messages part Two
-- [ ] 72 RequestRide Resolver 
+- [x] 70 Filtering Subscription Messages 
+- [X] 71 Filtering Subscription Messages part Two
+- [x] 72 RequestRide Resolver 
 - [ ] 73 GetNearbyRides Resolver 
 - [ ] 74 NearbyRideSubscription
 - [ ] 75 Testing the NearbyRideSubscription 

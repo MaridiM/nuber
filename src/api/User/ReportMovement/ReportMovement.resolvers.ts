@@ -1,4 +1,4 @@
-// Types
+ // Types
 import { Resolvers } from './../../../types/resolvers.d';
 import { 
     MutationReportMovementArgs, 
@@ -23,17 +23,18 @@ const resolvers: Resolvers = {
 
             // Get user, from req
             const user: User = req.user
-            const notNull = cleanNullArgs(args)
+            const notNull= cleanNullArgs(args)
             
             try {
                 // Update location  and orientation  user in profile
-                await User.update({ id: user.id }, { ...notNull })
-                
-                // Update drivers coordinates
-                // Publish chanel name, 
-                // Using Payload basic data({ DriversSubscription: user }), data what we send
-                pubSub.publish('driverUpdate', { DriversSubscription: user }) 
+                if( typeof(notNull) === 'object') {
+                    await User.update({ id: user.id }, { ...notNull } )
+                }
 
+                // Find Updated user
+                const updatedUser = await User.findOne({ id: user.id })
+                // Using Payload basic data({ DriversSubscription: user }), data what we send
+                pubSub.publish('driverUpdate', { DriversSubscription: updatedUser }) 
 
                 return {
                     ok: true,
