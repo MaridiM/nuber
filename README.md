@@ -38,12 +38,16 @@ Server for (N)Uber Clone, GraphQL, Typescript, NodeJS, PostgreSQL
 - [x] Authentication Subscription to Nearby Drivers
 - [x] Request a Ride
 - [x] Get Nearby Rides
-- [ ] Subscribe to Nearby Ride Request
-- [ ] Subscribe to Ride Status
+- [x] Subscribe to Nearby Ride Request
+- [x] Update Ride Status
+- [x] Get Ride
+- [x] Subscribe to Ride Status
+- [x] Create a Chat Room
 - [ ] Get Chat Room Messages
+- [ ] Subscribe to Chat Room Messages
 - [ ] Send a chat Message
 
 ## Code Challenge
 
 - [ ] Get Ride History
-- [ ] See Ride Detail
+- [ ] See Ride Details

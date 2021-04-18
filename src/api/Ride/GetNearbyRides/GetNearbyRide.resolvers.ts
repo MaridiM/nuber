@@ -3,7 +3,7 @@ import { Between } from 'typeorm'
 
 // Types
 import { Resolvers } from './../../../types/resolvers.d'
-import { GetNearbyRidesResponse } from './../../../types/graph.d'
+import { GetNearbyRideResponse } from './../../../types/graph.d'
 
 // Utils
 import privateAuthResolver from './../../../utils/privateAuthResolver'
@@ -15,8 +15,8 @@ import Ride from './../../../entities/Ride';
 
 const resolvers: Resolvers = {
     Query: {
-        GetNearbyRides: privateAuthResolver(
-            async( _, __, { req }): Promise<GetNearbyRidesResponse> => { 
+        GetNearbyRide: privateAuthResolver(
+            async( _, __, { req }): Promise<GetNearbyRideResponse> => { 
                 // Get user from req
                 const user: User = req.user
                 const { lastLat, lastLng } = user
@@ -24,36 +24,45 @@ const resolvers: Resolvers = {
                     try {
                         if( lastLat !== undefined && lastLng !== undefined) {
                             // Find All rides by params 
-                            const rides = await Ride.find({
+                            const ride = await Ride.findOne({
                                 status: 'REQUESTING',
                                 pickUpLat: Between(lastLat  - 0.05, lastLat + 0.05),
                                 pickUpLng: Between(lastLng  - 0.05, lastLng + 0.05),
                             })
     
-                            return {
-                                ok: false,
-                                error: null,
-                                rides,
+                            if(ride) {
+                                return {
+                                    ok: true,
+                                    error: null,
+                                    ride,
+                                }
+                            } else {
+                                return {
+                                    ok: true,
+                                    error: null,
+                                    ride: null
+                                }
+
                             }
                         }
                         return {
                             ok: false,
                             error: 'Not found driver\'s coordinates!',
-                            rides: null
+                            ride: null
                         }
                         
                     } catch (error) {
                         return { 
                             ok: false,
                             error: error.message,
-                            rides: null
+                            ride: null
                         }
-                    }
+                    } 
                 } else {
                     return { 
                         ok: false,
                         error: 'You are not a driver!',
-                        rides: null 
+                        ride: null 
                     }
                 }
 

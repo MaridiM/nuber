@@ -80,9 +80,13 @@ class User extends BaseEntity {
     @Column({ type: 'text', nullable: true })
     facebookID?: string
 
-    // One chat can have many participants
-    @ManyToOne( type => Chat, chat => chat.participants)
-    chat?: Chat // Chat in user
+    // One chat can have many passengers
+    @ManyToOne( type => Chat, chat => chat.passenger)
+    chatAsPassenger!: Chat[] // Chat in user
+
+    // One chat can have many Drivers
+    @ManyToOne( type => Chat, chat => chat.driver)
+    chatAsDriver?: Chat[] // Chat in user
 
     // One User can have many  messages
     @OneToMany( type => Message, message => message.user)

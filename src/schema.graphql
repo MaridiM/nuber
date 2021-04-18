@@ -1,7 +1,10 @@
 type Chat {
   id: Int!
   messages: [Message]!
-  participants: [User]!
+  passenger: [User]!
+  driver: [User]!
+  passengerId: Int!
+  driverId: Int
   createdAt: String!
   updatedAt: String
 }
@@ -26,6 +29,7 @@ type Mutation {
   EditPlace(id: Int!, name: String, isFav: Boolean): EditPlaceResponse!
   GetMyPlaces: GetMyPlacesResponse!
   RequestRide(pickUpAddress: String!, pickUpLat: Float!, pickUpLng: Float!, dropOffAddress: String!, dropOffLat: Float!, dropOffLng: Float!, price: Float!, distance: String!, duration: String!): RequestRideResponse!
+  UpdateRideStatus(rideId: Int!, status: StatusOptions!): UpdateRideStatusResponse!
   CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!
   CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse
   EmailSignIn(email: String!, password: String!): EmailSignInResponse!
@@ -68,15 +72,28 @@ type Place {
   updatedAt: String
 }
 
-type GetNearbyRidesResponse {
+type GetNearbyRideResponse {
   ok: Boolean!
   error: String
-  rides: [Ride]
+  ride: Ride
 }
 
 type Query {
-  GetNearbyRides: GetNearbyRidesResponse!
+  GetNearbyRide: GetNearbyRideResponse!
+  GetRide(rideId: Int!): GetRideResponse!
   GetMyProfile: GetMyProfileResponse!
+}
+
+type GetRideResponse {
+  ok: Boolean!
+  error: String
+  ride: Ride
+}
+
+type Subscription {
+  NearbyRideDescription: Ride
+  RideStatusSubscription: Ride
+  DriversSubscription: User
 }
 
 type RequestRideResponse {
@@ -98,9 +115,24 @@ type Ride {
   distance: String!
   duration: String!
   driver: User!
+  driverId: Int
   passenger: User!
+  passengerId: Int!
   createdAt: String!
   updatedAt: String
+}
+
+type UpdateRideStatusResponse {
+  ok: Boolean!
+  error: String
+}
+
+enum StatusOptions {
+  ACCEPTED
+  FINISHED
+  CANCELED
+  REQUESTING
+  ONROUTE
 }
 
 type CompleteEmailVerificationResponse {
@@ -112,10 +144,6 @@ type CompletePhoneVerificationResponse {
   ok: Boolean!
   error: String
   token: String
-}
-
-type Subscription {
-  DriversSubscription: User
 }
 
 type EmailSignInResponse {
@@ -180,6 +208,8 @@ type User {
   messages: [Message]
   ridesAsPassenger: [Ride]
   ridesAsDriver: [Ride]
+  chatAsPassenger: [Chat]
+  chatAsDriver: [Chat]
   places: [Place]
   createdAt: String!
   updatedAt: String

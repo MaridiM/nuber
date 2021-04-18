@@ -1,8 +1,10 @@
 // Core
 import {
     BaseEntity,
+    Column,
     CreateDateColumn,
     Entity,
+    ManyToOne,
     OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
@@ -23,9 +25,19 @@ class Chat extends BaseEntity {
     @OneToMany( type => Message, message => message.chat ) 
     messages!: Message[]
     
+    @Column({ nullable: true }) 
+    passengerId!: number
+    
     // One chat can have many users
-    @OneToMany(type => User, user => user.chat)
-    participants!: User[]
+    @ManyToOne( type => User, user => user.chatAsPassenger)
+    passenger!: User
+    
+    @Column({ nullable: true }) 
+    driverId?: number
+
+    // One chat can have many users
+    @ManyToOne( type => User, user => user.chatAsDriver)
+    driver!: User
         
  
     @CreateDateColumn() createdAt!: string

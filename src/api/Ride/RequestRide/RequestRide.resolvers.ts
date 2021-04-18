@@ -18,27 +18,45 @@ const resolvers: Resolvers = {
         async (
             _, 
             args: MutationRequestRideArgs, 
-            { req }) 
+            { req, pubSub }) 
         : Promise<RequestRideResponse> => { 
             // Get user from req
             const user: User = req.user
-            try {
-                // Create Ride
-                const ride = await Ride.create({ ...args, passenger: user }).save()
-
-                return { 
-                    ok: true,
-                    error: null,
-                    ride
+            
+            // If user.isRiding 
+            if(! user.isRiding) {
+                try {
+                    // Create Ride
+                    const ride = await Ride.create({ ...args, passenger: user }).save()
+                    // Publish in pubsub in chanel rideRequest, where send ride i nearbyRideDescription
+                    pubSub.publish('rideRequest', { NearbyRideDescription: ride })
+                    
+                    // Set user.isRiding to true 
+                    user.isRiding = false
+                    user.save()
+    
+                    return { 
+                        ok: true,
+                        error: null,
+                        ride
+                    }
+    
+                } catch (error) {
+                    return {
+                        ok: false,
+                        error: error.message,
+                        ride: null
+                    }
                 }
-
-            } catch (error) {
+            } else {
                 return {
                     ok: false,
-                    error: error.message,
+                    error: 'You can\'t request two rides',
                     ride: null
+
                 }
             }
+            
             
         })
     }
