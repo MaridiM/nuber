@@ -6,7 +6,7 @@
 
 ### Install
 
-- [ ] Create React App with Typescript
+- [x] Create React App with Typescript
 
 ---
 
