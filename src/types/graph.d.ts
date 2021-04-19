@@ -20,11 +20,13 @@ export type AddPlaceResponse = {
 export type Chat = {
   __typename?: 'Chat';
   id: Scalars['Int'];
-  messages: Array<Maybe<Message>>;
-  passenger: Array<Maybe<User>>;
-  driver: Array<Maybe<User>>;
+  messages?: Maybe<Array<Maybe<Message>>>;
+  passenger: User;
   passengerId: Scalars['Int'];
+  driver: User;
   driverId?: Maybe<Scalars['Int']>;
+  ride?: Maybe<Ride>;
+  rideId?: Maybe<Scalars['Int']>;
   createdAt: Scalars['String'];
   updatedAt?: Maybe<Scalars['String']>;
 };
@@ -75,6 +77,13 @@ export type FacebookConnectResponse = {
   token?: Maybe<Scalars['String']>;
 };
 
+export type GetChatResponse = {
+  __typename?: 'GetChatResponse';
+  ok: Scalars['Boolean'];
+  error?: Maybe<Scalars['String']>;
+  chat?: Maybe<Chat>;
+};
+
 export type GetMyPlacesResponse = {
   __typename?: 'GetMyPlacesResponse';
   ok: Scalars['Boolean'];
@@ -115,6 +124,7 @@ export type Message = {
   id: Scalars['Int'];
   text: Scalars['String'];
   chat: Chat;
+  chatId?: Maybe<Scalars['Int']>;
   user: User;
   createdAt: Scalars['String'];
   updateAt?: Maybe<Scalars['String']>;
@@ -135,6 +145,7 @@ export type Mutation = {
   ReportMovement: ReportMovementResponse;
   RequestEmailVerification: RequestEmailVerificationResponse;
   RequestRide: RequestRideResponse;
+  SendChatMessage: SendChatMessageResponse;
   StartPhoneVerification: StartPhoneVerificationResponse;
   ToggleDrivingMode: ToggleDrivingModeResponse;
   UpdateMyProfile?: Maybe<UpdateMyProfileResponse>;
@@ -219,6 +230,12 @@ export type MutationRequestRideArgs = {
 };
 
 
+export type MutationSendChatMessageArgs = {
+  text: Scalars['String'];
+  chatId: Scalars['Int'];
+};
+
+
 export type MutationStartPhoneVerificationArgs = {
   phoneNumber: Scalars['String'];
 };
@@ -255,9 +272,15 @@ export type Place = {
 
 export type Query = {
   __typename?: 'Query';
+  GetChat: GetChatResponse;
   GetMyProfile: GetMyProfileResponse;
   GetNearbyRide: GetNearbyRideResponse;
   GetRide: GetRideResponse;
+};
+
+
+export type QueryGetChatArgs = {
+  chatId: Scalars['Int'];
 };
 
 
@@ -301,8 +324,17 @@ export type Ride = {
   driverId?: Maybe<Scalars['Int']>;
   passenger: User;
   passengerId: Scalars['Int'];
+  chat?: Maybe<Chat>;
+  chatId?: Maybe<Scalars['Int']>;
   createdAt: Scalars['String'];
   updatedAt?: Maybe<Scalars['String']>;
+};
+
+export type SendChatMessageResponse = {
+  __typename?: 'SendChatMessageResponse';
+  ok: Scalars['Boolean'];
+  error?: Maybe<Scalars['String']>;
+  message?: Maybe<Message>;
 };
 
 export type StartPhoneVerificationResponse = {
@@ -322,6 +354,7 @@ export enum StatusOptions {
 export type Subscription = {
   __typename?: 'Subscription';
   DriversSubscription?: Maybe<User>;
+  MessageSubscription?: Maybe<Message>;
   NearbyRideDescription?: Maybe<Ride>;
   RideStatusSubscription?: Maybe<Ride>;
 };

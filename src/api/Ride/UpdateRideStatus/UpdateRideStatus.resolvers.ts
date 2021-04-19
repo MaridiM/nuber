@@ -58,10 +58,14 @@ const resolvers: Resolvers = {
                             user.save()
 
                             // Create chat room 
-                            await Chat.create({ 
+                            const chat = await Chat.create({ 
                                 driver: user,
                                 passenger: ride.passenger
                             }).save()
+
+                            // Set chat in ride.chat
+                            ride.chat = chat
+                            ride.save()
 
                         } 
                     } else {

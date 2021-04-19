@@ -7,12 +7,15 @@ import {
     UpdateDateColumn,
     PrimaryGeneratedColumn,
     ManyToOne,
+    OneToOne,
+    JoinColumn,
 } from 'typeorm'
 
 // Types
 import { RideStatus } from 'src/types/types'
 
 // Entities
+import Chat from './Chat';
 import User from './User'
 
 
@@ -63,6 +66,14 @@ class Ride extends BaseEntity {
     // One users(Passengers) can have many ridesAsPassenger
     @ManyToOne( type => User, user => user.ridesAsPassenger)
     passenger!: User
+
+    @Column({ nullable: true })
+    chatId?: number 
+
+     // One chat on one ride
+    @OneToOne( type => Chat, chat => chat.ride, { nullable: true })
+    @JoinColumn()
+    chat?: Chat  
     
     @Column({ nullable: true })
     driverId?: number

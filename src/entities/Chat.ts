@@ -6,6 +6,7 @@ import {
     Entity,
     ManyToOne,
     OneToMany,
+    OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from 'typeorm'
@@ -13,6 +14,7 @@ import {
 // Entities
 import Message from './Message'
 import User from './User'
+import Ride from './Ride';
 
 // Verification Entity 
 @Entity()
@@ -31,6 +33,13 @@ class Chat extends BaseEntity {
     // One chat can have many users
     @ManyToOne( type => User, user => user.chatAsPassenger)
     passenger!: User
+    
+    @Column({ nullable: true })
+    rideId?: number;
+
+    // One chat on one ride
+    @OneToOne( type => Ride, ride => ride.chat)
+    ride!: Ride  
     
     @Column({ nullable: true }) 
     driverId?: number

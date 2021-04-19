@@ -24,7 +24,7 @@ const resolvers: Resolvers = {
             const user: User = req.user
             
             // If user.isRiding 
-            if(! user.isRiding) {
+            if(!user.isRiding && !user.isDriving) {
                 try {
                     // Create Ride
                     const ride = await Ride.create({ ...args, passenger: user }).save()
@@ -51,7 +51,7 @@ const resolvers: Resolvers = {
             } else {
                 return {
                     ok: false,
-                    error: 'You can\'t request two rides',
+                    error: 'You can\'t request two rides or drive and request',
                     ride: null
 
                 }

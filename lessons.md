@@ -143,9 +143,9 @@
 ### Chat
 
 - [x] 81 Creating a ChatRoom
-- [ ] 82 GetChat Resolver
-- [ ] 83 BugFixing
-- [ ] 84 Testing GetChat Resolver
-- [ ] 85 SendChatMessage Resolver
-- [ ] 86 MessageSubscription
-- [ ] 87 Backend Conclusions
+- [x] 82 GetChat Resolver
+- [x] 83 BugFixing
+- [x] 84 Testing GetChat Resolver
+- [x] 85 SendChatMessage Resolver
+- [x] 86 MessageSubscription
+- [x] 87 Backend Conclusions

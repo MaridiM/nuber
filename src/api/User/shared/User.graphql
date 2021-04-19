@@ -25,5 +25,4 @@ type User {
     places: [Place]
     createdAt: String!
     updatedAt: String
-    
 }
