@@ -1,6 +1,7 @@
 // Core
 import React, { FC } from 'react'
 import PropTypes from 'prop-types'
+
 export interface IProps {
     isLoggedIn: boolean
 }

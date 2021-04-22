@@ -25,7 +25,7 @@
 - [x] 6 Typescript and React Components
 - [x] 7 Typescript and Styled Components part One
 - [x] 8 Typescript and Styled Components part Two
-- [ ] 9 Global Styles Set Up
+- [x] 9 Global Styles Set Up
 
 ---
 
