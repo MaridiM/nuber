@@ -1,0 +1,3 @@
+query QUERY_IS_LOGGED_IN {
+    isLoggedIn @client
+}

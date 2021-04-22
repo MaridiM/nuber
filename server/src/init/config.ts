@@ -10,7 +10,7 @@ import {
 
 
 // Config server 
-export const PORT: number | string = process.env.PORT || 8888
+export const PORT: number | string = process.env.SERVER_PORT || 8888
 
 // Session config
 export const sessionOptions: SessionOptions = {
@@ -27,7 +27,7 @@ export const sessionOptions: SessionOptions = {
 
 // CORS config
 export const corsOptions: CorsOptions = {
-    origin: `http://localhost:${PORT}`,
+    origin: `http://${process.env.CLIENT_HOST}`,
     credentials: true // for set cookie on client from server
 }
 
