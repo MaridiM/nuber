@@ -1,5 +1,7 @@
+overwrite: true
 schema:  ./src/api/**/*.graphql
 generates:
   ./src/types/graph.d.ts:
     plugins:
       - typescript
+

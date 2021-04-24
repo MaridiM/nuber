@@ -6,10 +6,11 @@ import { ApolloProvider } from '@apollo/client'
 // App
 import { App } from './Components'
 import { client } from './@init'
+
 // Settings
 import reportWebVitals from './reportWebVitals';
 
-// StyleD
+// Styled
 import { GlobalStyles } from './@styled'
 
 

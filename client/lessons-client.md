@@ -49,7 +49,7 @@
 
 ### Phone Login && Verify Phone
 
-- [ ] 18 PhoneLogin Mutation part One
+- [x] 18 PhoneLogin Mutation part One
 - [ ] 19 Magic with Apollo Codegen
 - [ ] 20 PhoneLogin Mutation part Two
 - [ ] 21 PhoneLogin Mutation part Three

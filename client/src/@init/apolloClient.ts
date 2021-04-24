@@ -10,7 +10,11 @@ import {
 } from '@apollo/client'
 import { setContext} from '@apollo/client/link/context'
 
-const uri = `http://${process.env.SERVER_HOST}`
+// Config
+import { SERVER_HOST, SERVER_GRAPHQL_ENDPOINT } from './config'
+
+const uri = `http://${SERVER_HOST}${SERVER_GRAPHQL_ENDPOINT}`
+
 
 /**
  * CACHE: \
