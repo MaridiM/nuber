@@ -25,24 +25,24 @@
 - [x] 6 Typescript and React Components
 - [x] 7 Typescript and Styled Components part One
 - [x] 8 Typescript and Styled Components part Two
-- [x] 9 Global Styles Set Up
+- [X] 9 Global Styles Set Up
 
 ---
 
 ### Routes
 
-- [ ] 10 Planning the Routes
-- [ ] 11 Router and Routes
-- [ ] 12 OutHome Component
-- [ ] 13 Login Component and React Helmet
-- [ ] 14 Route Components Review
+- [x] 10 Planning the Routes
+- [x] 11 Router and Routes
+- [x] 12 Login Component
+- [x] 13 Login Component and React Helmet
+- [x] 14 Route Components Review
 
 ---
 
 ### Inputs && Notifications
 
-- [ ] 15 Inputs and Typescript part One
-- [ ] 16 Inputs and Typescript part Two
+- [x] 15 Inputs and Typescript part One
+- [x] 16 Inputs and Typescript part Two
 - [ ] 17 Notifications with React Toastify
 
 ---

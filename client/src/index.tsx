@@ -9,8 +9,14 @@ import { client } from './@init'
 // Settings
 import reportWebVitals from './reportWebVitals';
 
+// StyleD
+import { GlobalStyles } from './@styled'
+
+
+
 ReactDOM.render(
     <ApolloProvider client={ client }>
+        <GlobalStyles />
         <App />
     </ApolloProvider>,
     document.getElementById('root')

@@ -2,7 +2,10 @@
 import { IDefaultTheme } from 'styled-components'
 
 const defaultTheme: IDefaultTheme = {
-   blueColor: "#3498db"
+   blueColor: "#3498db",
+   greenColor: "#1abc9c",
+   greyColor: "#7f8c8d",
+   yellowColor: "#f1c40f"
 }
 
 export default defaultTheme 
