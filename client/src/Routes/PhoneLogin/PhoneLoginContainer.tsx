@@ -1,6 +1,7 @@
 // Core
 import React, { ChangeEventHandler, FC, FormEventHandler, useState } from 'react'
 import { RouteComponentProps } from 'react-router'
+import { toast } from 'react-toastify'
 
 // Presenter
 import PhoneLoginPresenter from './PhoneLoginPresenter'
@@ -16,7 +17,7 @@ const PhoneLoginContainer: FC<RouteComponentProps<any>> = () => {
     
     const [state, setState] = useState<IState>({
         countryCode: '+380',
-        phoneNumber: '970005433'
+        phoneNumber: ''
     })
 
     const onInputChange: ChangeEventHandler<HTMLInputElement | HTMLSelectElement> = event => {
@@ -29,7 +30,14 @@ const PhoneLoginContainer: FC<RouteComponentProps<any>> = () => {
 
     const onSubmit: FormEventHandler<HTMLFormElement> = event => {
         event.preventDefault()
-        console.log(state)
+        // Validation Phone
+        const isValid = /^\+[1-9]{1}[0-9]{7,11}$/.test(
+            `${state.countryCode}${state.phoneNumber}`
+        )
+        if (!isValid) {
+            toast.error('Please write a valid phone number')
+        }
+        return 
     }
 
     return <PhoneLoginPresenter 

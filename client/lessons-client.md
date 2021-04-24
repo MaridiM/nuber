@@ -43,7 +43,7 @@
 
 - [x] 15 Inputs and Typescript part One
 - [x] 16 Inputs and Typescript part Two
-- [ ] 17 Notifications with React Toastify
+- [x] 17 Notifications with React Toastify
 
 ---
 
