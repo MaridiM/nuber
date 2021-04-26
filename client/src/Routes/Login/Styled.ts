@@ -37,7 +37,9 @@ export const Logo = styled.div`
   font-size: 25px;
 `
 
-export const Title = styled.h1 ``
+export const Title = styled.h1 `
+  
+`
 
 export const Footer = styled.div ``
 

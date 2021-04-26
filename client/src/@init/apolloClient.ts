@@ -1,16 +1,19 @@
 // Core
 import {
     ApolloClient,
+    ApolloLink,
+    from,
     HttpLink,
     InMemoryCache,
     InMemoryCacheConfig,
     makeVar,
+    NextLink,
     NormalizedCacheObject,
+    Operation, 
     ReactiveVar,
 } from '@apollo/client'
-import { setContext} from '@apollo/client/link/context'
 
-// Config
+// // Config
 import { SERVER_HOST, SERVER_GRAPHQL_ENDPOINT } from './config'
 
 const uri = `http://${SERVER_HOST}${SERVER_GRAPHQL_ENDPOINT}`
@@ -51,31 +54,24 @@ const cache:InMemoryCache = new InMemoryCache(cacheOptions)
  * AUTH \
  * Auth config, end set in context
  */
-
-const authLink = setContext( (_, { headers } ) => {
+const authLink: ApolloLink = new ApolloLink((_operation: Operation, _forward: NextLink) => {
     // Get item from  local storage
     const token = localStorage.getItem('jwt')
-    // Return all headers, and set authorization: token
-    return { 
-        ...headers,
-        "X-JWT": token ? token : ''
-    }
-})
 
+    _operation.setContext(({ headers }) => ({ headers: {
+        "X-JWT": token ? token : '', // however you get your token
+        ...headers
+    }}))
+    return _forward(_operation)
+})
 
 /**
  * APOLLO: HttpLink\
  * Create HttpLink, \
  * using cookies for login and session management with a backend
  */
-const httpLink = new HttpLink({ 
-    uri, 
-    headers: authLink,
-    credentials: 'include'  // using cookies for login and session management with a backend
-})
-// Wrapper httpLink in context
-const wrapperHttpLink = authLink.concat(httpLink)
-
+const httpLink: HttpLink = new HttpLink({ uri })
+const link: ApolloLink = from([ authLink, httpLink ])
 
 /**
  * APOLLO: Create ApolloClient \
@@ -84,7 +80,8 @@ const wrapperHttpLink = authLink.concat(httpLink)
 const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
     // Cache initialization
     cache,
-    link: wrapperHttpLink
+    link,
+    credentials: 'include' // using cookies for login and session management with a backend
 })
 
 // Endpoint Client

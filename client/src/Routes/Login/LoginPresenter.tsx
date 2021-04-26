@@ -1,6 +1,5 @@
 // Core
 import React, { FC } from 'react'
-import Helmet from 'react-helmet'
 import { Link } from 'react-router-dom'
 import { RouteComponentProps } from 'react-router'
 
@@ -22,15 +21,16 @@ import {
 // Utils
 import { paths } from './../../@utils'
 
+// Components
+import { Helmet } from './../../Components'
+
 // Type for Props
 export interface IProps extends RouteComponentProps<any> {}
 
 
 const OutHomePresenter: FC<IProps> = () => (
     <Container>
-        <Helmet>
-            <title>Login | (N) Uber</title>
-        </Helmet>
+        <Helmet title={'Login'} />
         <Header>
             <Logo>
                 <Title>(N)Uber</Title>

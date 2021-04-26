@@ -1,6 +1,5 @@
 // Core
 import React, { FC } from 'react'
-import Helmet from 'react-helmet'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 
 // Styled
@@ -9,6 +8,9 @@ import { BackArrowExtended, Container, Icon, Link, Title } from './Styled'
 // Utils
 import { paths } from './../../@utils'
 
+// Components
+import { Helmet } from './../../Components'
+
 // Interface for props
 interface IProps {
     loginCallback?: (response) => void
@@ -16,9 +18,7 @@ interface IProps {
 
 const SocialLoginPresenter: FC<IProps> = ({ loginCallback }) => (
     <Container>
-        <Helmet>
-            <title>Social Login | Nuber</title>
-        </Helmet>
+        <Helmet title={'Social Login'} />
         <Title>Choose an account</Title>
         <BackArrowExtended backTo={paths.home} />
         <FacebookLogin

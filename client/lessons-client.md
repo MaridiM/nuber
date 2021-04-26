@@ -50,8 +50,8 @@
 ### Phone Login && Verify Phone
 
 - [x] 18 PhoneLogin Mutation part One
-- [ ] 19 Magic with Apollo Codegen
-- [ ] 20 PhoneLogin Mutation part Two
+- [x] 19 Magic with Apollo Codegen
+- [x] 20 PhoneLogin Mutation part Two
 - [ ] 21 PhoneLogin Mutation part Three
 - [ ] 22 VerifyPhone Screen
 - [ ] 23 Testing the PhoneLogin Screen and Redirecting

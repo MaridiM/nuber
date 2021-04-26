@@ -1,3 +1,1 @@
-import React from 'react'
-
-export const VerifyPhone = () => <span>Verify phone</span>
+export { default as VerifyPhone } from './VerifyPhonePresenter'
