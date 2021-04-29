@@ -1,9 +1,11 @@
-overwrite: true
+overwrite: false
 schema: ./schema.graphql
-documents: ./src/Routes/**/*.queries.ts
+documents: ./src/Routes/**/*.graphql
 generates:
   ./src/@types/api.d.ts:
     plugins:
       - typescript
       - typescript-operations
       - typescript-react-apollo
+    config:
+      gqlImport: graphql.macro#gql

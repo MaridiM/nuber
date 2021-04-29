@@ -22,10 +22,10 @@ import {
 import { paths } from './../../@utils'
 
 export interface IProps {
-    isLoggedIn: boolean
+    isAuth: boolean
 }
  
-const AppPresenter: FC<IProps> = ({ isLoggedIn }) => <Router>{ isLoggedIn ? <LoggedInRoutes /> : <LoggedOutRoutes /> }</Router>
+const AppPresenter: FC<IProps> = ({ isAuth }) => <Router>{ isAuth ? <LoggedInRoutes /> : <LoggedOutRoutes /> }</Router>
 
 const LoggedOutRoutes: FC = () => (
     <Switch>
@@ -53,7 +53,7 @@ const LoggedInRoutes: FC = () => (
 
 
 AppPresenter.propTypes = {
-    isLoggedIn: PropTypes.bool.isRequired
+    isAuth: PropTypes.bool.isRequired
 }
 
 export default AppPresenter

@@ -1,6 +1,5 @@
 // Core
-import { Response, NextFunction } from 'express'
-// import jwt from 'jsonwebtoken' 
+import { NextFunction, Response } from 'express'
 
 // Utils
 import decodeJWT from './../utils/decodeJWT'
@@ -21,12 +20,6 @@ export const readToken = async (
             
         }
     }
-
-    // const { token } = req.session && req.session
-
-    // if( token ) {
-    //     const { fullname, email, phone } = jwt.verify(token, process.env.SESSION_SECRET)
-    //     req.user = { email, phone, fullname}
-    // }
+    
     next()
 } 

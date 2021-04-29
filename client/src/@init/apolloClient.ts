@@ -5,7 +5,6 @@ import {
     from,
     HttpLink,
     InMemoryCache,
-    InMemoryCacheConfig,
     makeVar,
     NextLink,
     NormalizedCacheObject,
@@ -14,50 +13,24 @@ import {
 } from '@apollo/client'
 
 // // Config
-import { SERVER_HOST, SERVER_GRAPHQL_ENDPOINT } from './config'
-
-const uri = `http://${SERVER_HOST}${SERVER_GRAPHQL_ENDPOINT}`
 
 
 /**
- * CACHE: \
- * Reactive Variable GraphQL, Auth value is false default
+ * isAuth /
+ * return  true or false, by localStorage.getItem('jwt')
  */
-
-// InMemoryCache Options
-const cacheOptions: InMemoryCacheConfig = {
-    typePolicies: {
-        Query: {
-            fields: {
-                isLoggedIn: {
-                    read() {
-                        return isAuth()
-                    }
-                    
-                },
-                isLoggedOut: {
-                    read() {
-                        localStorage.remove('jwt')
-                        return isAuth()
-                    }
-                },
-            }
-        }
-    }
-}
-
 export const isAuth: ReactiveVar<boolean> = makeVar<boolean>(!!localStorage.getItem('jwt'))
-const cache:InMemoryCache = new InMemoryCache(cacheOptions)
 
+const uri = `http://${process.env.REACT_APP_SERVER_HOST}${process.env.REACT_APP_SERVER_GRAPHQL_ENDPOINT}`
 
-/**
+/** 
  * AUTH \
  * Auth config, end set in context
  */
 const authLink: ApolloLink = new ApolloLink((_operation: Operation, _forward: NextLink) => {
     // Get item from  local storage
     const token = localStorage.getItem('jwt')
-
+    
     _operation.setContext(({ headers }) => ({ headers: {
         "X-JWT": token ? token : '', // however you get your token
         ...headers
@@ -79,7 +52,7 @@ const link: ApolloLink = from([ authLink, httpLink ])
  */
 const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
     // Cache initialization
-    cache,
+    cache: new InMemoryCache(),
     link,
     credentials: 'include' // using cookies for login and session management with a backend
 })

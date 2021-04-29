@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from 'graphql.macro';
 import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -437,6 +437,36 @@ export type StartPhoneVerificationMutation = (
   ) }
 );
 
+export type FacebookConnectMutationVariables = Exact<{
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
+  email: Scalars['String'];
+  facebookID: Scalars['String'];
+}>;
+
+
+export type FacebookConnectMutation = (
+  { __typename?: 'Mutation' }
+  & { FacebookConnect: (
+    { __typename?: 'FacebookConnectResponse' }
+    & Pick<FacebookConnectResponse, 'ok' | 'error' | 'token'>
+  ) }
+);
+
+export type CompletePhoneVerificationMutationVariables = Exact<{
+  phoneNumber: Scalars['String'];
+  key: Scalars['String'];
+}>;
+
+
+export type CompletePhoneVerificationMutation = (
+  { __typename?: 'Mutation' }
+  & { CompletePhoneVerification?: Maybe<(
+    { __typename?: 'CompletePhoneVerificationResponse' }
+    & Pick<CompletePhoneVerificationResponse, 'token' | 'ok' | 'error'>
+  )> }
+);
+
 
 export const StartPhoneVerificationDocument = gql`
     mutation startPhoneVerification($phoneNumber: String!) {
@@ -472,3 +502,82 @@ export function useStartPhoneVerificationMutation(baseOptions?: Apollo.MutationH
 export type StartPhoneVerificationMutationHookResult = ReturnType<typeof useStartPhoneVerificationMutation>;
 export type StartPhoneVerificationMutationResult = Apollo.MutationResult<StartPhoneVerificationMutation>;
 export type StartPhoneVerificationMutationOptions = Apollo.BaseMutationOptions<StartPhoneVerificationMutation, StartPhoneVerificationMutationVariables>;
+export const FacebookConnectDocument = gql`
+    mutation facebookConnect($firstName: String!, $lastName: String!, $email: String!, $facebookID: String!) {
+  FacebookConnect(
+    firstName: $firstName
+    lastName: $lastName
+    email: $email
+    facebookID: $facebookID
+  ) {
+    ok
+    error
+    token
+  }
+}
+    `;
+export type FacebookConnectMutationFn = Apollo.MutationFunction<FacebookConnectMutation, FacebookConnectMutationVariables>;
+
+/**
+ * __useFacebookConnectMutation__
+ *
+ * To run a mutation, you first call `useFacebookConnectMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useFacebookConnectMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [facebookConnectMutation, { data, loading, error }] = useFacebookConnectMutation({
+ *   variables: {
+ *      firstName: // value for 'firstName'
+ *      lastName: // value for 'lastName'
+ *      email: // value for 'email'
+ *      facebookID: // value for 'facebookID'
+ *   },
+ * });
+ */
+export function useFacebookConnectMutation(baseOptions?: Apollo.MutationHookOptions<FacebookConnectMutation, FacebookConnectMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<FacebookConnectMutation, FacebookConnectMutationVariables>(FacebookConnectDocument, options);
+      }
+export type FacebookConnectMutationHookResult = ReturnType<typeof useFacebookConnectMutation>;
+export type FacebookConnectMutationResult = Apollo.MutationResult<FacebookConnectMutation>;
+export type FacebookConnectMutationOptions = Apollo.BaseMutationOptions<FacebookConnectMutation, FacebookConnectMutationVariables>;
+export const CompletePhoneVerificationDocument = gql`
+    mutation completePhoneVerification($phoneNumber: String!, $key: String!) {
+  CompletePhoneVerification(phoneNumber: $phoneNumber, key: $key) {
+    token
+    ok
+    error
+  }
+}
+    `;
+export type CompletePhoneVerificationMutationFn = Apollo.MutationFunction<CompletePhoneVerificationMutation, CompletePhoneVerificationMutationVariables>;
+
+/**
+ * __useCompletePhoneVerificationMutation__
+ *
+ * To run a mutation, you first call `useCompletePhoneVerificationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCompletePhoneVerificationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [completePhoneVerificationMutation, { data, loading, error }] = useCompletePhoneVerificationMutation({
+ *   variables: {
+ *      phoneNumber: // value for 'phoneNumber'
+ *      key: // value for 'key'
+ *   },
+ * });
+ */
+export function useCompletePhoneVerificationMutation(baseOptions?: Apollo.MutationHookOptions<CompletePhoneVerificationMutation, CompletePhoneVerificationMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CompletePhoneVerificationMutation, CompletePhoneVerificationMutationVariables>(CompletePhoneVerificationDocument, options);
+      }
+export type CompletePhoneVerificationMutationHookResult = ReturnType<typeof useCompletePhoneVerificationMutation>;
+export type CompletePhoneVerificationMutationResult = Apollo.MutationResult<CompletePhoneVerificationMutation>;
+export type CompletePhoneVerificationMutationOptions = Apollo.BaseMutationOptions<CompletePhoneVerificationMutation, CompletePhoneVerificationMutationVariables>;

@@ -11,9 +11,9 @@ export type SessionOptions = {
     key: string,
     secret: string | string[],
     resave: boolean,
-    rolling: boolean,
+    rolling?: boolean,
     saveUninitialized: boolean,
-    cookie: TCookie
+    cookie?: any
 }
 
 // Cors options type

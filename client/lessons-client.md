@@ -52,21 +52,21 @@
 - [x] 18 PhoneLogin Mutation part One
 - [x] 19 Magic with Apollo Codegen
 - [x] 20 PhoneLogin Mutation part Two
-- [ ] 21 PhoneLogin Mutation part Three
-- [ ] 22 VerifyPhone Screen
-- [ ] 23 Testing the PhoneLogin Screen and Redirecting
-- [ ] 24 VerifyPhone Mutation part One
-- [ ] 25 VerifyPhone Mutation part Two
-- [ ] 26 Updating Local State
+- [x] 21 PhoneLogin Mutation part Three
+- [x] 22 VerifyPhone Screen
+- [x] 23 Testing the PhoneLogin Screen and Redirecting
+- [x] 24 VerifyPhone Mutation part One
+- [x] 25 VerifyPhone Mutation part Two
+- [x] 26 Updating Local State
 
 ---
 
 ### Social Login
 
-- [ ] 27 SocialLogin with Apollo part One
-- [ ] 28 SocialLogin with Apollo part Two
-- [ ] 29 SocialLogin with Apollo part Three
-- [ ] 30 SocialLogin with Apollo part Four
+- [x] 27 SocialLogin with Apollo part One
+- [x] 28 SocialLogin with Apollo part Two
+- [x] 29 SocialLogin with Apollo part Three
+- [x] 30 SocialLogin with Apollo part Four
 
 ---
 

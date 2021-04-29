@@ -1,1 +1,1 @@
-export { default as VerifyPhone } from './VerifyPhonePresenter'
+export { default as VerifyPhone } from './VerifyPhoneContainer'

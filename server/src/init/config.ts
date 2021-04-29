@@ -4,8 +4,8 @@ import { ConnectionOptions } from 'typeorm'
 
 // Types
 import { 
-    SessionOptions,
-    CorsOptions
+    CorsOptions,
+    SessionOptions
 } from './../types/config.d';
 
 
@@ -15,19 +15,21 @@ export const PORT: number | string = process.env.SERVER_PORT || 8888
 // Session config
 export const sessionOptions: SessionOptions = {
     key: 'token',
-    secret: process.env.SESSION_SECRET || "dfhgdiuerh4389kjsdvn4839hf34kj434h5lk",
-    resave: false,
+    secret: process.env.SESSION_SECRET || '',
+    resave: false, // important so that the session is not overwritten for every sneeze
     rolling: true,
-    saveUninitialized: false,
+    saveUninitialized: false, // needed to serve cookies even to an unauthorized user
     cookie: {
         httpOnly: true,
-        maxAge: 60 * 24 * 60 * 1000 // 24h
+        secure: true, // obliges to transfer via ssl
+        maxAge: 60 * 24 * 60 * 1000, // 24h
+        sameSite: `${process.env.CLIENT_PROTOCOL_URL}://${process.env.CLIENT_HOST}` // so that you can send to different subdomains
     }   
 }
 
 // CORS config
 export const corsOptions: CorsOptions = {
-    origin: `http://${process.env.CLIENT_HOST}`,
+    origin: `${process.env.CLIENT_PROTOCOL_URL}://${process.env.CLIENT_HOST}`,
     credentials: true // for set cookie on client from server
 }
 
@@ -44,7 +46,7 @@ export const PGPoolConfig: PoolConfig = {
   }
 
 
-// Default ormCcnfig, by connection with databse
+// Default ormConfig, by connection with database
 export const connectionOptions: ConnectionOptions  = {
     // type connection
     type: 'postgres', 
@@ -53,7 +55,7 @@ export const connectionOptions: ConnectionOptions  = {
     // synchronize with database (automatically)
     synchronize: true,  
     // Started to  transition
-    logging: true, 
+    logging: false, 
     // watching by entities app
     entities: [ 'entities/**/*.*' ],
     host: process.env.DB_ENDPOINT, 

@@ -1,14 +1,13 @@
 // Core
 import cors from 'cors'
-import express, { Request, Response, Application, NextFunction } from 'express'
+import express, { Application, NextFunction, Request, Response } from 'express'
 import session from 'express-session'
 import helmet from 'helmet'
 import logger from 'morgan'
 import path from 'path'
-// import bodyParser from 'body-parser'
 
 // Config
-import { sessionOptions, corsOptions } from './config'
+import { corsOptions, sessionOptions } from './config'
 // Read Token
 import { readToken } from './readToken'
 
@@ -16,10 +15,8 @@ import { readToken } from './readToken'
 const app: Application = express()
 
 // Middleware
-// app.use(bodyParser.json())
-// app.use(bodyParser.urlencoded({ extended: true }))
-app.use(session(sessionOptions))
 app.use(cors(corsOptions))
+app.use(session(sessionOptions))
 app.use(helmet({ contentSecurityPolicy: (process.env.NODE_ENV === 'production') ? undefined : false }))
 app.use(logger('dev'))
 

@@ -86,7 +86,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "precodegen": "apollo client:download-schema --endpoint=http://localhost:8888/graphql schema.graphql",
+    "precodegen": "rm -Rf ./src/@types/api.d.ts && apollo client:download-schema --endpoint=http://localhost:8888/graphql schema.graphql",
     "codegen": "graphql-codegen"
   },
   "eslintConfig": {

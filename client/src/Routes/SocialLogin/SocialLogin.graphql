@@ -1,0 +1,11 @@
+mutation facebookConnect($firstName: String!, $lastName: String!, $email: String!, $facebookID: String!) {
+    FacebookConnect(
+        firstName: $firstName, 
+        lastName: $lastName, 
+        email: $email, 
+        facebookID: $facebookID) {
+            ok
+            error
+            token
+        }
+}
