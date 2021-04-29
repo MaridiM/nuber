@@ -424,6 +424,21 @@ export type Verification = {
   updatedAt: Scalars['String'];
 };
 
+export type GetMyProfileQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetMyProfileQuery = (
+  { __typename?: 'Query' }
+  & { GetMyProfile: (
+    { __typename?: 'GetMyProfileResponse' }
+    & Pick<GetMyProfileResponse, 'ok' | 'error'>
+    & { user?: Maybe<(
+      { __typename?: 'User' }
+      & Pick<User, 'profilePhoto' | 'fullName' | 'isDriving'>
+    )> }
+  ) }
+);
+
 export type StartPhoneVerificationMutationVariables = Exact<{
   phoneNumber: Scalars['String'];
 }>;
@@ -468,6 +483,46 @@ export type CompletePhoneVerificationMutation = (
 );
 
 
+export const GetMyProfileDocument = gql`
+    query getMyProfile {
+  GetMyProfile {
+    ok
+    error
+    user {
+      profilePhoto
+      fullName
+      isDriving
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetMyProfileQuery__
+ *
+ * To run a query within a React component, call `useGetMyProfileQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMyProfileQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetMyProfileQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetMyProfileQuery(baseOptions?: Apollo.QueryHookOptions<GetMyProfileQuery, GetMyProfileQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetMyProfileQuery, GetMyProfileQueryVariables>(GetMyProfileDocument, options);
+      }
+export function useGetMyProfileLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMyProfileQuery, GetMyProfileQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetMyProfileQuery, GetMyProfileQueryVariables>(GetMyProfileDocument, options);
+        }
+export type GetMyProfileQueryHookResult = ReturnType<typeof useGetMyProfileQuery>;
+export type GetMyProfileLazyQueryHookResult = ReturnType<typeof useGetMyProfileLazyQuery>;
+export type GetMyProfileQueryResult = Apollo.QueryResult<GetMyProfileQuery, GetMyProfileQueryVariables>;
 export const StartPhoneVerificationDocument = gql`
     mutation startPhoneVerification($phoneNumber: String!) {
   StartPhoneVerification(phoneNumber: $phoneNumber) {

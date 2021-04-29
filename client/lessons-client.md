@@ -72,8 +72,8 @@
 
 ### Home Sidebar
 
-- [ ] 31 Home Sidebar Component
-- [ ] 32 Home Sidebar Query
+- [x] 31 Home Sidebar Component
+- [x] 32 Home Sidebar Query
 - [ ] 33 Home Sidebar Query part Two
 
 ---

@@ -1,0 +1,11 @@
+ query getMyProfile {
+    GetMyProfile {
+        ok 
+        error
+        user { 
+            profilePhoto
+            fullName
+            isDriving
+        }
+    }
+ }

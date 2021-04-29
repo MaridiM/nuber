@@ -10,4 +10,5 @@ export const paths = {
     places: '/places',
     addPlace: '/add-place',
     findAddress: '/find-address',
+    trips: '/trips',
 }

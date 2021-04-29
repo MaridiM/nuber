@@ -1,6 +1,6 @@
 overwrite: false
 schema: ./schema.graphql
-documents: ./src/Routes/**/*.graphql
+documents: ./src/**/*.graphql
 generates:
   ./src/@types/api.d.ts:
     plugins:
