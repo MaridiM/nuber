@@ -439,6 +439,33 @@ export type GetMyProfileQuery = (
   ) }
 );
 
+export type ToggleDrivingMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ToggleDrivingMutation = (
+  { __typename?: 'Mutation' }
+  & { ToggleDrivingMode: (
+    { __typename?: 'ToggleDrivingModeResponse' }
+    & Pick<ToggleDrivingModeResponse, 'ok' | 'error'>
+  ) }
+);
+
+export type UpdateMyProfileMutationVariables = Exact<{
+  email?: Maybe<Scalars['String']>;
+  firstName?: Maybe<Scalars['String']>;
+  lastName?: Maybe<Scalars['String']>;
+  profilePhoto?: Maybe<Scalars['String']>;
+}>;
+
+
+export type UpdateMyProfileMutation = (
+  { __typename?: 'Mutation' }
+  & { UpdateMyProfile?: Maybe<(
+    { __typename?: 'UpdateMyProfileResponse' }
+    & Pick<UpdateMyProfileResponse, 'ok' | 'error'>
+  )> }
+);
+
 export type StartPhoneVerificationMutationVariables = Exact<{
   phoneNumber: Scalars['String'];
 }>;
@@ -527,6 +554,81 @@ export function useGetMyProfileLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
 export type GetMyProfileQueryHookResult = ReturnType<typeof useGetMyProfileQuery>;
 export type GetMyProfileLazyQueryHookResult = ReturnType<typeof useGetMyProfileLazyQuery>;
 export type GetMyProfileQueryResult = Apollo.QueryResult<GetMyProfileQuery, GetMyProfileQueryVariables>;
+export const ToggleDrivingDocument = gql`
+    mutation toggleDriving {
+  ToggleDrivingMode {
+    ok
+    error
+  }
+}
+    `;
+export type ToggleDrivingMutationFn = Apollo.MutationFunction<ToggleDrivingMutation, ToggleDrivingMutationVariables>;
+
+/**
+ * __useToggleDrivingMutation__
+ *
+ * To run a mutation, you first call `useToggleDrivingMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useToggleDrivingMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [toggleDrivingMutation, { data, loading, error }] = useToggleDrivingMutation({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useToggleDrivingMutation(baseOptions?: Apollo.MutationHookOptions<ToggleDrivingMutation, ToggleDrivingMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ToggleDrivingMutation, ToggleDrivingMutationVariables>(ToggleDrivingDocument, options);
+      }
+export type ToggleDrivingMutationHookResult = ReturnType<typeof useToggleDrivingMutation>;
+export type ToggleDrivingMutationResult = Apollo.MutationResult<ToggleDrivingMutation>;
+export type ToggleDrivingMutationOptions = Apollo.BaseMutationOptions<ToggleDrivingMutation, ToggleDrivingMutationVariables>;
+export const UpdateMyProfileDocument = gql`
+    mutation updateMyProfile($email: String, $firstName: String, $lastName: String, $profilePhoto: String) {
+  UpdateMyProfile(
+    email: $email
+    firstName: $firstName
+    lastName: $lastName
+    profilePhoto: $profilePhoto
+  ) {
+    ok
+    error
+  }
+}
+    `;
+export type UpdateMyProfileMutationFn = Apollo.MutationFunction<UpdateMyProfileMutation, UpdateMyProfileMutationVariables>;
+
+/**
+ * __useUpdateMyProfileMutation__
+ *
+ * To run a mutation, you first call `useUpdateMyProfileMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateMyProfileMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateMyProfileMutation, { data, loading, error }] = useUpdateMyProfileMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *      firstName: // value for 'firstName'
+ *      lastName: // value for 'lastName'
+ *      profilePhoto: // value for 'profilePhoto'
+ *   },
+ * });
+ */
+export function useUpdateMyProfileMutation(baseOptions?: Apollo.MutationHookOptions<UpdateMyProfileMutation, UpdateMyProfileMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateMyProfileMutation, UpdateMyProfileMutationVariables>(UpdateMyProfileDocument, options);
+      }
+export type UpdateMyProfileMutationHookResult = ReturnType<typeof useUpdateMyProfileMutation>;
+export type UpdateMyProfileMutationResult = Apollo.MutationResult<UpdateMyProfileMutation>;
+export type UpdateMyProfileMutationOptions = Apollo.BaseMutationOptions<UpdateMyProfileMutation, UpdateMyProfileMutationVariables>;
 export const StartPhoneVerificationDocument = gql`
     mutation startPhoneVerification($phoneNumber: String!) {
   StartPhoneVerification(phoneNumber: $phoneNumber) {

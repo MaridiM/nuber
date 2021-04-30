@@ -17,7 +17,6 @@ const HomeContainer: FC<IProps> = () => {
 
     // Query
     const { loading } = useProfile()
-
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
 
     return <HomePresenter 

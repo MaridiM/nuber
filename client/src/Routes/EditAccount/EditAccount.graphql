@@ -1,0 +1,16 @@
+mutation updateMyProfile(
+    $email: String
+    $firstName: String
+    $lastName: String
+    $profilePhoto: String
+) {
+    UpdateMyProfile(
+        email: $email
+        firstName: $firstName
+        lastName: $lastName
+        profilePhoto: $profilePhoto
+    ) {
+        ok
+        error
+    }
+}

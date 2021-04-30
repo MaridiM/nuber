@@ -1,6 +1,7 @@
 // Core
 import React, { FC } from 'react'
 import { Link } from 'react-router-dom'
+import { MutationFunction } from '@apollo/client'
 
 // Utils
 import { paths } from './../../@utils'
@@ -19,23 +20,22 @@ import {
 } from './Styled'
 
 // Types
-import { GetMyProfileQuery } from './../../@types/api'
+import { GetMyProfileQuery, ToggleDrivingMutation } from './../../@types/api'
 interface IProps {
     data?: GetMyProfileQuery
     loading: boolean
+    toggleDriving: MutationFunction<ToggleDrivingMutation, any>
 }
 
 const MenuPresenter: FC<IProps> = ({ 
     data: {GetMyProfile: { user = {} } = {} } = {}, 
-    loading 
+    loading,
+    toggleDriving
 }) => { 
-    console.log(user)
-
     return (
         <Container>
             { !loading && 
                 user && 
-                user.profilePhoto &&
                 user.fullName &&
                 <>
                     <Header>
@@ -56,7 +56,12 @@ const MenuPresenter: FC<IProps> = ({
                     </Header>
                     <SLink to={paths.trips}>Your trips</SLink>
                     <SLink to={paths.settings}>Settings</SLink>
-                    <ToggleDriving isDriving={true}>{ true ? 'Stop driving' : 'Start driving' }</ToggleDriving>
+                    <ToggleDriving 
+                        isDriving={user.isDriving!}
+                        onClick={() => toggleDriving()}
+                    >
+                        { user.isDriving ? 'Stop driving' : 'Start driving' }
+                    </ToggleDriving>
                 </>
             }
         </Container>

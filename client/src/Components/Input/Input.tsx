@@ -6,18 +6,21 @@ import { Container } from './Styled'
 
 // Interface for props
 export interface IProps {
-    placeholder: string
+    id?: string
+    placeholder?: string
     type?: string
     required?: boolean
-    value: string
+    value?: string
     name?: string
     onChange: any
     className?: string
+    accept?: string
 }
 
-const Input: FC<IProps> = ({ placeholder, type, required, value, name, onChange, className }) => {
+const Input: FC<IProps> = ({id, placeholder, type, required, value, name, onChange, className, accept }) => {
     return (
         <Container
+            id={ id }
             placeholder={ placeholder }
             type={ type }
             required={ required }
@@ -25,6 +28,7 @@ const Input: FC<IProps> = ({ placeholder, type, required, value, name, onChange,
             name={ name }
             onChange={ onChange }
             className={ className }
+            accept={ accept }
         />
     )
 }
