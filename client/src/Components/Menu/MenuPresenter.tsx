@@ -19,31 +19,46 @@ import {
 } from './Styled'
 
 // Types
+import { GetMyProfileQuery } from './../../@types/api'
 interface IProps {
-
+    data?: GetMyProfileQuery
+    loading: boolean
 }
 
-const MenuPresenter: FC<IProps> = ({}) => { 
+const MenuPresenter: FC<IProps> = ({ 
+    data: {GetMyProfile: { user = {} } = {} } = {}, 
+    loading 
+}) => { 
+    console.log(user)
+
     return (
         <Container>
-            <Header>
-                <Grid>
-                    <Link to={paths.editAccount}>
-                        <Image
-                            src={
-                                "https://lh3.googleusercontent.com/-CTwXMuZRaWw/AAAAAAAAAAI/AAAAAAAAAUg/8T5nFuIdnHE/photo.jpg"
-                            }
-                        />
-                    </Link>
-                    <Text>
-                        <Name>Dmitriy Marynenko</Name>
-                        <Rating>4.5</Rating>
-                    </Text>
-                </Grid>
-            </Header>
-            <SLink to={paths.trips}>Your trips</SLink>
-            <SLink to={paths.settings}>Settings</SLink>
-            <ToggleDriving isDriving={true}>{ true ? 'Stop driving' : 'Start driving' }</ToggleDriving>
+            { !loading && 
+                user && 
+                user.profilePhoto &&
+                user.fullName &&
+                <>
+                    <Header>
+                        <Grid>
+                            <Link to={paths.editAccount}>
+                                <Image
+                                    src={
+                                        user.profilePhoto || 
+                                        "https://lh3.googleusercontent.com/-CTwXMuZRaWw/AAAAAAAAAAI/AAAAAAAAAUg/8T5nFuIdnHE/photo.jpg"
+                                    }
+                                />
+                            </Link>
+                            <Text>
+                                <Name>{ user.fullName }</Name>
+                                <Rating>4.5</Rating>
+                            </Text>
+                        </Grid>
+                    </Header>
+                    <SLink to={paths.trips}>Your trips</SLink>
+                    <SLink to={paths.settings}>Settings</SLink>
+                    <ToggleDriving isDriving={true}>{ true ? 'Stop driving' : 'Start driving' }</ToggleDriving>
+                </>
+            }
         </Container>
     )
 }

@@ -32,7 +32,7 @@ const HomePresenter: FC<IProps>= ({ toggleMenu, isMenuOpen, loading, children })
                     }
                 }}
             >
-                <button onClick={() => toggleMenu()}>Open sidebar</button>
+                { !loading && <button onClick={() => toggleMenu()}>Open sidebar</button> }
             </Sidebar>
         </Container>
     )

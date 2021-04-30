@@ -1,26 +1,22 @@
 // Core
 import React, { FC, useState } from 'react'
-import { loader } from 'graphql.macro'
 
 // Local
 import HomePresenter from './HomePresenter'
-import { useQuery } from '@apollo/client'
+
+// Hooks
+import { useProfile } from './../../@hooks'
 
 // Types
-import { GetMyProfileQuery } from './../../@types/api'
-
 interface IProps {}
 
-// GraphQL
-const QUERY_GET_MY_PROFILE = loader('./Home.graphql')
 
 
 const HomeContainer: FC<IProps> = () => {
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
 
     // Query
-    const { data, loading } = useQuery<GetMyProfileQuery>(QUERY_GET_MY_PROFILE)
-    console.log({ data, loading })
+    const { loading } = useProfile()
 
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
 

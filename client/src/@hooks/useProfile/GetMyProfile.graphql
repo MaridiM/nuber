@@ -2,8 +2,12 @@
     GetMyProfile {
         ok 
         error
-        user { 
+        user {
+            id
             profilePhoto
+            firstName
+            lastName
+            email
             fullName
             isDriving
         }

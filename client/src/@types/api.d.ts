@@ -434,7 +434,7 @@ export type GetMyProfileQuery = (
     & Pick<GetMyProfileResponse, 'ok' | 'error'>
     & { user?: Maybe<(
       { __typename?: 'User' }
-      & Pick<User, 'profilePhoto' | 'fullName' | 'isDriving'>
+      & Pick<User, 'id' | 'profilePhoto' | 'firstName' | 'lastName' | 'email' | 'fullName' | 'isDriving'>
     )> }
   ) }
 );
@@ -489,7 +489,11 @@ export const GetMyProfileDocument = gql`
     ok
     error
     user {
+      id
       profilePhoto
+      firstName
+      lastName
+      email
       fullName
       isDriving
     }

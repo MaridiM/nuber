@@ -74,7 +74,7 @@
 
 - [x] 31 Home Sidebar Component
 - [x] 32 Home Sidebar Query
-- [ ] 33 Home Sidebar Query part Two
+- [x] 33 Home Sidebar Query part Two
 
 ---
 
