@@ -22,7 +22,11 @@ const PhotoInput: FC<IProps> = ({ uploading, fileUrl, onChange, children }) => {
             <Input id={'photo'} type="file" accept='image/*' onChange={onChange} />
             <Image htmlFor={'photo'}>
                 { uploading && '⏰'}
-                { !uploading && <img src={fileUrl} alt='user_photo'/>} 
+                { !uploading 
+                    && <img 
+                        src={ fileUrl || "https://lh3.googleusercontent.com/-CTwXMuZRaWw/AAAAAAAAAAI/AAAAAAAAAUg/8T5nFuIdnHE/photo.jpg" } 
+                        alt='user_photo'/>
+                } 
             </Image>
         </Container>
     )

@@ -1,4 +1,5 @@
 // Core
+import axios from 'axios'
 import React, { ChangeEventHandler, FC, useEffect, useState } from 'react'
 import { loader } from 'graphql.macro'
 import { toast } from 'react-toastify'
@@ -21,6 +22,8 @@ interface IState {
     firstName: string
     lastName: string
     profilePhoto: string
+    uploading: boolean
+    file?: Blob 
 }
 interface IProps {}
 
@@ -35,6 +38,7 @@ const EditAccountContainer: FC<IProps> = () => {
         firstName: '',
         lastName: '',
         profilePhoto: '',
+        uploading: false,
     })
 
     const { data, loading: profileLoading, getMyProfileQuery } = useProfile()
@@ -43,13 +47,13 @@ const EditAccountContainer: FC<IProps> = () => {
         if(!profileLoading) {
             if(data?.GetMyProfile.user) {
                 const { email, firstName, lastName, profilePhoto } = data?.GetMyProfile.user
-                console.log(email, firstName, lastName, profilePhoto)
-                setState({ 
+                setState(state => ({ 
+                    ...state,
                     email: email || '', 
                     firstName, 
                     lastName, 
                     profilePhoto: profilePhoto || '' 
-                })
+                }))
             }
         }
     }, [data, profileLoading])
@@ -76,8 +80,33 @@ const EditAccountContainer: FC<IProps> = () => {
         }, 
     })
 
-    const onInputChange: ChangeEventHandler<HTMLInputElement> = event => {
-        const { name, value } = event.target
+    const onInputChange: ChangeEventHandler<HTMLInputElement> = async ( event ): Promise<void> => {
+        const { name, value, files } = event.target
+
+        if(files) {
+            setState( state => ({
+                ...state,
+                uploading: true
+            }))
+            // Append file on FormData
+            const formData = new FormData()
+            formData.append('file', files[0])
+            formData.append('api_kay', process.env.REACT_APP_CLOUDINARY_API_KAY || '')
+            formData.append('upload_preset', process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET || '')
+            formData.append('timestamp', String(Date.now() / 1000))
+
+            // Upload file on Cloudinary
+            const {data: { secure_url }} = await axios.post(process.env.REACT_APP_CLOUDINARY_API_URL || '', formData)
+            if (secure_url) {
+                // Set Photo in state from cloudinary
+                setState( state => ({
+                    ...state,
+                    profilePhoto: secure_url ,
+                    uploading: false,
+                }))
+            }
+        }
+
         setState( state => ({
             ...state,
             [name]: value
@@ -85,12 +114,12 @@ const EditAccountContainer: FC<IProps> = () => {
 
     }
 
+
     return (
         <EditAccountPresenter 
             onChange={onInputChange} 
             onSubmit={_updateMyProfile}
             loading={loading}
-            uploading
             {...state}/>
     )
 }

@@ -84,10 +84,10 @@
 - [x] 35 Updating Driver Mode part Two
 - [x] 36 EditProfile Screen part One
 - [x] 37 EditProfile Screen part Two
-- [ ] 38 EditProfile Screen part Three
-- [ ] 39 Uploading Profile Photo to Cloudinary part One (1)
-- [ ] 39 Uploading Profile Photo to Cloudinary part One(2)
-- [ ] 40 Uploading Profile Photo to Cloudinary part Two
+- [x] 38 EditProfile Screen part Three
+- [x] 39 Uploading Profile Photo to Cloudinary part One (1)
+- [x] 39 Uploading Profile Photo to Cloudinary part One (2)
+- [x] 40 Uploading Profile Photo to Cloudinary part Two
 - [ ] 41 Settings Screen part One
 - [ ] 42 Settings Screen part Two
 
