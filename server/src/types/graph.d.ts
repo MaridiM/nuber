@@ -140,8 +140,6 @@ export type Mutation = {
   EmailSignIn: EmailSignInResponse;
   EmailSignUp: EmailSignUpResponse;
   FacebookConnect: FacebookConnectResponse;
-  GetMyPlaces: GetMyPlacesResponse;
-  GetNearbyDrivers: GetNearbyDriversResponse;
   ReportMovement: ReportMovementResponse;
   RequestEmailVerification: RequestEmailVerificationResponse;
   RequestRide: RequestRideResponse;
@@ -273,7 +271,9 @@ export type Place = {
 export type Query = {
   __typename?: 'Query';
   GetChat: GetChatResponse;
+  GetMyPlaces: GetMyPlacesResponse;
   GetMyProfile: GetMyProfileResponse;
+  GetNearbyDrivers: GetNearbyDriversResponse;
   GetNearbyRide: GetNearbyRideResponse;
   GetRide: GetRideResponse;
 };

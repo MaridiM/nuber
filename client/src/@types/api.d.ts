@@ -142,7 +142,6 @@ export type Mutation = {
   AddPlace: AddPlaceResponse;
   DeletePlace: DeletePlaceResponse;
   EditPlace: EditPlaceResponse;
-  GetMyPlaces: GetMyPlacesResponse;
   RequestRide: RequestRideResponse;
   UpdateRideStatus: UpdateRideStatusResponse;
   CompleteEmailVerification: CompleteEmailVerificationResponse;
@@ -150,7 +149,6 @@ export type Mutation = {
   EmailSignIn: EmailSignInResponse;
   EmailSignUp: EmailSignUpResponse;
   FacebookConnect: FacebookConnectResponse;
-  GetNearbyDrivers: GetNearbyDriversResponse;
   ReportMovement: ReportMovementResponse;
   RequestEmailVerification: RequestEmailVerificationResponse;
   StartPhoneVerification: StartPhoneVerificationResponse;
@@ -279,9 +277,11 @@ export type Place = {
 export type Query = {
   __typename?: 'Query';
   GetChat: GetChatResponse;
+  GetMyPlaces: GetMyPlacesResponse;
   GetNearbyRide: GetNearbyRideResponse;
   GetRide: GetRideResponse;
   GetMyProfile: GetMyProfileResponse;
+  GetNearbyDrivers: GetNearbyDriversResponse;
 };
 
 
@@ -424,6 +424,21 @@ export type Verification = {
   updatedAt: Scalars['String'];
 };
 
+export type GetMyPlacesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetMyPlacesQuery = (
+  { __typename?: 'Query' }
+  & { GetMyPlaces: (
+    { __typename?: 'GetMyPlacesResponse' }
+    & Pick<GetMyPlacesResponse, 'ok' | 'error'>
+    & { places?: Maybe<Array<Maybe<(
+      { __typename?: 'Place' }
+      & Pick<Place, 'id' | 'name' | 'address' | 'isFav'>
+    )>>> }
+  ) }
+);
+
 export type GetMyProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -510,6 +525,47 @@ export type CompletePhoneVerificationMutation = (
 );
 
 
+export const GetMyPlacesDocument = gql`
+    query getMyPlaces {
+  GetMyPlaces {
+    ok
+    error
+    places {
+      id
+      name
+      address
+      isFav
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetMyPlacesQuery__
+ *
+ * To run a query within a React component, call `useGetMyPlacesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMyPlacesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetMyPlacesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetMyPlacesQuery(baseOptions?: Apollo.QueryHookOptions<GetMyPlacesQuery, GetMyPlacesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetMyPlacesQuery, GetMyPlacesQueryVariables>(GetMyPlacesDocument, options);
+      }
+export function useGetMyPlacesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMyPlacesQuery, GetMyPlacesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetMyPlacesQuery, GetMyPlacesQueryVariables>(GetMyPlacesDocument, options);
+        }
+export type GetMyPlacesQueryHookResult = ReturnType<typeof useGetMyPlacesQuery>;
+export type GetMyPlacesLazyQueryHookResult = ReturnType<typeof useGetMyPlacesLazyQuery>;
+export type GetMyPlacesQueryResult = Apollo.QueryResult<GetMyPlacesQuery, GetMyPlacesQueryVariables>;
 export const GetMyProfileDocument = gql`
     query getMyProfile {
   GetMyProfile {

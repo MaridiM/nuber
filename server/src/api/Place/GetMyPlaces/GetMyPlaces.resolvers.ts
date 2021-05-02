@@ -1,6 +1,6 @@
 // Types
-import { Resolvers } from './../../../types/resolvers.d';
 import { GetMyPlacesResponse } from './../../../types/graph.d'
+import { Resolvers } from './../../../types/resolvers.d';
 
 // Utils
 import privateAuthResolver from './../../../utils/privateAuthResolver';
@@ -10,7 +10,7 @@ import User from './../../../entities/User';
 
 
 const resolvers: Resolvers = {
-    Mutation: {
+    Query: {
         GetMyPlaces: privateAuthResolver( 
             async (_, __, { req }): Promise<GetMyPlacesResponse> => {
                 try {

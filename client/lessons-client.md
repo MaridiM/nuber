@@ -88,8 +88,8 @@
 - [x] 39 Uploading Profile Photo to Cloudinary part One (1)
 - [x] 39 Uploading Profile Photo to Cloudinary part One (2)
 - [x] 40 Uploading Profile Photo to Cloudinary part Two
-- [ ] 41 Settings Screen part One
-- [ ] 42 Settings Screen part Two
+- [x] 41 Settings Screen part One
+- [x] 42 Settings Screen part Two
 
 ---
 

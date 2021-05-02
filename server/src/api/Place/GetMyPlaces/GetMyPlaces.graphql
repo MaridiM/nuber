@@ -4,6 +4,6 @@ type GetMyPlacesResponse {
     places: [Place]
 }
 
-type Mutation {
+type Query {
     GetMyPlaces: GetMyPlacesResponse! 
 }

@@ -12,7 +12,7 @@ import privateAuthResolver from './../../../utils/privateAuthResolver';
 import User from './../../../entities/User';
 
 const resolvers: Resolvers = {
-    Mutation: {
+    Query: {
         GetNearbyDrivers: privateAuthResolver( 
             async ( _, __, { req }): Promise<GetNearbyDriversResponse> => {
                 // Get user from req

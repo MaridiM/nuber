@@ -4,6 +4,6 @@ type GetNearbyDriversResponse {
     drivers: [User]
 }
 
-type Mutation {
+type Query {
     GetNearbyDrivers: GetNearbyDriversResponse!
 }

@@ -41,12 +41,12 @@ const EditAccountContainer: FC<IProps> = () => {
         uploading: false,
     })
 
-    const { data, loading: profileLoading, getMyProfileQuery } = useProfile()
+    const { userData , userDataLoading, getMyProfileQuery } = useProfile()
     
     useEffect(() => {
-        if(!profileLoading) {
-            if(data?.GetMyProfile.user) {
-                const { email, firstName, lastName, profilePhoto } = data?.GetMyProfile.user
+        if(!userDataLoading) {
+            if(userData?.GetMyProfile.user) {
+                const { email, firstName, lastName, profilePhoto } = userData?.GetMyProfile.user
                 setState(state => ({ 
                     ...state,
                     email: email || '', 
@@ -56,7 +56,7 @@ const EditAccountContainer: FC<IProps> = () => {
                 }))
             }
         }
-    }, [data, profileLoading])
+    }, [userData, userDataLoading])
 
     // Mutation
     const [ _updateMyProfile, { loading } ] = useMutation<

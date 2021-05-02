@@ -1,0 +1,12 @@
+query getMyPlaces { 
+    GetMyPlaces{
+        ok
+        error
+        places {
+            id
+            name
+            address
+            isFav
+        }
+    }
+}

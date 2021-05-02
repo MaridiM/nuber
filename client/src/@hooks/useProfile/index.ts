@@ -6,9 +6,9 @@ import { loader } from "graphql.macro"
 import { GetMyProfileQuery } from "./../../@types/api"
 
 interface IUseProfile {
-    data?: GetMyProfileQuery
-    loading: boolean
-    error?: ApolloError
+    userData?: GetMyProfileQuery
+    userDataLoading: boolean
+    userDataError?: ApolloError
     getMyProfileQuery: DocumentNode
 } 
 
@@ -16,12 +16,16 @@ interface IUseProfile {
 const QUERY_GET_MY_PROFILE = loader('./GetMyProfile.graphql')
 
 export const useProfile = (): IUseProfile => {
-    const { data, loading, error } = useQuery<GetMyProfileQuery>(QUERY_GET_MY_PROFILE)
+    const {
+        data: userData,
+        loading: userDataLoading,
+        error: userDataError
+    } = useQuery<GetMyProfileQuery>(QUERY_GET_MY_PROFILE)
 
     return { 
-        data,
-        loading,
-        error,
+        userData,
+        userDataLoading,
+        userDataError,
         getMyProfileQuery: QUERY_GET_MY_PROFILE 
     }
 }

@@ -22,7 +22,7 @@ interface IProps {}
 const MUTATION_TOGGLE_DRIVING = loader('./Menu.graphql')
 
 const MenuContainer: FC<IProps> = () => {
-    const { data: profileData , loading, getMyProfileQuery } = useProfile()
+    const {  userData , userDataLoading, getMyProfileQuery } = useProfile()
 
     const [ _toggleDrivingMode ] = useMutation<
         ToggleDrivingMutation,
@@ -35,9 +35,9 @@ const MenuContainer: FC<IProps> = () => {
         onCompleted	(data) {
             const { ToggleDrivingMode } = data
             if(!ToggleDrivingMode.ok) return toast.error(ToggleDrivingMode.error)
-            console.log(profileData?.GetMyProfile.user?.isDriving )
-            return profileData 
-                && profileData.GetMyProfile.user?.isDriving 
+            console.log(userData?.GetMyProfile.user?.isDriving )
+            return userData 
+                && userData.GetMyProfile.user?.isDriving 
                     ? toast.dark('You start to driving!')
                     : toast.dark('You finished driving!')
 
@@ -47,8 +47,8 @@ const MenuContainer: FC<IProps> = () => {
 
 
     return <MenuPresenter 
-        data={profileData} 
-        loading={loading} 
+        data={userData} 
+        loading={userDataLoading} 
         toggleDriving={_toggleDrivingMode} />
 }
 

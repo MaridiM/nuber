@@ -1,3 +1,5 @@
+// Utils
+import { paths } from "./../@utils"
 // Init
 import { isAuth } from "./../@init"
 
@@ -9,15 +11,18 @@ interface IAuthFn {
 }
 
 export const useAuth = (): IAuthFn => {
+
     const authentication = (token: string): void => {
         if (token) {
             localStorage.setItem('jwt', token)
             isAuth(true)
+            document.location.pathname = paths.home
         }
     }
     const logout = (): void => {
-        localStorage.remove('jwt')
+        localStorage.removeItem('jwt')
         isAuth(false)
+        document.location.pathname = paths.home
     } 
     return { 
         authentication,

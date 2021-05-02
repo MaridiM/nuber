@@ -1,16 +1,14 @@
 // Core
-import { createConnection } from 'typeorm'
 import dotenv from 'dotenv'
+import { createConnection } from 'typeorm'
 dotenv.config({ path: '../.env' })
 
 // Init
 import './init/app'
-import { PORT, 
-    connectionOptions 
-} from './init/config'
+import { graphqlPath, subscriptionsPath } from './init/applyMiddleware'
+import { connectionOptions, PORT } from './init/config'
 import './init/db'
 import { server } from './init/server'
-import { graphqlPath, subscriptionsPath } from './init/applyMiddleware'
 
 
 // Create PostgreSQL connection with typeorm and  after start servers

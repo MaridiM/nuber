@@ -16,11 +16,11 @@ const HomeContainer: FC<IProps> = () => {
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
 
     // Query
-    const { loading } = useProfile()
+    const { userDataLoading } = useProfile()
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
 
     return <HomePresenter 
-        loading={loading}
+        loading={userDataLoading}
         toggleMenu={toggleMenu} 
         isMenuOpen={isMenuOpen}
 
