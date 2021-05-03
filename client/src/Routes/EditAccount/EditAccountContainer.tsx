@@ -111,7 +111,6 @@ const EditAccountContainer: FC<IProps> = () => {
             ...state,
             [name]: value
         }))
-
     }
 
 

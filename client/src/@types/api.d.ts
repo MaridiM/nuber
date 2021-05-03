@@ -465,6 +465,23 @@ export type ToggleDrivingMutation = (
   ) }
 );
 
+export type AddPlaceMutationVariables = Exact<{
+  name: Scalars['String'];
+  lat: Scalars['Float'];
+  lng: Scalars['Float'];
+  address: Scalars['String'];
+  isFav: Scalars['Boolean'];
+}>;
+
+
+export type AddPlaceMutation = (
+  { __typename?: 'Mutation' }
+  & { AddPlace: (
+    { __typename?: 'AddPlaceResponse' }
+    & Pick<AddPlaceResponse, 'ok' | 'error'>
+  ) }
+);
+
 export type UpdateMyProfileMutationVariables = Exact<{
   email?: Maybe<Scalars['String']>;
   firstName?: Maybe<Scalars['String']>;
@@ -643,6 +660,44 @@ export function useToggleDrivingMutation(baseOptions?: Apollo.MutationHookOption
 export type ToggleDrivingMutationHookResult = ReturnType<typeof useToggleDrivingMutation>;
 export type ToggleDrivingMutationResult = Apollo.MutationResult<ToggleDrivingMutation>;
 export type ToggleDrivingMutationOptions = Apollo.BaseMutationOptions<ToggleDrivingMutation, ToggleDrivingMutationVariables>;
+export const AddPlaceDocument = gql`
+    mutation addPlace($name: String!, $lat: Float!, $lng: Float!, $address: String!, $isFav: Boolean!) {
+  AddPlace(name: $name, lat: $lat, lng: $lng, address: $address, isFav: $isFav) {
+    ok
+    error
+  }
+}
+    `;
+export type AddPlaceMutationFn = Apollo.MutationFunction<AddPlaceMutation, AddPlaceMutationVariables>;
+
+/**
+ * __useAddPlaceMutation__
+ *
+ * To run a mutation, you first call `useAddPlaceMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddPlaceMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addPlaceMutation, { data, loading, error }] = useAddPlaceMutation({
+ *   variables: {
+ *      name: // value for 'name'
+ *      lat: // value for 'lat'
+ *      lng: // value for 'lng'
+ *      address: // value for 'address'
+ *      isFav: // value for 'isFav'
+ *   },
+ * });
+ */
+export function useAddPlaceMutation(baseOptions?: Apollo.MutationHookOptions<AddPlaceMutation, AddPlaceMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AddPlaceMutation, AddPlaceMutationVariables>(AddPlaceDocument, options);
+      }
+export type AddPlaceMutationHookResult = ReturnType<typeof useAddPlaceMutation>;
+export type AddPlaceMutationResult = Apollo.MutationResult<AddPlaceMutation>;
+export type AddPlaceMutationOptions = Apollo.BaseMutationOptions<AddPlaceMutation, AddPlaceMutationVariables>;
 export const UpdateMyProfileDocument = gql`
     mutation updateMyProfile($email: String, $firstName: String, $lastName: String, $profilePhoto: String) {
   UpdateMyProfile(

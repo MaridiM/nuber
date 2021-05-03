@@ -1,3 +1,1 @@
-import React from 'react'
-
-export const Places = () => <span>Places</span>
+export { default as Places } from './PlacesContainer'

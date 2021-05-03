@@ -95,8 +95,8 @@
 
 ### Places
 
-- [ ] 43 Places + AddPlace Components
-- [ ] 44 AddPlace Mutation
+- [x] 43 Places + AddPlace Components
+- [x] 44 AddPlace Mutation
 - [ ] 45 Edit Place Mutation
 - [ ] 46 Google Maps and React part One
 - [ ] 47 Google Maps and Geolocation
