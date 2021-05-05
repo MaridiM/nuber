@@ -25,7 +25,8 @@ const PlacesPresenter: FC<IProps> = ({placesData, placesLoading}) => {
             <Helmet title={'Places'} />
             <Header title={'Places'} backTo={paths.home} />   
             <Container>
-                { !placesLoading 
+                {   
+                    !placesLoading 
                     && places 
                     && !places.length 
                     && <InfoText>You have no places</InfoText>

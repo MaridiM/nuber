@@ -465,6 +465,21 @@ export type ToggleDrivingMutation = (
   ) }
 );
 
+export type EditPlaceMutationVariables = Exact<{
+  id: Scalars['Int'];
+  name?: Maybe<Scalars['String']>;
+  isFav?: Maybe<Scalars['Boolean']>;
+}>;
+
+
+export type EditPlaceMutation = (
+  { __typename?: 'Mutation' }
+  & { EditPlace: (
+    { __typename?: 'EditPlaceResponse' }
+    & Pick<EditPlaceResponse, 'ok' | 'error'>
+  ) }
+);
+
 export type AddPlaceMutationVariables = Exact<{
   name: Scalars['String'];
   lat: Scalars['Float'];
@@ -660,6 +675,42 @@ export function useToggleDrivingMutation(baseOptions?: Apollo.MutationHookOption
 export type ToggleDrivingMutationHookResult = ReturnType<typeof useToggleDrivingMutation>;
 export type ToggleDrivingMutationResult = Apollo.MutationResult<ToggleDrivingMutation>;
 export type ToggleDrivingMutationOptions = Apollo.BaseMutationOptions<ToggleDrivingMutation, ToggleDrivingMutationVariables>;
+export const EditPlaceDocument = gql`
+    mutation editPlace($id: Int!, $name: String, $isFav: Boolean) {
+  EditPlace(id: $id, name: $name, isFav: $isFav) {
+    ok
+    error
+  }
+}
+    `;
+export type EditPlaceMutationFn = Apollo.MutationFunction<EditPlaceMutation, EditPlaceMutationVariables>;
+
+/**
+ * __useEditPlaceMutation__
+ *
+ * To run a mutation, you first call `useEditPlaceMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useEditPlaceMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [editPlaceMutation, { data, loading, error }] = useEditPlaceMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      name: // value for 'name'
+ *      isFav: // value for 'isFav'
+ *   },
+ * });
+ */
+export function useEditPlaceMutation(baseOptions?: Apollo.MutationHookOptions<EditPlaceMutation, EditPlaceMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<EditPlaceMutation, EditPlaceMutationVariables>(EditPlaceDocument, options);
+      }
+export type EditPlaceMutationHookResult = ReturnType<typeof useEditPlaceMutation>;
+export type EditPlaceMutationResult = Apollo.MutationResult<EditPlaceMutation>;
+export type EditPlaceMutationOptions = Apollo.BaseMutationOptions<EditPlaceMutation, EditPlaceMutationVariables>;
 export const AddPlaceDocument = gql`
     mutation addPlace($name: String!, $lat: Float!, $lng: Float!, $address: String!, $isFav: Boolean!) {
   AddPlace(name: $name, lat: $lat, lng: $lng, address: $address, isFav: $isFav) {

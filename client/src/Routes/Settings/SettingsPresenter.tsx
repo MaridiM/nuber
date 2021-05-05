@@ -48,6 +48,7 @@ const SettingsPresenter: FC<IProps> = ({ logout, placesData, placesLoading, user
                     !placesLoading && places && places.map( (state, idx) => (
                         <Place 
                             key={idx} 
+                            id={state!.id}
                             fav={state!.isFav} 
                             name={state!.name} 
                             address={state!.address} />

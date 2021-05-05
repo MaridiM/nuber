@@ -25,7 +25,7 @@ Client for the (N)Uber Clone Course on Nomad Academy. ReactJS,
 - [x] Edit Account
 - [x] Settings
 - [x] Places
-- [ ] Add Place
-- [ ] Find Address
+- [x] Add Place
+- [x] Find Address
 - [ ] Challenge: Ride History
 - [ ] Challenge: Email Sign In

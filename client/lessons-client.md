@@ -43,7 +43,7 @@
 
 - [x] 15 Inputs and Typescript part One
 - [x] 16 Inputs and Typescript part Two
-- [x] 17 Notifications with React Toastify
+- [x] 17 Notifications with React Toastify54
 
 ---
 
@@ -97,22 +97,22 @@
 
 - [x] 43 Places + AddPlace Components
 - [x] 44 AddPlace Mutation
-- [ ] 45 Edit Place Mutation
-- [ ] 46 Google Maps and React part One
-- [ ] 47 Google Maps and Geolocation
-- [ ] 48 Google Map Events
-- [ ] 49 Reverse Geocoding part One
-- [ ] 50 Reverse Geocoding part Two
-- [ ] 51 Geocoding part One
-- [ ] 52 Geocoding part Two
-- [ ] 53 Refactoring AddPlace
+- [x] 45 Edit Place Mutation
+- [x] 46 Google Maps and React part One
+- [x] 47 Google Maps and Geolocation
+- [x] 48 Google Map Events
+- [x] 49 Reverse Geocoding part One
+- [x] 50 Reverse Geocoding part Two
+- [x] 51 Geocoding part One
+- [x] 52 Geocoding part Two
+- [x] 53 Refactoring AddPlace
 
 ---
 
 ### HomeScreen
 
-- [ ] 54 HomeScreen User Marker
-- [ ] 55 HomeScreen Moving with the User
+- [x] 54 HomeScreen User Marker
+- [x] 55 HomeScreen Moving with the User
 - [ ] 56 HomeScreen Creating Route Markers
 - [ ] 57 HomeScreen Getting Directions part One
 - [ ] 58 HomeScreen Getting Directions part Two

@@ -17,9 +17,10 @@ interface IProps {
     onChange: (event: ChangeEvent<HTMLInputElement>) => void
     loading: boolean
     onSubmit: MutationFunction<AddPlaceMutation, AddPlaceMutationVariables>
+    pickedAddress: boolean
 }
 
-const AddPlacePresenter: FC<IProps> = ({ address, name, onChange, loading, onSubmit}) => {
+const AddPlacePresenter: FC<IProps> = ({ address, name, onChange, loading, onSubmit, pickedAddress}) => {
     return (
         <>
             <Helmet title={'Add Place'}/>
@@ -31,18 +32,24 @@ const AddPlacePresenter: FC<IProps> = ({ address, name, onChange, loading, onSub
                         placeholder={'Name'}
                         name={'name'}
                         value={name} 
-                        onChange={onChange} />
+                        onChange={onChange}
+                        required />
                     <ExtendedInput 
                         type="text" 
                         placeholder={'Address'}
                         name={'address'}
                         value={address} 
-                        onChange={onChange} />
+                        onChange={onChange} 
+                        required/>
                     <ExtendedLink to={paths.findAddress}>Pick place from map</ExtendedLink>
-                    <Button 
-                        onClick={null} 
-                        value={loading ? 'Adding place' : 'Add place'} 
-                    />
+                    {
+                        pickedAddress && (
+                            <Button 
+                                onClick={null} 
+                                value={loading ? 'Adding place' : 'Add place'} 
+                            />
+                        )
+                    }
                 </Form>
             </Container>
         </>

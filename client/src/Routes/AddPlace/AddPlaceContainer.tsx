@@ -1,7 +1,7 @@
 // Core
 import { useMutation } from '@apollo/client';
 import { loader } from 'graphql.macro';
-import React, { ChangeEventHandler, FC, useState } from 'react'
+import React, { ChangeEventHandler, FC, useEffect, useState } from 'react'
 import { RouteComponentProps } from 'react-router';
 import { toast } from 'react-toastify';
 
@@ -25,18 +25,35 @@ interface IState {
     lng: number
     isFav: boolean
 }
+interface IHistoryState {
+    address: string
+        lat: number
+        lng: number
+}
 
 // GraphQL 
 const MUTATION_ADD_PLACE = loader('./AddPlace.graphql')
 
-const AddPlaceContainer: FC<RouteComponentProps<IProps>> = ({ history }) => {
+const AddPlaceContainer: FC<RouteComponentProps<IProps, any, IHistoryState>> = ({ history }) => {
+    const {state: { address = '', lat, lng} = {} } =  history.location
+
     const [state, setState] = useState<IState>({
         address: '',
         name: '',
-        lat: 1.34,
-        lng: 1.34,
+        lat: 0,
+        lng: 0,
         isFav: false
     });
+
+    useEffect(() => {
+        setState(state => ({
+            ...state,
+            address: address || '',
+            lat: lat || 0,
+            lng: lng || 0,
+        }))
+    }, [setState])
+
 
     const { getMyPlacesQuery } = usePlaces()
     // Mutation
@@ -78,10 +95,13 @@ const AddPlaceContainer: FC<RouteComponentProps<IProps>> = ({ history }) => {
         }))
     }
 
+
+    console.log(state)
     return <AddPlacePresenter 
         onChange={onInputChange}
         loading={loading}
         onSubmit={_addPlace}
+        pickedAddress={state.lat !== 0 && state.lng !== 0}
         {...state} 
     />
 }

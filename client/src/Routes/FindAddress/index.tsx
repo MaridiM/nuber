@@ -1,3 +1,1 @@
-import React from 'react'
-
-export const FindAddress = () => <span>Find address</span>
+export { default as FindAddress } from './FindAddressContainer'
