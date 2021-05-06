@@ -113,9 +113,9 @@
 
 - [x] 54 HomeScreen User Marker
 - [x] 55 HomeScreen Moving with the User
-- [ ] 56 HomeScreen Creating Route Markers
-- [ ] 57 HomeScreen Getting Directions part One
-- [ ] 58 HomeScreen Getting Directions part Two
+- [x] 56 HomeScreen Creating Route Markers
+- [x] 57 HomeScreen Getting Directions part One
+- [x] 58 HomeScreen Getting Directions part Two
 
 ---
 
