@@ -1,7 +1,7 @@
 // Core
 import React, { FC } from 'react'
 import { Link } from 'react-router-dom'
-import { MutationFunction } from '@apollo/client'
+// import { MutationFunction } from '@apollo/client'
 
 // Utils
 import { paths } from './../../@utils'
@@ -20,11 +20,15 @@ import {
 } from './Styled'
 
 // Types
-import { GetMyProfileQuery, ToggleDrivingMutation } from './../../@types/api'
+import {
+    GetMyProfileQuery,
+    // ToggleDrivingMutation
+} from './../../@types/api'
 interface IProps {
     data?: GetMyProfileQuery
     loading: boolean
-    toggleDriving: MutationFunction<ToggleDrivingMutation, any>
+    // toggleDriving: MutationFunction<ToggleDrivingMutation, any>
+    toggleDriving: any
 }
 
 const MenuPresenter: FC<IProps> = ({ 
@@ -58,7 +62,7 @@ const MenuPresenter: FC<IProps> = ({
                     <SLink to={paths.settings}>Settings</SLink>
                     <ToggleDriving 
                         isDriving={user.isDriving!}
-                        onClick={() => toggleDriving()}
+                        onClick={toggleDriving}
                     >
                         { user.isDriving ? 'Stop driving' : 'Start driving' }
                     </ToggleDriving>

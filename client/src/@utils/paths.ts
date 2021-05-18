@@ -1,6 +1,8 @@
 export const paths = {
     home: '/',
     phoneLogin: '/phone-login',
+    signUp: '/sign-up',
+    emailLogin: '/email-login',
     verifyPhone: '/verify-phone',
     socialLogin: '/social-login',
     ride: (id?: string):string =>  id ? `/ride/${id}` : '/ride/:rideId',

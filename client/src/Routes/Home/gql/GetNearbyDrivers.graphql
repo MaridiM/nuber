@@ -1,0 +1,11 @@
+query getNearbyDrivers {
+    GetNearbyDrivers {
+        ok
+        error
+        drivers  {
+            id
+            lastLng
+            lastLat
+        }
+    }
+}

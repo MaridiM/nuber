@@ -1,17 +1,28 @@
 // Core
 import React, { ChangeEventHandler, FC, MouseEventHandler, MutableRefObject, useEffect, useRef, useState } from 'react'
+import { toast } from 'react-toastify'
 import { GoogleApiWrapper, IProvidedProps } from 'google-maps-react'
+import { loader } from 'graphql.macro'
 import { RouteComponentProps } from 'react-router'
+import { useMutation, useQuery } from '@apollo/client'
 
 // Local
 import HomePresenter from './HomePresenter'
 
 // Hooks
 import { useProfile } from './../../@hooks'
-import { geoCode } from 'src/@utils'
-import { toast } from 'react-toastify'
+
+// Utils
+import { geoCode } from './../../@utils'
 
 // Types
+import { 
+    GetNearbyDriversQuery,
+    GetNearbyDriversQueryVariables,
+    ReportMovementMutation,
+    ReportMovementMutationVariables
+} from './../../@types/api'
+
 interface IProps extends IProvidedProps, RouteComponentProps<any> {}
 interface IState {
     lat: number
@@ -19,12 +30,14 @@ interface IState {
     toAddress: string
     toLat: number
     toLng: number
-    price?: number
-    distance?: string
+    price?: string
+    distance: string
     duration?: string
 }
 
-
+// GraphQL
+ const QUERY_GET_NEARBY_DRIVERS = loader('./gql/GetNearbyDrivers.graphql')
+ const MUTATION_REPORT_MOVEMENT = loader('./gql/ReportMovement.graphql')
 
 const HomeContainer: FC<IProps> = ({ google }) => {
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
@@ -35,7 +48,7 @@ const HomeContainer: FC<IProps> = ({ google }) => {
         toAddress: '',
         toLat: 0,
         toLng: 0,
-        price: 0,
+        price: undefined,
         distance: '',
         duration: ''
     })
@@ -44,26 +57,85 @@ const HomeContainer: FC<IProps> = ({ google }) => {
     let userMarker: google.maps.Marker
     let toMarker: google.maps.Marker
     let directions: google.maps.DirectionsRenderer
+    let driverMarkers: google.maps.Marker[] = []
 
     useEffect(() => {
-          // Function for getting geolocation and set on load map
+        // Function for getting geolocation and set on load map
         const handleGeoSuccess = (position: GeolocationPosition): void => {
             const { coords: { latitude: lat, longitude: lng } } = position
             loadMap(lat, lng)
+            
             setState( state => ({ ...state, lat, lng }))
         }
         
         // Handler for error geolocation
         const handleGeoError: PositionErrorCallback = (): void => console.log("No location") 
-
+        
         // Get current position
         navigator.geolocation.getCurrentPosition(handleGeoSuccess, handleGeoError)
-
+        
     })
 
-    function loadMap (lat: number, lng: number): google.maps.Map<Element> {
+
+
+    // Query
+    const { userDataLoading, userData } = useProfile()
+    const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
+
+    // GraphQL Requests 
+    const [ _reportMovement ]= useMutation<ReportMovementMutation, ReportMovementMutationVariables>(MUTATION_REPORT_MOVEMENT)
+    const { loading: nearbyLoading } = useQuery<GetNearbyDriversQuery, GetNearbyDriversQueryVariables>(QUERY_GET_NEARBY_DRIVERS, {
+        pollInterval: 1000, // every 1000 mls re fetching only with data 
+        skip: ( userData 
+            && userData.GetMyProfile
+            && userData.GetMyProfile.user?.isDriving ) 
+            || false,
+        onCompleted ( data ) {
+            const { GetNearbyDrivers: { drivers, ok, error} } = data
+            if (!ok && !drivers) return toast.error(error)
+            
+            // Set markers nearby drivers
+            drivers && drivers.forEach(driver => {
+                if( state.lat !== 0 && state.lng !== 0){
+                    map = loadMap(state.lat, state.lng)
+                }
+
+                // Set marker option for nearby  driver
+                const markerOptions: google.maps.MarkerOptions = {
+                    icon: {
+                        path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+                        scale: 5
+                    },
+                    position: {
+                        lat: Number(driver!.lastLat),
+                        lng: Number(driver!.lastLng),
+                    },
+                }
+                // Create marker for nearby driver
+                // Set Id driver
+                // Set marker in map
+                const newMarker: google.maps.Marker = new google.maps.Marker(markerOptions)
+
+                driverMarkers.push(newMarker)
+                newMarker.set('ID', driver!.id)
+                newMarker.setMap(map)
+
+            })
+
+            return 
+        }
+    })
+    
+
+    
+    const loadMap = (lat: number, lng: number): google.maps.Map<Element> => {
         // Set maps constructor
         const maps = google.maps
+        
+        // If current is no exist to reload map
+        if(!mapRef.current) {
+            return loadMap(lat, lng)
+        }
         // Set mapConfig
         const mapConfig: google.maps.MapOptions = {
             center: { lat, lng },
@@ -72,10 +144,10 @@ const HomeContainer: FC<IProps> = ({ google }) => {
             minZoom: 3,
             maxZoom: 18
         }
+
         // Set map on ref div
         map = new maps.Map(mapRef.current, mapConfig)
         
-
 
         // User Marker options
         const userMarkerOptions: google.maps.MarkerOptions = {
@@ -105,7 +177,7 @@ const HomeContainer: FC<IProps> = ({ google }) => {
     }
 
     // Handlers by watching positions
-    function handleGeoWatchSuccess (position: GeolocationPosition): void {
+    async function handleGeoWatchSuccess (position: GeolocationPosition): Promise<void> {
         const { 
             coords: { 
                 latitude: lat, 
@@ -117,6 +189,16 @@ const HomeContainer: FC<IProps> = ({ google }) => {
         userMarker.setPosition({lat, lng})
         // Fallow map by user coords
         map.panTo({lat, lng})
+
+        // Report movement by server
+        await _reportMovement({
+            variables: {
+                lastLat: lat,
+                lastLng: lng
+            }
+        })
+
+
     }
     function handleGeoWatchError () {
         console.log('Error watching you')
@@ -129,13 +211,14 @@ const HomeContainer: FC<IProps> = ({ google }) => {
         if( result !== false) {
             const { lat, lng, formatted_address: toAddress } = result
             
+            
             if(toMarker) {
                 toMarker.setMap(null)
             }
             
-           
             // Get map
             map = await loadMap(state.lat, state.lng)
+            console.log(map)
             // User Marker options
             const toMarkerOptions: google.maps.MarkerOptions = {
                 position: { lat, lng },
@@ -153,13 +236,12 @@ const HomeContainer: FC<IProps> = ({ google }) => {
             bounds.extend({ lat: state.lat, lng: state.lng })
             map.fitBounds(bounds)
 
-            await setState(state => ({ 
+            setState(state => ({ 
                 ...state, 
                 toAddress, 
                 toLat: lat, 
                 toLng: lng 
             }))
-
             // Create path  after setState
             createPath()
         }
@@ -174,9 +256,10 @@ const HomeContainer: FC<IProps> = ({ google }) => {
     }
     
     // Function for directions
-    // Crete route line from cords  to `
+    // Crete route line from cords to 
     function createPath () {
         const { toLat, toLng, lat, lng } = state
+        
         if(directions) {
             directions.setMap(null)
         }
@@ -206,34 +289,43 @@ const HomeContainer: FC<IProps> = ({ google }) => {
         }
 
         // Set in service.route, directionOptionst with from  and to coords
-        directionsService.route(
-            directionsOptions, 
-            (result: google.maps.DirectionsResult, status: google.maps.DirectionsStatus): void => {
-                if (status === google.maps.DirectionsStatus.OK){
-                    const { routes } = result
-                    const { 
-                        distance: { text: distance },
-                        duration: { text: duration }
-                    } = routes[0].legs[0]
+        directionsService.route( directionsOptions, handleRouteRequest )
 
-                    setState(state => ({ ...state, duration, distance}))
-                    directions.setDirections(result)
-                    directions.setMap(map)
+    }
+    // Handler for route request for direction service
+    async function handleRouteRequest (
+        result: google.maps.DirectionsResult, 
+        status: google.maps.DirectionsStatus
+    ): Promise<void> {
 
-                } else {
-                    toast.error('There is no route, you have to ')
-                }
+        if (status === google.maps.DirectionsStatus.OK){
+            const { routes } = result
+            const { 
+                distance: { text: distance },
+                duration: { text: duration }
+            } = routes[0].legs[0]
 
-            }
-        )
+            directions.setDirections(result)
+            directions.setMap(map)
+            await setState(state => ({ ...state, duration, distance}))
+            setPrice()
+            
+        } else {
+            toast.error('There is no route, you have to ')
+        }
 
     }
 
 
-
-    // Query
-    const { userDataLoading } = useProfile()
-    const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
+    // Set Price by Distance and driving
+    function setPrice () {
+        if ( state.distance ) {
+            setState( state => ({ 
+                ...state, 
+                price: Number(parseFloat(state.distance!.replace(',', '')) * 3).toFixed(2)
+            }))
+        }
+    }
 
     return <HomePresenter 
         loading={userDataLoading}
@@ -242,8 +334,11 @@ const HomeContainer: FC<IProps> = ({ google }) => {
         mapRef={mapRef}
         onAddressSubmit={onAddressSubmit}
         onInputChange={onInputChange}
+        nearbyLoading={nearbyLoading}
+        data={userData}
         { ...state }
     />
+
 }
 
 export default  GoogleApiWrapper({

@@ -9,6 +9,8 @@ export const GlobalStyles = createGlobalStyle `
     }
     body {
         font-family: "Segoe UI",Roboto,Arial,sans-serif;
+        width: 100%;
+        height: 100vh;
     }
     a { 
         color: inherit;

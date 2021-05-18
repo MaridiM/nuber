@@ -1,0 +1,14 @@
+mutation reportMovement (
+    $lastOrientation: Float
+    $lastLat: Float
+    $lastLng: Float
+) {
+    ReportMovement(
+        lastOrientation: $lastOrientation
+        lastLat: $lastLat
+        lastLng: $lastLng
+    ) {
+        ok
+        error
+    }
+}

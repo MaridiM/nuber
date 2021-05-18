@@ -1,3 +1,5 @@
+export { EmailLogin } from './EmailLogin'
+export { SignUp } from './SignUp'
 export { AddPlace } from './AddPlace'
 export { EditAccount } from './EditAccount'
 export { FindAddress } from './FindAddress'

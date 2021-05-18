@@ -12,6 +12,7 @@ export const Container = styled.input`
     cursor: pointer;
     font-weight: 500;
     text-align: center;
+    z-index: 2;
     &:active,
     &:focus {
       outline: none;

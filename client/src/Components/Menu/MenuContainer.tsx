@@ -1,14 +1,14 @@
 // Core
-import { useProfile } from 'src/@hooks'
 import { loader } from 'graphql.macro'
+import React, { FC } from 'react'
 import { toast } from 'react-toastify'
+import { useMutation } from '@apollo/client'
 
 // Local
 import MenuPresenter from './MenuPresenter'
 
 //Hooks
-import React, { FC } from 'react'
-import { useMutation } from '@apollo/client'
+import { useProfile } from './../../@hooks'
 
 // Types
 import {
@@ -22,27 +22,29 @@ interface IProps {}
 const MUTATION_TOGGLE_DRIVING = loader('./Menu.graphql')
 
 const MenuContainer: FC<IProps> = () => {
-    const {  userData , userDataLoading, getMyProfileQuery } = useProfile()
+    const { 
+        userData, 
+        userDataLoading,
+        getMyProfileQuery 
+    } = useProfile()
 
     const [ _toggleDrivingMode ] = useMutation<
         ToggleDrivingMutation,
         ToggleDrivingMutationVariables
     >(MUTATION_TOGGLE_DRIVING, {
-        refetchQueries: [{
+        refetchQueries: [{ 
             query: getMyProfileQuery 
         }],
-        awaitRefetchQueries: true,
-        onCompleted	(data) {
-            const { ToggleDrivingMode } = data
+        awaitRefetchQueries: true,   
+        async update ( _, { data }) {
+            const { ToggleDrivingMode } = data!
             if(!ToggleDrivingMode.ok) return toast.error(ToggleDrivingMode.error)
-            console.log(userData?.GetMyProfile.user?.isDriving )
-            return userData 
-                && userData.GetMyProfile.user?.isDriving 
-                    ? toast.dark('You start to driving!')
-                    : toast.dark('You finished driving!')
 
-            
-        } 
+            userData && await !userData?.GetMyProfile.user?.isDriving  
+                    ? toast.success('You start to driving!')
+                    : toast.dark('You finished driving!')
+            return
+        },
     })
 
 

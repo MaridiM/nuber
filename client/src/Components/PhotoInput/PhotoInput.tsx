@@ -1,33 +1,45 @@
 // Core
-import React, { ChangeEvent, FC, ReactNode } from 'react'
-
-// Components
-import { Input } from '..'
+import React, { ChangeEvent, FC, MouseEventHandler, useRef } from 'react'
 
 // Styled
-import { Container, Image } from './Styled'
+import { ButtonImage, Container, Image, UploadInput } from './Styled'
 
 // Types
 interface IProps {
     uploading: boolean
     fileUrl: string
     onChange: (event: ChangeEvent<HTMLInputElement>) => void
-    children?: ReactNode
+    required?: boolean
 }
 
+const PhotoInput: FC<IProps> = ({ uploading, fileUrl, onChange, required}) => {
+    const uploadInputRef = useRef<HTMLInputElement>()
 
-const PhotoInput: FC<IProps> = ({ uploading, fileUrl, onChange, children }) => {
+    const uploadHandleInput: MouseEventHandler<HTMLButtonElement> = event => {
+        event.preventDefault()
+        return uploadInputRef.current?.click()
+    }
+
     return (
         <Container>
-            <Input id={'photo'} type="file" accept='image/*' onChange={onChange} />
-            <Image htmlFor={'photo'}>
-                { uploading && '⏰'}
-                { !uploading 
-                    && <img 
-                        src={ fileUrl || "https://lh3.googleusercontent.com/-CTwXMuZRaWw/AAAAAAAAAAI/AAAAAAAAAUg/8T5nFuIdnHE/photo.jpg" } 
-                        alt='user_photo'/>
-                } 
-            </Image>
+            <UploadInput 
+                id={'photo'} 
+                type="file" 
+                accept='image/*' 
+                onChange={onChange} 
+                uploadInputRef={uploadInputRef} 
+                required={required}
+            />
+            <ButtonImage onClick={uploadHandleInput}>
+                <Image>
+                    { uploading && '⏰'}
+                    { !uploading 
+                        && <img 
+                            src={ fileUrl || "https://lh3.googleusercontent.com/-CTwXMuZRaWw/AAAAAAAAAAI/AAAAAAAAAUg/8T5nFuIdnHE/photo.jpg" } 
+                            alt='user_photo'/>
+                    } 
+                </Image>
+            </ButtonImage>
         </Container>
     )
 }

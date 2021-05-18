@@ -513,6 +513,50 @@ export type UpdateMyProfileMutation = (
   )> }
 );
 
+export type EmailSignInMutationVariables = Exact<{
+  email: Scalars['String'];
+  password: Scalars['String'];
+}>;
+
+
+export type EmailSignInMutation = (
+  { __typename?: 'Mutation' }
+  & { EmailSignIn: (
+    { __typename?: 'EmailSignInResponse' }
+    & Pick<EmailSignInResponse, 'ok' | 'error' | 'token'>
+  ) }
+);
+
+export type ReportMovementMutationVariables = Exact<{
+  lastOrientation?: Maybe<Scalars['Float']>;
+  lastLat?: Maybe<Scalars['Float']>;
+  lastLng?: Maybe<Scalars['Float']>;
+}>;
+
+
+export type ReportMovementMutation = (
+  { __typename?: 'Mutation' }
+  & { ReportMovement: (
+    { __typename?: 'ReportMovementResponse' }
+    & Pick<ReportMovementResponse, 'ok' | 'error'>
+  ) }
+);
+
+export type GetNearbyDriversQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetNearbyDriversQuery = (
+  { __typename?: 'Query' }
+  & { GetNearbyDrivers: (
+    { __typename?: 'GetNearbyDriversResponse' }
+    & Pick<GetNearbyDriversResponse, 'ok' | 'error'>
+    & { drivers?: Maybe<Array<Maybe<(
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'lastLng' | 'lastLat'>
+    )>>> }
+  ) }
+);
+
 export type StartPhoneVerificationMutationVariables = Exact<{
   phoneNumber: Scalars['String'];
 }>;
@@ -523,6 +567,25 @@ export type StartPhoneVerificationMutation = (
   & { StartPhoneVerification: (
     { __typename?: 'StartPhoneVerificationResponse' }
     & Pick<StartPhoneVerificationResponse, 'ok' | 'error'>
+  ) }
+);
+
+export type EmailSignUpMutationVariables = Exact<{
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
+  email: Scalars['String'];
+  password: Scalars['String'];
+  profilePhoto: Scalars['String'];
+  phoneNumber: Scalars['String'];
+  age: Scalars['Int'];
+}>;
+
+
+export type EmailSignUpMutation = (
+  { __typename?: 'Mutation' }
+  & { EmailSignUp: (
+    { __typename?: 'EmailSignUpResponse' }
+    & Pick<EmailSignUpResponse, 'ok' | 'error' | 'token'>
   ) }
 );
 
@@ -791,6 +854,122 @@ export function useUpdateMyProfileMutation(baseOptions?: Apollo.MutationHookOpti
 export type UpdateMyProfileMutationHookResult = ReturnType<typeof useUpdateMyProfileMutation>;
 export type UpdateMyProfileMutationResult = Apollo.MutationResult<UpdateMyProfileMutation>;
 export type UpdateMyProfileMutationOptions = Apollo.BaseMutationOptions<UpdateMyProfileMutation, UpdateMyProfileMutationVariables>;
+export const EmailSignInDocument = gql`
+    mutation emailSignIn($email: String!, $password: String!) {
+  EmailSignIn(email: $email, password: $password) {
+    ok
+    error
+    token
+  }
+}
+    `;
+export type EmailSignInMutationFn = Apollo.MutationFunction<EmailSignInMutation, EmailSignInMutationVariables>;
+
+/**
+ * __useEmailSignInMutation__
+ *
+ * To run a mutation, you first call `useEmailSignInMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useEmailSignInMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [emailSignInMutation, { data, loading, error }] = useEmailSignInMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *      password: // value for 'password'
+ *   },
+ * });
+ */
+export function useEmailSignInMutation(baseOptions?: Apollo.MutationHookOptions<EmailSignInMutation, EmailSignInMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<EmailSignInMutation, EmailSignInMutationVariables>(EmailSignInDocument, options);
+      }
+export type EmailSignInMutationHookResult = ReturnType<typeof useEmailSignInMutation>;
+export type EmailSignInMutationResult = Apollo.MutationResult<EmailSignInMutation>;
+export type EmailSignInMutationOptions = Apollo.BaseMutationOptions<EmailSignInMutation, EmailSignInMutationVariables>;
+export const ReportMovementDocument = gql`
+    mutation reportMovement($lastOrientation: Float, $lastLat: Float, $lastLng: Float) {
+  ReportMovement(
+    lastOrientation: $lastOrientation
+    lastLat: $lastLat
+    lastLng: $lastLng
+  ) {
+    ok
+    error
+  }
+}
+    `;
+export type ReportMovementMutationFn = Apollo.MutationFunction<ReportMovementMutation, ReportMovementMutationVariables>;
+
+/**
+ * __useReportMovementMutation__
+ *
+ * To run a mutation, you first call `useReportMovementMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useReportMovementMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [reportMovementMutation, { data, loading, error }] = useReportMovementMutation({
+ *   variables: {
+ *      lastOrientation: // value for 'lastOrientation'
+ *      lastLat: // value for 'lastLat'
+ *      lastLng: // value for 'lastLng'
+ *   },
+ * });
+ */
+export function useReportMovementMutation(baseOptions?: Apollo.MutationHookOptions<ReportMovementMutation, ReportMovementMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ReportMovementMutation, ReportMovementMutationVariables>(ReportMovementDocument, options);
+      }
+export type ReportMovementMutationHookResult = ReturnType<typeof useReportMovementMutation>;
+export type ReportMovementMutationResult = Apollo.MutationResult<ReportMovementMutation>;
+export type ReportMovementMutationOptions = Apollo.BaseMutationOptions<ReportMovementMutation, ReportMovementMutationVariables>;
+export const GetNearbyDriversDocument = gql`
+    query getNearbyDrivers {
+  GetNearbyDrivers {
+    ok
+    error
+    drivers {
+      id
+      lastLng
+      lastLat
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetNearbyDriversQuery__
+ *
+ * To run a query within a React component, call `useGetNearbyDriversQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetNearbyDriversQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetNearbyDriversQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetNearbyDriversQuery(baseOptions?: Apollo.QueryHookOptions<GetNearbyDriversQuery, GetNearbyDriversQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetNearbyDriversQuery, GetNearbyDriversQueryVariables>(GetNearbyDriversDocument, options);
+      }
+export function useGetNearbyDriversLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetNearbyDriversQuery, GetNearbyDriversQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetNearbyDriversQuery, GetNearbyDriversQueryVariables>(GetNearbyDriversDocument, options);
+        }
+export type GetNearbyDriversQueryHookResult = ReturnType<typeof useGetNearbyDriversQuery>;
+export type GetNearbyDriversLazyQueryHookResult = ReturnType<typeof useGetNearbyDriversLazyQuery>;
+export type GetNearbyDriversQueryResult = Apollo.QueryResult<GetNearbyDriversQuery, GetNearbyDriversQueryVariables>;
 export const StartPhoneVerificationDocument = gql`
     mutation startPhoneVerification($phoneNumber: String!) {
   StartPhoneVerification(phoneNumber: $phoneNumber) {
@@ -825,6 +1004,55 @@ export function useStartPhoneVerificationMutation(baseOptions?: Apollo.MutationH
 export type StartPhoneVerificationMutationHookResult = ReturnType<typeof useStartPhoneVerificationMutation>;
 export type StartPhoneVerificationMutationResult = Apollo.MutationResult<StartPhoneVerificationMutation>;
 export type StartPhoneVerificationMutationOptions = Apollo.BaseMutationOptions<StartPhoneVerificationMutation, StartPhoneVerificationMutationVariables>;
+export const EmailSignUpDocument = gql`
+    mutation emailSignUp($firstName: String!, $lastName: String!, $email: String!, $password: String!, $profilePhoto: String!, $phoneNumber: String!, $age: Int!) {
+  EmailSignUp(
+    firstName: $firstName
+    lastName: $lastName
+    email: $email
+    password: $password
+    profilePhoto: $profilePhoto
+    phoneNumber: $phoneNumber
+    age: $age
+  ) {
+    ok
+    error
+    token
+  }
+}
+    `;
+export type EmailSignUpMutationFn = Apollo.MutationFunction<EmailSignUpMutation, EmailSignUpMutationVariables>;
+
+/**
+ * __useEmailSignUpMutation__
+ *
+ * To run a mutation, you first call `useEmailSignUpMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useEmailSignUpMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [emailSignUpMutation, { data, loading, error }] = useEmailSignUpMutation({
+ *   variables: {
+ *      firstName: // value for 'firstName'
+ *      lastName: // value for 'lastName'
+ *      email: // value for 'email'
+ *      password: // value for 'password'
+ *      profilePhoto: // value for 'profilePhoto'
+ *      phoneNumber: // value for 'phoneNumber'
+ *      age: // value for 'age'
+ *   },
+ * });
+ */
+export function useEmailSignUpMutation(baseOptions?: Apollo.MutationHookOptions<EmailSignUpMutation, EmailSignUpMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<EmailSignUpMutation, EmailSignUpMutationVariables>(EmailSignUpDocument, options);
+      }
+export type EmailSignUpMutationHookResult = ReturnType<typeof useEmailSignUpMutation>;
+export type EmailSignUpMutationResult = Apollo.MutationResult<EmailSignUpMutation>;
+export type EmailSignUpMutationOptions = Apollo.BaseMutationOptions<EmailSignUpMutation, EmailSignUpMutationVariables>;
 export const FacebookConnectDocument = gql`
     mutation facebookConnect($firstName: String!, $lastName: String!, $email: String!, $facebookID: String!) {
   FacebookConnect(

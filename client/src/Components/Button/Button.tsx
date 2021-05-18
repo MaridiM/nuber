@@ -1,19 +1,20 @@
 // Core
-import React, { FC } from 'react'
+import React, { FC, ReactNode } from 'react'
 
 // Styled
 import { Container } from './Styled'
 
 // Interface for IProps
 interface IProps {
-    value: string
+    value?: string
     onClick: any
     disabled?: boolean
     className?: string
+    children?: ReactNode
 }
 
 
-const Button: FC<IProps> = ({ value, onClick, disabled = false, className }) => {
+const Button: FC<IProps> = ({ value, onClick, disabled = false, className, children }) => {
     return (
         <Container
             value={value}
@@ -21,7 +22,7 @@ const Button: FC<IProps> = ({ value, onClick, disabled = false, className }) => 
             disabled={disabled}
             className={className}
             type={"submit"}
-        />
+        >{ children }</Container> 
     )
 }
 

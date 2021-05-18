@@ -1,0 +1,24 @@
+mutation emailSignUp (
+    $firstName: String!
+    $lastName: String!
+    $email: String!
+    $password: String!
+    $profilePhoto: String!
+    $phoneNumber: String!
+    $age: Int!
+) {
+    EmailSignUp(
+        firstName: $firstName
+        lastName: $lastName
+        email: $email
+        password: $password
+        profilePhoto: $profilePhoto
+        phoneNumber: $phoneNumber
+        age: $age
+    ) {
+        ok
+        error
+        token
+    }
+
+}

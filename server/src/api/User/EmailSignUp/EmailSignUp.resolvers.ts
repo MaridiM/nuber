@@ -40,7 +40,7 @@ const resolvers: Resolvers = {
 
                 // If Phone is verified, then create new user 
                 if(phoneVerification) {
-                    const newUser = await User.create({ ...args }).save()
+                    const newUser = await User.create({ ...args, verifiedPhoneNumber: true }).save()
                     
                     // After created new user, 
                     // crete new  verification key and 

@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-d
 import { 
     AddPlace,
     EditAccount,
+    EmailLogin,
     FindAddress,
     Home,
     Login,
@@ -14,6 +15,7 @@ import {
     Places,
     Ride,
     Settings, 
+    SignUp, 
     SocialLogin,
     VerifyPhone
 } from './../../Routes'
@@ -31,6 +33,8 @@ const LoggedOutRoutes: FC = () => (
     <Switch>
         <Route exact path={paths.home} component={ Login } />
         <Route path={paths.phoneLogin} component={ PhoneLogin } />
+        <Route path={paths.signUp} component={ SignUp } />
+        <Route path={paths.emailLogin} component={ EmailLogin } />
         <Route path={paths.verifyPhone} component={ VerifyPhone } />
         <Route path={paths.socialLogin} component={ SocialLogin } />
         <Redirect from='*' to={paths.home} />

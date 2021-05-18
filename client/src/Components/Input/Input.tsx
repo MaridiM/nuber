@@ -1,5 +1,5 @@
 // Core
-import React, { FC } from 'react'
+import React, { FC, MutableRefObject } from 'react'
 
 // Styled
 import { Container } from './Styled'
@@ -10,14 +10,34 @@ export interface IProps {
     placeholder?: string
     type?: string
     required?: boolean
-    value?: string
+    value?: string | number
     name?: string
     onChange: any
     className?: string
     accept?: string
+    min?: string | number
+    max?: string | number 
+    uploadInputRef?: MutableRefObject<any>
+    autocomplete?: string
+    readonly?: boolean
 }
 
-const Input: FC<IProps> = ({id, placeholder, type, required, value, name, onChange, className, accept }) => {
+const Input: FC<IProps> = ({
+    id,
+    placeholder,
+    type,
+    required,
+    value,
+    name,
+    onChange,
+    className,
+    accept,
+    min,
+    max,
+    uploadInputRef,
+    autocomplete,
+    readonly
+}) => {
     return (
         <Container
             id={ id }
@@ -29,6 +49,11 @@ const Input: FC<IProps> = ({id, placeholder, type, required, value, name, onChan
             onChange={ onChange }
             className={ className }
             accept={ accept }
+            min={ min}
+            max={ max}
+            ref={ uploadInputRef }
+            autoComplete={ autocomplete }
+            readOnly={ readonly }
         />
     )
 }

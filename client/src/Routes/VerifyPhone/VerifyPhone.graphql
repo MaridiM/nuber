@@ -1,6 +1,5 @@
 mutation completePhoneVerification($phoneNumber: String!, $key: String!) {
-    CompletePhoneVerification
-    ( phoneNumber: $phoneNumber, key: $key) {
+    CompletePhoneVerification( phoneNumber: $phoneNumber, key: $key) {
         token
         ok
         error

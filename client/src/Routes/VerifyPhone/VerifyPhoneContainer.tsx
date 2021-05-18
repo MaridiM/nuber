@@ -30,12 +30,14 @@ interface IState {
     phone: string 
 }
 interface ILocalHistoryState  {
-    phone: string
+    phone: string,
+    verificationPhone: boolean 
 }
 
 const VerifyPhoneContainer: FC<IProps> = ({ location, history }) => {
     // If not exist state in location, redirect to home page
-    !location.state && history.push(paths.home)
+    !location.state && history.push(paths.phoneLogin)
+
     const [ verifyState, setVerifyState ] = useState<IState>({
         key: '',
         phone: location.state.phone
@@ -55,15 +57,23 @@ const VerifyPhoneContainer: FC<IProps> = ({ location, history }) => {
         async onCompleted( data ) {
             const { CompletePhoneVerification } = data
             if(!CompletePhoneVerification?.ok) return toast.error(CompletePhoneVerification?.error) 
-            // If CompletePhoneVerification.ok
-            toast.success('You\'re verified, logging in now')
             
             // if token exist
             if(CompletePhoneVerification?.token) {
-                authentication(CompletePhoneVerification?.token)
-            } 
+                toast.success('You\'re verified, logging in now')
+                return authentication(CompletePhoneVerification?.token)
+            }
+            
+            history.push({ 
+                pathname: paths.signUp,
+                state: {
+                    phone: verifyState.phone,
+                    verificationPhone: true 
+                }
+            })
 
-            return 
+            return
+             
         }
     })
     

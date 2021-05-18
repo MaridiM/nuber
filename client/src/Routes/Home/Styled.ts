@@ -40,7 +40,7 @@ export const ExtendedButton = styled(Button)`
     width: 80%;
 `
 
-export const RequestButton = `
+export const RequestButton = styled(Button) `
     position: absolute;
     left: 0;
     right: 0;

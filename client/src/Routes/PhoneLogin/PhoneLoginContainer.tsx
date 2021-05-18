@@ -81,6 +81,7 @@ const PhoneLoginContainer: FC<RouteComponentProps<any>> = () => {
             return 
         }
 
+
         // If valid to send request and return it
         await _startPhoneVerification({
             variables: {

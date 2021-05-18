@@ -46,6 +46,11 @@ const OutHomePresenter: FC<IProps> = () => (
                     </FakeInput>
                 </PhoneLogin>
             </Link>
+            <Link to={paths.emailLogin}>
+                <SocialLogin>
+                    <SocialLink>Enter by email</SocialLink>
+                </SocialLogin>
+            </Link>
             <Link to={paths.socialLogin}>
                 <SocialLogin>
                     <SocialLink>Or connect with social network</SocialLink>

@@ -121,15 +121,15 @@
 
 ### Nearby Drivers && Ride
 
-- [ ] 59 Calculating the Price
-- [ ] 60 Report Location with HOC
-- [ ] 61 NearbyDrivers Query
-- [ ] 62 NearbyDrivers Query part Two
-- [ ] 63 Drawing Nearby Drivers part One
-- [ ] 64 Drawing Nearby Drivers part Two
+- [x] 59 Calculating the Price
+- [x] 60 Report Location with HOC
+- [x] 61 NearbyDrivers Query
+- [x] 62 NearbyDrivers Query part Two
+- [x] 63 Drawing Nearby Drivers part One
+- [x] 64 Drawing Nearby Drivers part Two
 - [ ] 65 Drawing Nearby Drivers part Three
 - [ ] 66 Ejecting from Apollo Boost
-- [ ] 67 RequestRide Mutation
+- [ ] 67 RequestRide Mutation 
 - [ ] 68 Getting Nearby Rides part One
 - [ ] 69 Getting Nearby Rides part Two
 - [ ] 70 Apollo Subscriptions part One
