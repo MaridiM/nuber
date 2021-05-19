@@ -50,7 +50,7 @@ const HomeContainer: FC<IProps> = ({ google }) => {
         toLng: 0,
         price: undefined,
         distance: '',
-        duration: ''
+        duration: '',
     })
 
     let map: google.maps.Map
@@ -76,8 +76,6 @@ const HomeContainer: FC<IProps> = ({ google }) => {
         
     })
 
-
-
     // Query
     const { userDataLoading, userData } = useProfile()
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
@@ -85,45 +83,66 @@ const HomeContainer: FC<IProps> = ({ google }) => {
     // GraphQL Requests 
     const [ _reportMovement ]= useMutation<ReportMovementMutation, ReportMovementMutationVariables>(MUTATION_REPORT_MOVEMENT)
     const { loading: nearbyLoading } = useQuery<GetNearbyDriversQuery, GetNearbyDriversQueryVariables>(QUERY_GET_NEARBY_DRIVERS, {
-        pollInterval: 1000, // every 1000 mls re fetching only with data 
-        skip: ( userData 
-            && userData.GetMyProfile
-            && userData.GetMyProfile.user?.isDriving ) 
-            || false,
-        onCompleted ( data ) {
-            const { GetNearbyDrivers: { drivers, ok, error} } = data
-            if (!ok && !drivers) return toast.error(error)
-            
-            // Set markers nearby drivers
-            drivers && drivers.forEach(driver => {
-                if( state.lat !== 0 && state.lng !== 0){
-                    map = loadMap(state.lat, state.lng)
-                }
+        skip: (userData && userData.GetMyProfile.user?.isDriving) || false,
+        // Re fetching avery 5s
+        pollInterval: 5000,
+        fetchPolicy: 'network-only',
+        // Reset onCompleted, after pollInterval request
+        notifyOnNetworkStatusChange: true,
+        onCompleted: ( data ) => {
+            const { GetNearbyDrivers: { drivers, ok} } = data
+            if (ok && drivers) {
 
-                // Set marker option for nearby  driver
-                const markerOptions: google.maps.MarkerOptions = {
-                    icon: {
-                        path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-                        scale: 5
-                    },
-                    position: {
-                        lat: Number(driver!.lastLat),
-                        lng: Number(driver!.lastLng),
-                    },
-                }
-                // Create marker for nearby driver
-                // Set Id driver
-                // Set marker in map
-                const newMarker: google.maps.Marker = new google.maps.Marker(markerOptions)
+                // Set markers nearby drivers
+                drivers && drivers.forEach(driver => {
+                    console.log(driver)
 
-                driverMarkers.push(newMarker)
-                newMarker.set('ID', driver!.id)
-                newMarker.setMap(map)
+                    // Get map 
+                    if( state.lat !== 0 && state.lng !== 0){
+                        map = loadMap(state.lat, state.lng)
+                    }
 
-            })
-
-            return 
-        }
+                    if (driver && driver.lastLat && driver.lastLng) {
+                        // Check existing driver
+                        const existingDriver:
+                            | google.maps.Marker
+                            | undefined = driverMarkers.find((driverMarker: google.maps.Marker) => {
+                            const markerID = driverMarker.get('ID')
+                            return markerID === driver!.id
+                        })
+                        // If driver is existing, to set Position 
+                        // Else create new marker
+                        if (existingDriver) {
+                            existingDriver.setPosition({ 
+                                lat: Number(driver!.lastLat),
+                                lng: Number(driver!.lastLng)
+                            })
+                            existingDriver.setMap(map)
+                        } else {
+                            // Set marker option for nearby  driver
+                            const markerOptions: google.maps.MarkerOptions = {
+                                icon: {
+                                    path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+                                    scale: 4
+                                },
+                                position: {
+                                    lat: Number(driver!.lastLat),
+                                    lng: Number(driver!.lastLng),
+                                },
+                            }
+                            // Create marker for nearby driver
+                            // Set Id driver
+                            // Set marker in map
+                            const newMarker: google.maps.Marker = new google.maps.Marker(markerOptions)
+        
+                            newMarker.set('ID', driver!.id)
+                            newMarker.setMap(map)
+                            driverMarkers.push(newMarker)
+                        }
+                    }
+                })
+            }
+        },
     })
     
 
