@@ -1,6 +1,7 @@
 // Core
 import React, { ChangeEvent, FC, MouseEvent, MutableRefObject } from 'react'
 import Sidebar from 'react-sidebar'
+import { MutationFunction } from '@apollo/client'
 
 // Components
 import { AddressBar, Helmet, Menu } from './../../Components'
@@ -9,7 +10,11 @@ import { AddressBar, Helmet, Menu } from './../../Components'
 import { Container, ExtendedButton, Map, MenuButton, RequestButton } from './Styled'
 
 // Types
-import { GetMyProfileQuery } from './../../@types/api'
+import { 
+    GetMyProfileQuery, 
+    RequestRideMutation, 
+    RequestRideMutationVariables 
+} from './../../@types/api'
 interface IProps {
     toggleMenu: () => void
     isMenuOpen: boolean
@@ -17,10 +22,11 @@ interface IProps {
     mapRef: MutableRefObject<any>
     onAddressSubmit: (event: MouseEvent<HTMLButtonElement> ) => void
     onInputChange: (event: ChangeEvent<HTMLInputElement>) => void
+    onBlur: () => void
     toAddress: string
     price?: string
     data?: GetMyProfileQuery
-    nearbyLoading: boolean
+    _requestRide: MutationFunction<RequestRideMutation, RequestRideMutationVariables>
 }
 
 const HomePresenter: FC<IProps>= ({
@@ -33,7 +39,8 @@ const HomePresenter: FC<IProps>= ({
     loading,
     mapRef,
     data: { GetMyProfile: { user = null } = {} } = {},
-    nearbyLoading
+    onBlur,
+    _requestRide
 }) => {
     return (
         <Container>
@@ -57,7 +64,7 @@ const HomePresenter: FC<IProps>= ({
                             name={'toAddress'}
                             onChange={onInputChange}
                             value={toAddress}
-                            onBlur={() => 'Home - AddressBar - onBlur'}
+                            onBlur={onBlur}
                         />
                         {   
                             !isMenuOpen && 
@@ -71,7 +78,7 @@ const HomePresenter: FC<IProps>= ({
                 )}
                 { 
                     price && !isMenuOpen && <RequestButton 
-                        onClick={() => console.log('Reqiest Button')}
+                        onClick={_requestRide}
                         disabled={toAddress === ''}
                         value={`Request Ride (${price})`}
                     />

@@ -134,7 +134,7 @@
 
 ### Nearby Ride
 
-- [ ] 67 RequestRide Mutation 
+- [x] 67 RequestRide Mutation 
 - [ ] 68 Getting Nearby Rides part One
 - [ ] 69 Getting Nearby Rides part Two
 - [ ] 70 Apollo Subscriptions part One

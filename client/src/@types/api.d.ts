@@ -527,6 +527,21 @@ export type EmailSignInMutation = (
   ) }
 );
 
+export type GetNearbyDriversQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetNearbyDriversQuery = (
+  { __typename?: 'Query' }
+  & { GetNearbyDrivers: (
+    { __typename?: 'GetNearbyDriversResponse' }
+    & Pick<GetNearbyDriversResponse, 'ok' | 'error'>
+    & { drivers?: Maybe<Array<Maybe<(
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'lastLng' | 'lastLat'>
+    )>>> }
+  ) }
+);
+
 export type ReportMovementMutationVariables = Exact<{
   lastOrientation?: Maybe<Scalars['Float']>;
   lastLat?: Maybe<Scalars['Float']>;
@@ -542,18 +557,28 @@ export type ReportMovementMutation = (
   ) }
 );
 
-export type GetNearbyDriversQueryVariables = Exact<{ [key: string]: never; }>;
+export type RequestRideMutationVariables = Exact<{
+  pickUpAddress: Scalars['String'];
+  pickUpLat: Scalars['Float'];
+  pickUpLng: Scalars['Float'];
+  dropOffAddress: Scalars['String'];
+  dropOffLat: Scalars['Float'];
+  dropOffLng: Scalars['Float'];
+  price: Scalars['Float'];
+  distance: Scalars['String'];
+  duration: Scalars['String'];
+}>;
 
 
-export type GetNearbyDriversQuery = (
-  { __typename?: 'Query' }
-  & { GetNearbyDrivers: (
-    { __typename?: 'GetNearbyDriversResponse' }
-    & Pick<GetNearbyDriversResponse, 'ok' | 'error'>
-    & { drivers?: Maybe<Array<Maybe<(
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'lastLng' | 'lastLat'>
-    )>>> }
+export type RequestRideMutation = (
+  { __typename?: 'Mutation' }
+  & { RequestRide: (
+    { __typename?: 'RequestRideResponse' }
+    & Pick<RequestRideResponse, 'ok' | 'error'>
+    & { ride?: Maybe<(
+      { __typename?: 'Ride' }
+      & Pick<Ride, 'id'>
+    )> }
   ) }
 );
 
@@ -890,46 +915,6 @@ export function useEmailSignInMutation(baseOptions?: Apollo.MutationHookOptions<
 export type EmailSignInMutationHookResult = ReturnType<typeof useEmailSignInMutation>;
 export type EmailSignInMutationResult = Apollo.MutationResult<EmailSignInMutation>;
 export type EmailSignInMutationOptions = Apollo.BaseMutationOptions<EmailSignInMutation, EmailSignInMutationVariables>;
-export const ReportMovementDocument = gql`
-    mutation reportMovement($lastOrientation: Float, $lastLat: Float, $lastLng: Float) {
-  ReportMovement(
-    lastOrientation: $lastOrientation
-    lastLat: $lastLat
-    lastLng: $lastLng
-  ) {
-    ok
-    error
-  }
-}
-    `;
-export type ReportMovementMutationFn = Apollo.MutationFunction<ReportMovementMutation, ReportMovementMutationVariables>;
-
-/**
- * __useReportMovementMutation__
- *
- * To run a mutation, you first call `useReportMovementMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useReportMovementMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [reportMovementMutation, { data, loading, error }] = useReportMovementMutation({
- *   variables: {
- *      lastOrientation: // value for 'lastOrientation'
- *      lastLat: // value for 'lastLat'
- *      lastLng: // value for 'lastLng'
- *   },
- * });
- */
-export function useReportMovementMutation(baseOptions?: Apollo.MutationHookOptions<ReportMovementMutation, ReportMovementMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<ReportMovementMutation, ReportMovementMutationVariables>(ReportMovementDocument, options);
-      }
-export type ReportMovementMutationHookResult = ReturnType<typeof useReportMovementMutation>;
-export type ReportMovementMutationResult = Apollo.MutationResult<ReportMovementMutation>;
-export type ReportMovementMutationOptions = Apollo.BaseMutationOptions<ReportMovementMutation, ReportMovementMutationVariables>;
 export const GetNearbyDriversDocument = gql`
     query getNearbyDrivers {
   GetNearbyDrivers {
@@ -970,6 +955,101 @@ export function useGetNearbyDriversLazyQuery(baseOptions?: Apollo.LazyQueryHookO
 export type GetNearbyDriversQueryHookResult = ReturnType<typeof useGetNearbyDriversQuery>;
 export type GetNearbyDriversLazyQueryHookResult = ReturnType<typeof useGetNearbyDriversLazyQuery>;
 export type GetNearbyDriversQueryResult = Apollo.QueryResult<GetNearbyDriversQuery, GetNearbyDriversQueryVariables>;
+export const ReportMovementDocument = gql`
+    mutation reportMovement($lastOrientation: Float, $lastLat: Float, $lastLng: Float) {
+  ReportMovement(
+    lastOrientation: $lastOrientation
+    lastLat: $lastLat
+    lastLng: $lastLng
+  ) {
+    ok
+    error
+  }
+}
+    `;
+export type ReportMovementMutationFn = Apollo.MutationFunction<ReportMovementMutation, ReportMovementMutationVariables>;
+
+/**
+ * __useReportMovementMutation__
+ *
+ * To run a mutation, you first call `useReportMovementMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useReportMovementMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [reportMovementMutation, { data, loading, error }] = useReportMovementMutation({
+ *   variables: {
+ *      lastOrientation: // value for 'lastOrientation'
+ *      lastLat: // value for 'lastLat'
+ *      lastLng: // value for 'lastLng'
+ *   },
+ * });
+ */
+export function useReportMovementMutation(baseOptions?: Apollo.MutationHookOptions<ReportMovementMutation, ReportMovementMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ReportMovementMutation, ReportMovementMutationVariables>(ReportMovementDocument, options);
+      }
+export type ReportMovementMutationHookResult = ReturnType<typeof useReportMovementMutation>;
+export type ReportMovementMutationResult = Apollo.MutationResult<ReportMovementMutation>;
+export type ReportMovementMutationOptions = Apollo.BaseMutationOptions<ReportMovementMutation, ReportMovementMutationVariables>;
+export const RequestRideDocument = gql`
+    mutation requestRide($pickUpAddress: String!, $pickUpLat: Float!, $pickUpLng: Float!, $dropOffAddress: String!, $dropOffLat: Float!, $dropOffLng: Float!, $price: Float!, $distance: String!, $duration: String!) {
+  RequestRide(
+    pickUpAddress: $pickUpAddress
+    pickUpLat: $pickUpLat
+    pickUpLng: $pickUpLng
+    dropOffAddress: $dropOffAddress
+    dropOffLat: $dropOffLat
+    dropOffLng: $dropOffLng
+    price: $price
+    distance: $distance
+    duration: $duration
+  ) {
+    ok
+    error
+    ride {
+      id
+    }
+  }
+}
+    `;
+export type RequestRideMutationFn = Apollo.MutationFunction<RequestRideMutation, RequestRideMutationVariables>;
+
+/**
+ * __useRequestRideMutation__
+ *
+ * To run a mutation, you first call `useRequestRideMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRequestRideMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [requestRideMutation, { data, loading, error }] = useRequestRideMutation({
+ *   variables: {
+ *      pickUpAddress: // value for 'pickUpAddress'
+ *      pickUpLat: // value for 'pickUpLat'
+ *      pickUpLng: // value for 'pickUpLng'
+ *      dropOffAddress: // value for 'dropOffAddress'
+ *      dropOffLat: // value for 'dropOffLat'
+ *      dropOffLng: // value for 'dropOffLng'
+ *      price: // value for 'price'
+ *      distance: // value for 'distance'
+ *      duration: // value for 'duration'
+ *   },
+ * });
+ */
+export function useRequestRideMutation(baseOptions?: Apollo.MutationHookOptions<RequestRideMutation, RequestRideMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<RequestRideMutation, RequestRideMutationVariables>(RequestRideDocument, options);
+      }
+export type RequestRideMutationHookResult = ReturnType<typeof useRequestRideMutation>;
+export type RequestRideMutationResult = Apollo.MutationResult<RequestRideMutation>;
+export type RequestRideMutationOptions = Apollo.BaseMutationOptions<RequestRideMutation, RequestRideMutationVariables>;
 export const StartPhoneVerificationDocument = gql`
     mutation startPhoneVerification($phoneNumber: String!) {
   StartPhoneVerification(phoneNumber: $phoneNumber) {

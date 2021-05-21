@@ -94,6 +94,7 @@ const errorLink: ApolloLink = onError(({ graphQLErrors, networkError}) => {
         )
     }
     if(networkError) {
+        // Show error if user networ or connection  with  server will down
         toast.error(`Network error: ${networkError}`)
     }
 })
